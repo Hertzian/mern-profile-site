@@ -1,24 +1,23 @@
-export const Footer = () => {
-  const date = new Date.getFullYear()
+const Footer = () => {
+  const date = new Date().getFullYear()
 
   return (
-    <footer class='footer'>
-      <a class='footer-link' href='mailto:lalo@eduardoaguilar.dev'>
-        Eduardo Aguilar Copyright &copy; {date('Y')}
-      </a>
-      <p class='footer-link'>Eduardo Aguilar Copyright &copy; {date('Y')}</p>
-      <ul class='social-list'>
-        <li class='social-list__item'>
-          <a href='{{ $github }}' class='social-list__link'>
-            <i class='fab fa-github'></i>
+    <footer className='footer'>
+      <p className='footer-link'>Lalo Aguilar Copyright &copy; {date}</p>
+      <ul className='social-list'>
+        <li className='social-list__item'>
+          <a href='{{ $github }}' className='social-list__link'>
+            <i className='fab fa-github'></i>github
           </a>
         </li>
-        <li class='social-list__item'>
-          <a href='{{ $linkedin }}' class='social-list__link'>
-            <i class='fab fa-linkedin-in'></i>
+        <li className='social-list__item'>
+          <a href='{{ $linkedin }}' className='social-list__link'>
+            <i className='fab fa-linkedin-in'></i>linkedin
           </a>
         </li>
       </ul>
     </footer>
   )
 }
+
+export default Footer
