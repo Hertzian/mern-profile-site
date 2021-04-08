@@ -1,59 +1,53 @@
+import { useState } from 'react'
+import MenuItem from './MenuItem'
+
 const Menu = () => {
-  // Navigation
-  const navToggle = document.querySelector('.nav-toggle')
-  const navLinks = document.querySelectorAll('.nav__link')
+  const [menuIsOpen, setMenuIsOpen] = useState(false)
 
-  navToggle.addEventListener('click', () => {
-    document.body.classList.toggle('nav-open')
-  })
+  const openMenuHandler = () => {
+    console.log('ham')
+    setMenuIsOpen(true)
+  }
+  const closeMenuHandler = (isOpen) => {
+    console.log('se cerro')
+    console.log(isOpen)
+    setMenuIsOpen(false)
+  }
 
-  navLinks.forEach((link) => {
-    link.addEventListener('click', () => {
-      document.body.classList.remove('nav-open')
-    })
-  })
+  const items = [
+    { label: 'Home', refe: '#home' },
+    { label: 'My experience', refe: '#places' },
+    { label: 'About', refe: '#about' },
+    { label: 'Skills', refe: '#skills' },
+    { label: 'Projects', refe: '#projects' },
+    { label: 'Contact', refe: '#contact' }
+  ]
 
   return (
-    <>
+    <div className={menuIsOpen ? 'nav-open' : undefined}>
       <div className='logo'></div>
-      <button className='nav-toggle' aria-label='toggle navigation'>
+      <button
+        className='nav-toggle'
+        aria-label='toggle navigation'
+        onClick={menuIsOpen ? closeMenuHandler : openMenuHandler}
+      >
         <span className='hamburger'></span>
       </button>
       <nav className='nav'>
         <ul className='nav__list'>
-          <li className='nav__item'>
-            <a href='#home' className='nav__link'>
-              Home
-            </a>
-          </li>
-          <li className='nav__item'>
-            <a href='#places' className='nav__link'>
-              My experience
-            </a>
-          </li>
-          <li className='nav__item'>
-            <a href='#about' className='nav__link'>
-              About me
-            </a>
-          </li>
-          <li className='nav__item'>
-            <a href='#skills' className='nav__link'>
-              Skills
-            </a>
-          </li>
-          <li className='nav__item'>
-            <a href='#projects' className='nav__link'>
-              My work
-            </a>
-          </li>
-          <li className='nav__item'>
-            <a href='#contact' className='nav__link'>
-              Contact
-            </a>
-          </li>
+          {items.map((item, idx) => {
+            return (
+              <MenuItem
+                key={idx}
+                label={item.label}
+                refe={item.refe}
+                onClose={closeMenuHandler}
+              />
+            )
+          })}
         </ul>
       </nav>
-    </>
+    </div>
   )
 }
 
