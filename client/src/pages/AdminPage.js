@@ -1,8 +1,11 @@
+import AdminMenu from '../components/AdminMenu'
+
 const AdminPage = () => {
   return (
-    <div>
+    <section className='admin'>
       <h1>AdminPage</h1>
-    </div>
+      <AdminMenu />
+    </section>
   )
 }
 

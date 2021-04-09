@@ -675,3 +675,9 @@ div.skills div.grid h3 {
   font-size: 1rem;
   margin-top: 1rem;
 }
+
+/* admin section */
+section.admin {
+  max-width: 1000px;
+  margin: 0 auto;
+}

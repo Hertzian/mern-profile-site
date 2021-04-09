@@ -1,27 +1,16 @@
 import { useState } from 'react'
 import MenuItem from './MenuItem'
+import { menuItems as items } from '../dummy/dummy'
 
 const Menu = () => {
   const [menuIsOpen, setMenuIsOpen] = useState(false)
 
   const openMenuHandler = () => {
-    console.log('ham')
     setMenuIsOpen(true)
   }
   const closeMenuHandler = (isOpen) => {
-    console.log('se cerro')
-    console.log(isOpen)
     setMenuIsOpen(false)
   }
-
-  const items = [
-    { label: 'Home', refe: '#home' },
-    { label: 'My experience', refe: '#places' },
-    { label: 'About', refe: '#about' },
-    { label: 'Skills', refe: '#skills' },
-    { label: 'Projects', refe: '#projects' },
-    { label: 'Contact', refe: '#contact' }
-  ]
 
   return (
     <div className={menuIsOpen ? 'nav-open' : undefined}>
