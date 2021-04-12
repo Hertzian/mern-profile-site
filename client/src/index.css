@@ -677,7 +677,25 @@ div.skills div.grid h3 {
 }
 
 /* admin section */
-section.admin {
+.admin {
   max-width: 1000px;
   margin: 0 auto;
+}
+
+.admin-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 0;
+  background-color: var(--clr-accent);
+}
+
+.admin-navbar__item {
+  list-style: none;
+  padding: 0.5rem 2rem;
+}
+
+.admin-navbar__item a {
+  text-decoration: none;
+  color: var(--clr-light);
 }

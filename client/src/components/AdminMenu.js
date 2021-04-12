@@ -1,13 +1,26 @@
-import { menuItems } from '../dummy/dummy'
-import AdminMenuItem from './AdminMenuItem'
+import { useRouteMatch, Link } from 'react-router-dom'
 
 const AdminMenu = () => {
+  const { url } = useRouteMatch()
+
   return (
     <>
-      <ul>
-        {menuItems.map((item, idx) => (
-          <AdminMenuItem key={idx} name={item.label} />
-        ))}
+      <ul className='admin-navbar'>
+        <li className='admin-navbar__item'>
+          <Link to={`${url}`}>Profile</Link>
+        </li>
+        <li className='admin-navbar__item'>
+          <Link to={`${url}/places`}>Places</Link>
+        </li>
+        <li className='admin-navbar__item'>
+          <Link to={`${url}/skills`}>Skills</Link>
+        </li>
+        <li className='admin-navbar__item'>
+          <Link to={`${url}/projects`}>Projects</Link>
+        </li>
+        <li className='admin-navbar__item'>
+          <a href='#'>Logout</a>
+        </li>
       </ul>
     </>
   )
