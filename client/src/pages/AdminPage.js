@@ -1,4 +1,4 @@
-import { useRouteMatch, Link, Switch, Route } from 'react-router-dom'
+import { useRouteMatch, Switch, Route } from 'react-router-dom'
 import AdminMenu from '../components/AdminMenu'
 import ProfileSection from '../components/back/ProfileSection'
 import PlacesSection from '../components/back/PlacesSection'
@@ -6,7 +6,7 @@ import SkillsSection from '../components/back/SkillsSection'
 import ProjectsSection from '../components/back/ProjectsSection'
 
 const AdminPage = () => {
-  const { url, path } = useRouteMatch()
+  const { path } = useRouteMatch()
 
   return (
     <div className='admin'>
@@ -15,7 +15,7 @@ const AdminPage = () => {
       </ul>
 
       <Switch>
-        <Route path={`${path}`}>
+        <Route path={`${path}/profile`}>
           <ProfileSection />
         </Route>
         <Route path={`${path}/places`}>
