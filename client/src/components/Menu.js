@@ -13,17 +13,17 @@ const Menu = () => {
   }
 
   return (
-    <div className={menuIsOpen ? 'nav-open' : undefined}>
+    <div className={menuIsOpen ? 'navf-open' : undefined}>
       <div className='logo'></div>
       <button
-        className='nav-toggle'
+        className='navf-toggle'
         aria-label='toggle navigation'
         onClick={menuIsOpen ? closeMenuHandler : openMenuHandler}
       >
         <span className='hamburger'></span>
       </button>
-      <nav className='nav'>
-        <ul className='nav__list'>
+      <nav className='navf'>
+        <ul className='navf__list'>
           {items.map((item, idx) => {
             return (
               <MenuItem

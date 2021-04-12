@@ -153,7 +153,7 @@ header {
   font-size: var(--fs-h3);
 }
 
-.nav {
+.navf {
   position: fixed;
   background: var(--clr-dark);
   color: var(--clr-light);
@@ -167,7 +167,7 @@ header {
   transition: transform 250ms cubic-bezier(0.5, 0, 0.5, 1);
 }
 
-.nav__list {
+.navf__list {
   list-style: none;
   display: flex;
   height: 70%;
@@ -178,19 +178,19 @@ header {
   padding: 0;
 }
 
-.nav__link {
+.navf__link {
   color: inherit;
   font-weight: var(--fw-bold);
   font-size: var(--fs-h2);
   text-decoration: none;
 }
 
-.nav__link:hover {
+.navf__link:hover {
   color: var(--clr-accent);
   text-decoration: underline;
 }
 
-.nav-toggle {
+.navf-toggle {
   padding: 1em 0.5em;
   background: transparent;
   border: 0;
@@ -202,23 +202,23 @@ header {
   z-index: 1000;
 }
 
-.nav-open .nav {
+.navf-open .navf {
   transform: translateX(0);
 }
 
-.nav-open .nav-toggle {
+.navf-open .navf-toggle {
   position: fixed;
 }
 
-.nav-open .hamburger {
+.navf-open .hamburger {
   transform: rotate(0.625turn);
 }
 
-.nav-open .hamburger::before {
+.navf-open .hamburger::before {
   transform: rotate(90deg) translateX(-10px);
 }
 
-.nav-open .hamburger::after {
+.navf-open .hamburger::after {
   opacity: 0;
 }
 
@@ -674,28 +674,4 @@ div.skills div.grid {
 div.skills div.grid h3 {
   font-size: 1rem;
   margin-top: 1rem;
-}
-
-/* admin section */
-.admin {
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.admin-navbar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-left: 0;
-  background-color: var(--clr-accent);
-}
-
-.admin-navbar__item {
-  list-style: none;
-  padding: 0.5rem 2rem;
-}
-
-.admin-navbar__item a {
-  text-decoration: none;
-  color: var(--clr-light);
 }
