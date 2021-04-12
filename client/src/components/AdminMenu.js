@@ -7,7 +7,7 @@ const AdminMenu = () => {
     <>
       <ul className='admin-navbar'>
         <li className='admin-navbar__item'>
-          <Link to={`${url}`}>Profile</Link>
+          <Link to={`${url}/profile`}>Profile</Link>
         </li>
         <li className='admin-navbar__item'>
           <Link to={`${url}/places`}>Places</Link>
@@ -19,7 +19,7 @@ const AdminMenu = () => {
           <Link to={`${url}/projects`}>Projects</Link>
         </li>
         <li className='admin-navbar__item'>
-          <a href='#'>Logout</a>
+          <p>Logout</p>
         </li>
       </ul>
     </>
