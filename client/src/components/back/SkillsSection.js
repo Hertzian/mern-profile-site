@@ -1,8 +1,13 @@
+import Card from '../Card'
+
 const SkillsSection = () => {
   return (
-    <div>
-      <h2>SkillsSection</h2>
-    </div>
+    <>
+      <h1 className='mt-4'>Skills</h1>
+      <Card header={'Skills'}>
+        <p>SkillsSection</p>
+      </Card>
+    </>
   )
 }
 

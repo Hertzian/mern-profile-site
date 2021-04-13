@@ -1,8 +1,13 @@
+import Card from '../Card'
+
 const PlacesSection = () => {
   return (
-    <div>
-      <h2>PlacesSection</h2>
-    </div>
+    <>
+      <h1 className='mt-4'>Places</h1>
+      <Card header={'Places'}>
+        <p>PlacesSection</p>
+      </Card>
+    </>
   )
 }
 
