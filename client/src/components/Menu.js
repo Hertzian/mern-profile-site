@@ -8,7 +8,7 @@ const Menu = () => {
   const openMenuHandler = () => {
     setMenuIsOpen(true)
   }
-  const closeMenuHandler = (isOpen) => {
+  const closeMenuHandler = () => {
     setMenuIsOpen(false)
   }
 
