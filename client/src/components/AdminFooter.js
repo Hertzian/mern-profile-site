@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom'
-
 const AdminFooter = () => {
   const date = new Date().getFullYear()
 
