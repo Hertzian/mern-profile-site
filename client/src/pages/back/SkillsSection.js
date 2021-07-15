@@ -1,5 +1,5 @@
-import Card from '../Card'
-import Table from '../Table'
+import Card from '../../components/Card'
+import Table from '../../components/Table'
 
 const SkillsSection = () => {
   const tableHead = ['Name', 'Value', 'Show', 'Actions']
@@ -22,8 +22,8 @@ const SkillsSection = () => {
   ]
   return (
     <>
-      <h1 className='mt-4'>Skills</h1>
       <Card header={'Skills'}>
+        <button className='btn btn-primary mb-2'>New Skill</button>
         <Table head={tableHead} body={tableBody} />
       </Card>
     </>

@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { useRouteMatch, Switch, Route } from 'react-router-dom'
-import AdminMenu from '../components/AdminMenu'
-import AdminNav from '../components/AdminNav'
-import ProfileSection from '../components/back/ProfileSection'
-import PlacesSection from '../components/back/PlacesSection'
-import SkillsSection from '../components/back/SkillsSection'
-import ProjectsSection from '../components/back/ProjectsSection'
-import '../styles/tables.css'
-import '../styles/back.css'
+import AdminMenu from '../../components/AdminMenu'
+import AdminNav from '../../components/AdminNav'
+import ProfileSection from '../back/ProfileSection'
+import PlacesSection from '../back/PlacesSection'
+import SkillsSection from '../back/SkillsSection'
+import ProjectsSection from '../back/ProjectsSection'
+import '../../styles/tables.css'
+import '../../styles/back.css'
 
 const AdminPage = () => {
   const { path } = useRouteMatch()
