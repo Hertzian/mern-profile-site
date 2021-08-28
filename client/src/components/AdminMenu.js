@@ -17,7 +17,7 @@ const AdminMenu = (props) => {
                 <div className='sb-sidenav-menu-heading'>Welcome</div>
                 <Link className='nav-link' to={`${url}/profile`}>
                   <div className='sb-nav-link-icon'>
-                    <i className='fas fa-chart-area'></i>
+                    <i className='fas fa-user'></i>
                   </div>
                   Profile
                 </Link>
@@ -29,13 +29,13 @@ const AdminMenu = (props) => {
                 </Link>
                 <Link className='nav-link' to={`${url}/skills`}>
                   <div className='sb-nav-link-icon'>
-                    <i className='fas fa-chart-area'></i>
+                    <i className='fas fa-table'></i>
                   </div>
                   Skills
                 </Link>
                 <Link className='nav-link' to={`${url}/projects`}>
                   <div className='sb-nav-link-icon'>
-                    <i className='fas fa-chart-area'></i>
+                    <i className='fas fa-folder-plus'></i>
                   </div>
                   Projects
                 </Link>

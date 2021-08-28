@@ -1,10 +1,22 @@
+import { useState } from 'react'
+
 const AreaInput = (props) => {
   const { lbl, input, value } = props
+  const [enter, setEnter] = useState('')
+
+  const handleChange = (e) => {
+    setEnter(e.target.value)
+  }
 
   return (
     <div className='form-group'>
       <label htmlFor={input}>{lbl}</label>
-      <textarea name={input} className='form-control'>
+      <textarea
+        value={value || ''}
+        name={input}
+        onChange={handleChange}
+        className='form-control'
+      >
         {value}
       </textarea>
     </div>
