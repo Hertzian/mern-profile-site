@@ -15,7 +15,7 @@ const SkillModal = (props) => {
           <div className='modal-content'>
             <div className='modal-header'>
               <h5 className='modal-title' id='exampleModalLabel'>
-                Skill
+                Skill {props.id}
               </h5>
               <button
                 type='button'
@@ -28,9 +28,8 @@ const SkillModal = (props) => {
             </div>
             <div className='modal-body'>
               <form>
-                <TextInput lbl='Company' input='company' />
-                <TextInput lbl='Job' input='job' />
-                <TextInput lbl='Year' input='year' />
+                <TextInput lbl='Name' input='name' />
+                <TextInput lbl='Value' input='value' />
 
                 <div className='form-group'>
                   <label htmlFor='show'>Do you want to show?</label>

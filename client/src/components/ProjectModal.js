@@ -1,11 +1,11 @@
 import TextInput from './TextInput'
 
-const ProjectModal = () => {
+const ProjectModal = (props) => {
   return (
     <>
       <div
         className='modal fade'
-        id='exampleModal'
+        id={props.id}
         tabIndex='-1'
         role='dialog'
         aria-labelledby='exampleModalLabel'
@@ -15,7 +15,7 @@ const ProjectModal = () => {
           <div className='modal-content'>
             <div className='modal-header'>
               <h5 className='modal-title' id='exampleModalLabel'>
-                Project
+                Project {props.id}
               </h5>
               <button
                 type='button'
@@ -28,9 +28,9 @@ const ProjectModal = () => {
             </div>
             <div className='modal-body'>
               <form>
-                <TextInput lbl='Company' input='company' />
-                <TextInput lbl='Job' input='job' />
-                <TextInput lbl='Year' input='year' />
+                <TextInput lbl='Name' input='name' />
+                <TextInput lbl='url' input='url' />
+                <TextInput lbl='Github' input='github' />
 
                 <div className='form-group'>
                   <label htmlFor='show'>Do you want to show?</label>

@@ -33,7 +33,11 @@ const Table = (props) => {
               <td>
                 <button
                   data-toggle='modal'
-                  data-target={`#${td.id}`}
+                  data-target={
+                    (td.job && `#placeModal-${td.id}`) ||
+                    (td.value && `#skillModal-${td.id}`) ||
+                    (td.github && `#projectModal-${td.id}`)
+                  }
                   className='btn btn-primary'
                 >
                   Details
@@ -50,9 +54,11 @@ const Table = (props) => {
 
       {body.map(
         (th, idx) =>
-          (th.value && <SkillModal />) ||
-          (th.github && <ProjectModal />) ||
-          (th.job && <PlaceModal key={idx} id={th.id} />)
+          (th.value && <SkillModal key={idx} id={`skillModal-${th.id}`} />) ||
+          (th.github && (
+            <ProjectModal key={idx} id={`projectModal-${th.id}`} />
+          )) ||
+          (th.job && <PlaceModal key={idx} id={`placeModal-${th.id}`} />)
       )}
     </>
   )

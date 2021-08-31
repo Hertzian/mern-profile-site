@@ -1,4 +1,5 @@
 import TextInput from './TextInput'
+import YesNoInput from './YesNoInput'
 
 const PlaceModal = (props) => {
   return (
@@ -31,30 +32,7 @@ const PlaceModal = (props) => {
                 <TextInput lbl='Company' input='company' />
                 <TextInput lbl='Job' input='job' />
                 <TextInput lbl='Year' input='year' />
-
-                <div className='form-group'>
-                  <label htmlFor='show'>Do you want to show?</label>
-                  <div className='form-check'>
-                    <input
-                      className='form-check-input'
-                      type='radio'
-                      name='show'
-                    />
-                    <label className='form-check-label' htmlFor='showYes'>
-                      Yes
-                    </label>
-                  </div>
-                  <div className='form-check'>
-                    <input
-                      className='form-check-input'
-                      type='radio'
-                      name='show'
-                    />
-                    <label className='form-check-label' htmlFor='showNo'>
-                      No
-                    </label>
-                  </div>
-                </div>
+                <YesNoInput />
               </form>
 
               <button type='button' className='btn btn-primary'>

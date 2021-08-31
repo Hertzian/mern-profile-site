@@ -1,15 +1,21 @@
 import { useState } from 'react'
+import ValidationMessages from '../components/ValidationMessages'
 
 const TextInput = (props) => {
   const { lbl, type, value, input } = props
   const [enter, setEnter] = useState('')
+  const [valid, setValid] = useState('')
 
   const handleChange = (e) => {
     setEnter({
       ...enter,
       [e.target.name]: e.target.value
     })
-    console.log(e.target.value)
+
+    if (e.target.value === '') {
+      return setValid(false)
+    }
+    return setValid(true)
   }
 
   return (
@@ -20,8 +26,9 @@ const TextInput = (props) => {
         name={input}
         value={value}
         onChange={handleChange}
-        className='form-control'
+        className={`form-control ${valid ? 'is-valid' : 'is-invalid'}`}
       />
+      <ValidationMessages valid={valid} />
     </div>
   )
 }
