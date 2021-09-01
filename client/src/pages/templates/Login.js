@@ -20,31 +20,19 @@ const Login = () => {
                   <div className='card-body'>
                     <form>
                       <TextInput
+                        placeholder='Your email mastah'
                         lbl='Email'
                         type='text'
-                        value='Your email mastah'
                         input='email'
                       />
                       <TextInput
                         lbl='Password'
                         type='password'
-                        value='password'
                         input='password'
                       />
 
-                      <div className='form-group'>
-                        <label className='small mb-1' htmlFor='inputPassword'>
-                          Password
-                        </label>
-                        <input
-                          className='form-control py-4'
-                          id='inputPassword'
-                          type='password'
-                          placeholder='Enter password'
-                        />
-                      </div>
                       <div className='form-group d-flex align-items-center mt-4 mb-0'>
-                        <Link className='btn btn-primary' to={'admin'}>
+                        <Link className='btn btn-primary' to={'admin/profile'}>
                           Login
                         </Link>
                       </div>

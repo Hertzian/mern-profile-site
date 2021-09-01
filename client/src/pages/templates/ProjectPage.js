@@ -1,8 +1,11 @@
+import Menu from '../../components/Menu'
+import Footer from '../../components/Footer'
 import '../../styles/front.css'
 
 const DetailPage = () => {
   return (
     <>
+      <Menu />
       <section className='intro' id='home'>
         <h1 className='section__title section__title--intro'>
           Welcome to <strong> work name </strong>
@@ -17,12 +20,12 @@ const DetailPage = () => {
 
       <div className='portfolio-item-individual'>
         <p>
-          <a className='btn' href='#'>
+          <a className='btn' href='/'>
             This is the repo
           </a>
         </p>
         <p>
-          <a className='btn' href='#'>
+          <a className='btn' href='/'>
             You can visit workname from here
           </a>
         </p>
@@ -30,6 +33,7 @@ const DetailPage = () => {
         <img src='' alt='' />
         <p> $workdescription2 </p>
       </div>
+      <Footer />
     </>
   )
 }

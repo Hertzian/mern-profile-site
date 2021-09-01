@@ -3,10 +3,11 @@ import HomePage from './pages/templates/HomePage'
 import ProjectPage from './pages/templates/ProjectPage'
 import Login from './pages/templates/Login'
 import AdminPage from './pages/templates/AdminPage'
+import PlaceState from './context/PlaceState'
 
 function App() {
   return (
-    <div>
+    <PlaceState>
       <Router>
         <Switch>
           <Route path='/' component={HomePage} exact />
@@ -15,7 +16,7 @@ function App() {
           <Route path='/mamalon' component={Login} />
         </Switch>
       </Router>
-    </div>
+    </PlaceState>
   )
 }
 
