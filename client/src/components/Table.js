@@ -1,6 +1,7 @@
 import PlaceModal from './PlaceModal'
 import ProjectModal from './ProjectModal'
 import SkillModal from './SkillModal'
+import ButtonOpenModal from './ButtonOpenModal'
 
 const Table = (props) => {
   const { head, body } = props
@@ -31,17 +32,16 @@ const Table = (props) => {
                 )}
               </td>
               <td>
-                <button
-                  data-toggle='modal'
-                  data-target={
-                    (td.job && `#placeModal-${td.id}`) ||
-                    (td.value && `#skillModal-${td.id}`) ||
-                    (td.github && `#projectModal-${td.id}`)
+                <ButtonOpenModal
+                  target={
+                    (td.job && `#placeModal-${td._id}`) ||
+                    (td.value && `#skillModal-${td._id}`) ||
+                    (td.github && `#projectModal-${td._id}`)
                   }
-                  className='btn btn-primary'
-                >
-                  Details
-                </button>
+                  dataid={td._id}
+                  className='btn-primary'
+                  legend='Details'
+                />
                 <button className='btn btn-danger ml-1'>
                   <i className='far fa-times-circle'></i>
                 </button>
@@ -50,15 +50,16 @@ const Table = (props) => {
           ))}
         </tbody>
       </table>
-      <PlaceModal />
 
       {body.map(
         (th, idx) =>
-          (th.value && <SkillModal key={idx} id={`skillModal-${th.id}`} />) ||
+          (th.value && <SkillModal key={idx} id={`skillModal-${th._id}`} />) ||
           (th.github && (
-            <ProjectModal key={idx} id={`projectModal-${th.id}`} />
+            <ProjectModal key={idx} id={`projectModal-${th._id}`} />
           )) ||
-          (th.job && <PlaceModal key={idx} id={`placeModal-${th.id}`} />)
+          (th.job && (
+            <PlaceModal allData={th} key={idx} id={`placeModal-${th._id}`} />
+          ))
       )}
     </>
   )

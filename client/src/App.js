@@ -10,10 +10,10 @@ function App() {
     <PlaceState>
       <Router>
         <Switch>
-          <Route path='/' component={HomePage} exact />
-          <Route path='/project/:projectId' component={ProjectPage} exact />
+          <Route exact path='/' component={HomePage} />
+          <Route exact path='/project/:projectId' component={ProjectPage} />
+          <Route exact path='/mamalon' component={Login} />
           <Route path='/admin' component={AdminPage} />
-          <Route path='/mamalon' component={Login} />
         </Switch>
       </Router>
     </PlaceState>

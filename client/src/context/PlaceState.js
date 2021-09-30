@@ -25,7 +25,7 @@ const PlaceState = (props) => {
 
   const getPlace = async (placeId) => {
     try {
-      const res = await axios.get(`api/place/${placeId}`)
+      const res = await axios.get(`/api/places/${placeId}`)
       dispatch({ type: GET_PLACE, payload: res.data })
     } catch (err) {
       dispatch({ type: PLACES_ERROR, payload: err.response.data.message })

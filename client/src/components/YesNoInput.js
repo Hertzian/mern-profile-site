@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import RadioInput from './RadioInput'
 
-const YesNoInput = () => {
-  const [ans, setAns] = useState('no')
+const YesNoInput = (props) => {
+  const [ans, setAns] = useState(false)
 
   return (
     <div className='form-group'>

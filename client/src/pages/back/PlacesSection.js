@@ -4,57 +4,34 @@ import Card from '../../components/Card'
 import PlaceModal from '../../components/PlaceModal'
 import Table from '../../components/Table'
 import Loader from '../../components/Loader'
+import ButtonOpenModal from '../../components/ButtonOpenModal'
 
 const PlacesSection = () => {
   const placeContext = useContext(PlaceContext)
   const { places, loading, error, getPlaces } = placeContext
 
   const tableHead = ['Company', 'Job', 'Year', 'Show', 'Actions']
-  //const tableBody = [
-  //{
-  //id: 1,
-  //company: 'Dynamics',
-  //job: 'FullStack developer',
-  //year: '2019',
-  //show: true
-  //},
-  //{
-  //id: 2,
-  //company: 'Dynamics',
-  //job: 'FullStack developer',
-  //year: '2019',
-  //show: false
-  //},
-  //{
-  //id: 3,
-  //company: 'Dynamics',
-  //job: 'FullStack developer',
-  //year: '2019',
-  //show: true
-  //}
-  //]
 
   useEffect(() => {
     getPlaces()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  console.log(places)
 
   return (
     <>
       <Card header={'Places'}>
-        <button
-          type='button'
+        <ButtonOpenModal
+          toggle='modal'
+          target='#new-place'
           className='btn btn-primary mb-2'
-          data-toggle='modal'
-          data-target='#placeModal'
-        >
-          New Place
-        </button>
+          legend='New place'
+          dataid='new-place'
+        />
+        <PlaceModal allData={''} id={`new-place`} />
         {loading && <Loader />}
         {places && <Table head={tableHead} body={places} />}
         {error && 'Theres no places...'}
       </Card>
-      <PlaceModal id={`placeModal`} />
     </>
   )
 }

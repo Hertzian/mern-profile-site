@@ -1,7 +1,28 @@
-{
+[{
   "company": "test1",
   "job": "test1",
   "year": "1900",
   "assignment": "test1",
   "show": true
-}
+},
+{
+  "company": "Dynamics",
+  "job": "FullStack developer",
+  "year": "2019",
+  "assignment": "test1",
+  "show": true
+},
+{
+  "company": "Dynamics",
+  "job": "FullStack developer",
+  "year": "2019",
+  "assignment": "test1",
+  "show": false
+},
+{
+  "company": "Dynamics",
+  "job": "FullStack developer",
+  "year": "2019",
+  "assignment": "test1",
+  "show": false
+}]

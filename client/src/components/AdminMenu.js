@@ -1,4 +1,4 @@
-import { useRouteMatch, Link } from 'react-router-dom'
+import { useRouteMatch, NavLink } from 'react-router-dom'
 import Footer from './AdminFooter'
 
 const AdminMenu = (props) => {
@@ -15,30 +15,30 @@ const AdminMenu = (props) => {
             <div className='sb-sidenav-menu'>
               <div className='nav'>
                 <div className='sb-sidenav-menu-heading'>Welcome</div>
-                <Link className='nav-link' to={`${url}/profile`}>
+                <NavLink className='nav-link' to={`${url}/profile`}>
                   <div className='sb-nav-link-icon'>
                     <i className='fas fa-user'></i>
                   </div>
                   Profile
-                </Link>
-                <Link className='nav-link' to={`${url}/places`}>
+                </NavLink>
+                <NavLink className='nav-link' to={`${url}/places`}>
                   <div className='sb-nav-link-icon'>
                     <i className='fas fa-chart-area'></i>
                   </div>
                   Places
-                </Link>
-                <Link className='nav-link' to={`${url}/skills`}>
+                </NavLink>
+                <NavLink className='nav-link' to={`${url}/skills`}>
                   <div className='sb-nav-link-icon'>
                     <i className='fas fa-table'></i>
                   </div>
                   Skills
-                </Link>
-                <Link className='nav-link' to={`${url}/projects`}>
+                </NavLink>
+                <NavLink className='nav-link' to={`${url}/projects`}>
                   <div className='sb-nav-link-icon'>
                     <i className='fas fa-folder-plus'></i>
                   </div>
                   Projects
-                </Link>
+                </NavLink>
               </div>
             </div>
             <div className='sb-sidenav-footer'>
