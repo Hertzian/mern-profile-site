@@ -11,6 +11,7 @@ const placesRoutes = require('./routes/placesRoutes')
 const skillsRoutes = require('./routes/skillsRoutes')
 const projectsRoutes = require('./routes/projectsRoutes')
 
+app.use(express.json())
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'))
 }
