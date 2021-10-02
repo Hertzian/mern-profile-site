@@ -1,5 +1,8 @@
 import { Component } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { URL } from '../../context/types'
+import setAuthToken from './../../utils/setAuthToken'
 import Footer from '../../components/AdminFooter'
 import '../../styles/back.css'
 
@@ -15,9 +18,15 @@ class Login extends Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault()
-    console.log(this.state)
+    const res = await axios.post(`${URL}/users/login`, {
+      email: this.state.email,
+      password: this.state.password
+    })
+    setAuthToken(res.data)
+    localStorage.setItem('token', res.data.token)
+    this.props.history.push('/admin/profile')
   }
 
   render() {
