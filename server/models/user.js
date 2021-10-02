@@ -7,12 +7,12 @@ const userSchema = mongoose.Schema(
     lastname: { type: String, required: true },
     github: { type: String, required: true },
     linkedin: { type: String, required: true },
-    write: { type: String, required: true },
-    bio: { type: String, required: true },
     phone: { type: String, required: true },
+    bio: { type: String, required: true },
+    profession: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    bgPic: { type: String, required: true },
-    profilePic: { type: String, required: true },
+    background: { type: String, required: true },
+    portait: { type: String, required: true },
     password: { type: String, required: true }
   },
   { timestamps: true }
@@ -25,7 +25,7 @@ userSchema.pre('save', async function (next) {
 })
 
 userSchema.methods.matchPassword = async function (enteredPassword) {
-  return await bcryp.compare(enteredPassword, this.password)
+  return await bcrypt.compare(enteredPassword, this.password)
 }
 
 module.exports = mongoose.model('User', userSchema)
