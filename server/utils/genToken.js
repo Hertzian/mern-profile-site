@@ -5,6 +5,4 @@ const genToken = (userId) =>
     expiresIn: process.env.JWT_EXPIRE
   })
 
-module.exports = {
-  genToken
-}
+module.exports = genToken
