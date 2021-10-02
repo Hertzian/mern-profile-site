@@ -1,4 +1,6 @@
 import { Component } from 'react'
+import axios from 'axios'
+import { URL } from '../../context/types'
 import Card from '../Card'
 
 class Profile extends Component {
@@ -24,6 +26,13 @@ class Profile extends Component {
   handleSubmit(e) {
     e.preventDefault()
     console.log('this are the values', this.state)
+  }
+
+  async componentDidMount() {
+    const res = await axios.get(`${URL}/users/profile`)
+    const data = res.data.user
+    const { name, lastname, github, linkedin, phone, bio, profession } = data
+    this.setState({ name, lastname, github, linkedin, phone, bio, profession })
   }
 
   render() {
