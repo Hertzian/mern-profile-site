@@ -1,6 +1,3 @@
-import PlaceModal from './PlaceModal'
-import ProjectModal from './ProjectModal'
-import SkillModal from './SkillModal'
 import ButtonOpenModal from './ButtonOpenModal'
 
 const Table = (props) => {
@@ -50,17 +47,6 @@ const Table = (props) => {
           ))}
         </tbody>
       </table>
-
-      {body.map(
-        (th, idx) =>
-          (th.value && <SkillModal key={idx} id={`skillModal-${th._id}`} />) ||
-          (th.github && (
-            <ProjectModal key={idx} id={`projectModal-${th._id}`} />
-          )) ||
-          (th.job && (
-            <PlaceModal allData={th} key={idx} id={`placeModal-${th._id}`} />
-          ))
-      )}
     </>
   )
 }

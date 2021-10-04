@@ -1,6 +1,4 @@
 import Card from '../../components/Card'
-import SkillModal from '../../components/SkillModal'
-import Table from '../../components/Table'
 
 const SkillsSection = () => {
   const tableHead = ['Name', 'Value', 'Show', 'Actions']
@@ -35,9 +33,7 @@ const SkillsSection = () => {
         >
           New Skill
         </button>
-        <Table head={tableHead} body={tableBody} />
       </Card>
-      <SkillModal id={`skillModal`} />
     </>
   )
 }

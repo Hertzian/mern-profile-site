@@ -1,6 +1,4 @@
 import Card from '../../components/Card'
-import ProjectModal from '../../components/ProjectModal'
-import Table from '../../components/Table'
 
 const ProjectsSection = () => {
   const tableHead = ['Name', 'url', 'Github', 'Show', 'Actions']
@@ -38,9 +36,7 @@ const ProjectsSection = () => {
         >
           New Project
         </button>
-        <Table head={tableHead} body={tableBody} />
       </Card>
-      <ProjectModal id={`projectModal`} />
     </>
   )
 }
