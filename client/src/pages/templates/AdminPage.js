@@ -1,40 +1,18 @@
 import { useState } from 'react'
-import { useRouteMatch, Switch, Route } from 'react-router-dom'
 import AdminMenu from '../../components/AdminMenu'
 import AdminNav from '../../components/AdminNav'
-import ProfileSection from '../back/ProfileSection'
-import PlacesSection from '../back/PlacesSection'
-import SkillsSection from '../back/SkillsSection'
-import ProjectsSection from '../back/ProjectsSection'
 import '../../styles/tables.css'
 import '../../styles/back.css'
 
-const AdminPage = () => {
-  const { path } = useRouteMatch()
+const AdminPage = (props) => {
   const [openMenu, setOpenMenu] = useState(true)
 
-  const onOpenMenu = () => setOpenMenu(false)
-  const onCloseMenu = () => setOpenMenu(true)
+  const handleMenu = () => setOpenMenu(!openMenu)
 
   return (
     <div className={`sb-nav-fixed ${!openMenu && 'sb-sidenav-toggled'}`}>
-      <AdminNav menuState={openMenu ? onOpenMenu : onCloseMenu} />
-      <AdminMenu>
-        <Switch>
-          <Route path={`${path}/profile`}>
-            <ProfileSection />
-          </Route>
-          <Route path={`${path}/places`}>
-            <PlacesSection />
-          </Route>
-          <Route path={`${path}/skills`}>
-            <SkillsSection />
-          </Route>
-          <Route path={`${path}/projects`}>
-            <ProjectsSection />
-          </Route>
-        </Switch>
-      </AdminMenu>
+      <AdminNav menuState={handleMenu} />
+      <AdminMenu>{props.children}</AdminMenu>
     </div>
   )
 }

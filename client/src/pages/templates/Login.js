@@ -1,7 +1,6 @@
 import { Component } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import { URL } from '../../context/types'
 import setAuthToken from './../../utils/setAuthToken'
 import Footer from '../../components/AdminFooter'
 import '../../styles/back.css'
@@ -20,13 +19,17 @@ class Login extends Component {
 
   async handleSubmit(e) {
     e.preventDefault()
-    const res = await axios.post(`${URL}/users/login`, {
-      email: this.state.email,
-      password: this.state.password
-    })
-    setAuthToken(res.data)
-    localStorage.setItem('token', res.data.token)
-    this.props.history.push('/admin/profile')
+    try {
+      const res = await axios.post(`/users/login`, {
+        email: this.state.email,
+        password: this.state.password
+      })
+      setAuthToken(res.data)
+      localStorage.setItem('token', res.data.token)
+      this.props.history.push('/admin/profile')
+    } catch (err) {
+      console.log('peluquin: ', err)
+    }
   }
 
   render() {

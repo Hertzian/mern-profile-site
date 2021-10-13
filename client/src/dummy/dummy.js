@@ -5,7 +5,7 @@ export const menuItems = [
   { label: 'Skills', refe: '#skills' },
   { label: 'Projects', refe: '#projects' },
   { label: 'Contact', refe: '#contact' },
-  { label: 'Admin', refe: 'mamalon' }
+  { label: 'Admin', refe: 'mamalon/login' }
 ]
 
 export const adminMenu = [

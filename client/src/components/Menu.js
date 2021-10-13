@@ -1,16 +1,20 @@
 import { useState } from 'react'
 import MenuItem from './MenuItem'
-import { menuItems as items } from '../dummy/dummy'
+import { menuItems } from '../dummy/dummy'
 
 const Menu = () => {
   const [menuIsOpen, setMenuIsOpen] = useState(false)
 
-  const openMenuHandler = () => {
-    setMenuIsOpen(true)
-  }
-  const closeMenuHandler = () => {
-    setMenuIsOpen(false)
-  }
+  const menuHandler = () => setMenuIsOpen(!menuIsOpen)
+
+  const menuList = menuItems.map((item, idx) => (
+    <MenuItem
+      key={idx}
+      label={item.label}
+      refe={item.refe}
+      onClose={menuHandler}
+    />
+  ))
 
   return (
     <div className={menuIsOpen ? 'navf-open' : undefined}>
@@ -18,23 +22,12 @@ const Menu = () => {
       <button
         className='navf-toggle'
         aria-label='toggle navigation'
-        onClick={menuIsOpen ? closeMenuHandler : openMenuHandler}
+        onClick={menuHandler}
       >
         <span className='hamburger'></span>
       </button>
       <nav className='navf'>
-        <ul className='navf__list'>
-          {items.map((item, idx) => {
-            return (
-              <MenuItem
-                key={idx}
-                label={item.label}
-                refe={item.refe}
-                onClose={closeMenuHandler}
-              />
-            )
-          })}
-        </ul>
+        <ul className='navf__list'>{menuList}</ul>
       </nav>
     </div>
   )

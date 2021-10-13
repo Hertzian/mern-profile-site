@@ -1,8 +1,8 @@
-import { useRouteMatch, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import Footer from './AdminFooter'
 
 const AdminMenu = (props) => {
-  const { url } = useRouteMatch()
+  const url = '/admin'
 
   return (
     <>

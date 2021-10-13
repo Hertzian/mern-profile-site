@@ -1,29 +1,9 @@
+import AdminPage from '../templates/AdminPage'
 import Card from '../../components/Card'
 
 const SkillsSection = () => {
-  const tableHead = ['Name', 'Value', 'Show', 'Actions']
-  const tableBody = [
-    {
-      id: 1,
-      name: 'English',
-      value: '90',
-      show: true
-    },
-    {
-      id: 2,
-      name: 'English',
-      value: '90',
-      show: false
-    },
-    {
-      id: 3,
-      name: 'English',
-      value: '90',
-      show: true
-    }
-  ]
   return (
-    <>
+    <AdminPage>
       <Card header={'Skills'}>
         <button
           type='button'
@@ -34,7 +14,7 @@ const SkillsSection = () => {
           New Skill
         </button>
       </Card>
-    </>
+    </AdminPage>
   )
 }
 

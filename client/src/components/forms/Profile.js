@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import axios from 'axios'
-import { URL } from '../../context/types'
+//import { URL } from '../../context/types'
 import Card from '../Card'
 
 class Profile extends Component {
@@ -29,7 +29,7 @@ class Profile extends Component {
   }
 
   async componentDidMount() {
-    const res = await axios.get(`${URL}/users/profile`)
+    const res = await axios.get('/api/users/profile')
     const data = res.data.user
     const { name, lastname, github, linkedin, phone, bio, profession } = data
     this.setState({ name, lastname, github, linkedin, phone, bio, profession })
@@ -132,7 +132,7 @@ class Profile extends Component {
               </div>
             </div>
           </div>
-          <button className='btn btn-primary mt-2'>Save</button>
+          <button className='btn btn-primary mt-2'>Update</button>
         </form>
       </Card>
     )

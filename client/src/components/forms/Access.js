@@ -50,7 +50,7 @@ class Access extends Component {
               </div>
             </div>
           </div>
-          <button className='btn btn-primary mt-2'>Save</button>
+          <button className='btn btn-primary mt-2'>Update</button>
         </form>
       </Card>
     )

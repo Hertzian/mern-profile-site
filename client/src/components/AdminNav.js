@@ -3,10 +3,7 @@ import { Link } from 'react-router-dom'
 
 const AdminNav = ({ menuState }) => {
   const [userButton, setUserButton] = useState(false)
-
-  const menuClick = () => menuState()
-  const openUserButton = () => setUserButton(true)
-  const closeUserButton = () => setUserButton(false)
+  const handleLogout = () => setUserButton(!userButton)
 
   return (
     <nav className='sb-topnav navbar navbar-expand navbar-dark bg-dark'>
@@ -16,7 +13,7 @@ const AdminNav = ({ menuState }) => {
       <button
         className='btn btn-link btn-sm order-1 order-lg-0'
         id='sidebarToggle'
-        onClick={menuClick}
+        onClick={menuState}
       >
         <i className='fas fa-bars'></i>
       </button>
@@ -26,7 +23,7 @@ const AdminNav = ({ menuState }) => {
           <span
             className='nav-link dropdown-toggle'
             id='userDropdown'
-            onClick={userButton ? closeUserButton : openUserButton}
+            onClick={handleLogout}
           >
             <i className='fas fa-user fa-fw'></i>
           </span>
@@ -35,11 +32,7 @@ const AdminNav = ({ menuState }) => {
               userButton && 'show'
             }`}
           >
-            <Link
-              className='dropdown-item'
-              to={'/'}
-              onClick={userButton ? closeUserButton : openUserButton}
-            >
+            <Link className='dropdown-item' to={'/'}>
               Logout
             </Link>
           </div>
