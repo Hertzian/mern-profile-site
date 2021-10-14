@@ -13,9 +13,20 @@ export const login = async (email, password) => {
 }
 
 export const updateProfile = async (userData) => {
-  console.log('actions: ', userData)
-  const res = await axios.put(`/api/users/profile`, { userData })
-  console.log(res)
+  const { name, lastname, github, linkedin, phone, bio, profession } = userData
+  try {
+    await axios.put(`/api/users/profile`, {
+      name,
+      lastname,
+      github,
+      linkedin,
+      phone,
+      bio,
+      profession
+    })
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 export const hasToken = () => localStorage.getItem('token')

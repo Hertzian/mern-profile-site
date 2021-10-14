@@ -5,7 +5,7 @@ const usersController = require('../controllers/usersController')
 
 router.post('/login', usersController.login)
 router.get('/profile', usersController.getProfile)
-router.post('/profile', protect, usersController.updateProfile)
+router.put('/profile', protect, usersController.updateProfile)
 router.get('/portait-image', protect, usersController.getPortaitImage)
 router.get('/background-image', protect, usersController.getBackgroundImage)
 router.get('/access-credentials', protect, usersController.getAccessCredentials)

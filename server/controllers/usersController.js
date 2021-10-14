@@ -20,14 +20,22 @@ exports.getProfile = asyH(async (req, res) => {
   }
 })
 
-//@route    POST /api/user/profile
+//@route    PUT /api/user/profile
 //@access   private
 exports.updateProfile = asyH(async (req, res) => {
-  console.log(req.user)
   try {
-    //const { name, lastname, github, linkedin, phone, bio, profession } = req.body
+    const { name, lastname, github, linkedin, phone, bio, profession } =
+      req.body
     let user = await User.findById(req.user._id)
-    console.log(user)
+    user.name = name || user.name
+    user.lastname = lastname || user.lastname
+    user.github = github || user.github
+    user.linkedin = linkedin || user.linkedin
+    user.phone = phone || user.phone
+    user.bio = bio || user.bio
+    user.profession = profession || user.profession
+    user.save()
+
     res.json({ user })
   } catch (err) {
     res.json({ error: err })
@@ -75,7 +83,6 @@ exports.login = asyH(async (req, res) => {
   const { email, password } = req.body
   //const isMatch = await user.matchPassword(password)
   //res.json({ isMatch, password, user })
-
   try {
     const user = await User.findOne({ email })
     if (user && (await user.matchPassword(password))) {
