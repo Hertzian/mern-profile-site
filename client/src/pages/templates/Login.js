@@ -1,11 +1,13 @@
 import { Component } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
-import setAuthToken from './../../utils/setAuthToken'
 import Footer from '../../components/AdminFooter'
+import { UserContext } from '../../context/UserContext'
+import { login, hasToken } from '../../context/userActions'
 import '../../styles/back.css'
 
 class Login extends Component {
+  static contextType = UserContext
+
   constructor(props) {
     super(props)
     this.state = { email: '', password: '' }
@@ -17,15 +19,19 @@ class Login extends Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
+  componentDidMount() {
+    const token = hasToken()
+    if (token) {
+      this.props.history.push('/admin/profile')
+      this.context.authorize()
+    }
+  }
+
   async handleSubmit(e) {
     e.preventDefault()
     try {
-      const res = await axios.post(`/users/login`, {
-        email: this.state.email,
-        password: this.state.password
-      })
-      setAuthToken(res.data)
-      localStorage.setItem('token', res.data.token)
+      login(this.state.email, this.state.password)
+      this.context.authorize()
       this.props.history.push('/admin/profile')
     } catch (err) {
       console.log('peluquin: ', err)
@@ -72,11 +78,8 @@ class Login extends Component {
                         </div>
                         <div className='form-group d-flex align-items-center mt-4 mb-0'>
                           <button className='btn btn-primary'>Login</button>
-                          <Link
-                            className='btn btn-primary ml-2'
-                            to='/admin/profile'
-                          >
-                            pass...
+                          <Link className='btn ml-2' to='/'>
+                            Go back
                           </Link>
                         </div>
                       </form>
