@@ -1,7 +1,12 @@
 import SiteRoutes from './components/SiteRoutes'
+import { UserProvider } from './context/UserContext'
 
 function App() {
-  return <SiteRoutes />
+  return (
+    <UserProvider>
+      <SiteRoutes />
+    </UserProvider>
+  )
 }
 
 export default App
