@@ -11,7 +11,7 @@ const AdminPage = (props) => {
 
   return (
     <div className={`sb-nav-fixed ${!openMenu && 'sb-sidenav-toggled'}`}>
-      <AdminNav menuState={handleMenu} />
+      <AdminNav {...props} menuState={handleMenu} />
       <AdminMenu>{props.children}</AdminMenu>
     </div>
   )

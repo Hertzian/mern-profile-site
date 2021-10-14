@@ -1,9 +1,9 @@
 import AdminPage from '../templates/AdminPage'
 import Card from '../../components/Card'
 
-const SkillsSection = () => {
+const SkillsSection = (props) => {
   return (
-    <AdminPage>
+    <AdminPage {...props}>
       <Card header={'Skills'}>
         <button
           type='button'

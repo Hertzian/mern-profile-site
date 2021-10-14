@@ -1,9 +1,12 @@
 import { Component } from 'react'
 import axios from 'axios'
-//import { URL } from '../../context/types'
 import Card from '../Card'
+import { UserContext } from '../../context/UserContext'
+import { updateProfile } from '../../context/userActions'
 
 class Profile extends Component {
+  static contextType = UserContext
+
   constructor(props) {
     super(props)
     this.state = {
@@ -25,7 +28,8 @@ class Profile extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    console.log('this are the values', this.state)
+    updateProfile(this.state)
+    //console.log('this are the values', this.state)
   }
 
   async componentDidMount() {

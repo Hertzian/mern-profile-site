@@ -2,9 +2,9 @@ import AdminPage from '../templates/AdminPage'
 import Card from '../../components/Card'
 import ButtonOpenModal from '../../components/ButtonOpenModal'
 
-const PlacesSection = () => {
+const PlacesSection = (props) => {
   return (
-    <AdminPage>
+    <AdminPage {...props}>
       <Card header={'Places'}>
         <ButtonOpenModal
           toggle='modal'
