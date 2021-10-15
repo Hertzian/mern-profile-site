@@ -1,16 +1,16 @@
 import axios from 'axios'
-import setAuthToken from '../utils/setAuthToken'
+//import setAuthToken from '../utils/setAuthToken'
 
-export const login = async (email, password) => {
-  try {
-    const res = await axios.post(`/api/users/login`, { email, password })
-    const token = res.data
-    localStorage.setItem('token', token.token)
-    setAuthToken(token.token)
-  } catch (err) {
-    console.log(err)
-  }
-}
+//export const login = async (email, password) => {
+//try {
+//const res = await axios.post(`/api/users/login`, { email, password })
+//const token = res.data
+//localStorage.setItem('token', token.token)
+//setAuthToken(token.token)
+//} catch (err) {
+//console.log(err)
+//}
+//}
 
 export const getProfile = async () => {
   try {
@@ -53,17 +53,17 @@ export const updateAccess = async (userAccess) => {
 }
 
 //pending checking
-export const userVerify = async (token) => {
-  try {
-    const res = await axios.post(`/api/users/verify`, {
-      localToken: token
-    })
-    return res.data.verifiqueichons
-  } catch (err) {
-    console.log(err)
-    return false
-  }
-}
+//export const userVerify = async (token) => {
+//try {
+//const res = await axios.post(`/api/users/verify`, {
+//localToken: token
+//})
+//return res.data.verifiqueichons
+//} catch (err) {
+//console.log(err)
+//return false
+//}
+//}
 
 export const hasToken = () => localStorage.getItem('token')
 

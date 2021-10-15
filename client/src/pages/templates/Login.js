@@ -1,8 +1,10 @@
 import { Component } from 'react'
+import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Footer from '../../components/AdminFooter'
 import { UserContext } from '../../context/UserContext'
-import { login, hasToken } from '../../context/userActions'
+import { hasToken } from '../../context/userActions'
+import setAuthToken from '../../utils/setAuthToken'
 import '../../styles/back.css'
 
 class Login extends Component {
@@ -21,16 +23,30 @@ class Login extends Component {
 
   componentDidMount() {
     const token = hasToken()
-    if (token) {
-      this.props.history.push('/admin/profile')
-      this.context.authorize()
-    }
+    //console.log('hasToken: ', token)
+    axios
+      .post('/api/users/verify', {
+        localToken: token
+      })
+      .then((valid) => {
+        if (token && valid) {
+          this.props.history.push('/admin/profile')
+          this.context.authorize()
+        }
+      })
   }
 
   async handleSubmit(e) {
     e.preventDefault()
     try {
-      login(this.state.email, this.state.password)
+      const login = await axios.post('/api/users/login', {
+        email: this.state.email,
+        password: this.state.password
+      })
+      const token = login.data
+      console.log(token)
+      localStorage.setItem('token', token.token)
+      setAuthToken(token.token)
       this.context.authorize()
       this.props.history.push('/admin/profile')
     } catch (err) {

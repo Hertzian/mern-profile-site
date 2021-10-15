@@ -46,8 +46,13 @@ exports.updateProfile = asyH(async (req, res) => {
 // @route   GET /api/users/read-access
 // @access  private
 exports.readAccessData = asyH(async (req, res) => {
-  const user = req.user
-  return res.json({ email: user.email })
+  try {
+    const user = req.user
+    return res.json({ email: user.email })
+  } catch (err) {
+    console.log(err)
+    return res.json(err)
+  }
 })
 
 // @route   PUT /api/users/update-access
