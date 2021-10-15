@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import Card from '../Card'
+import { readAccessData, updateAccess } from '../../context/userActions'
 
 class Access extends Component {
   constructor(props) {
@@ -9,13 +10,24 @@ class Access extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  async componentDidMount() {
+    readAccessData()
+      .then((acc) => {
+        this.setState({ email: acc.email })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value })
   }
 
   handleSubmit(e) {
     e.preventDefault()
-    console.log('access', this.state)
+    updateAccess(this.state)
+    this.setState({ password: '' })
   }
 
   render() {
@@ -29,7 +41,7 @@ class Access extends Component {
                 <input
                   value={this.state.email}
                   name='email'
-                  type='email'
+                  //type='email'
                   className='form-control'
                   placeholder='email'
                   onChange={this.handleChange}

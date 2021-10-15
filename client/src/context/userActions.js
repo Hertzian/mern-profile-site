@@ -6,7 +6,16 @@ export const login = async (email, password) => {
     const res = await axios.post(`/api/users/login`, { email, password })
     const token = res.data
     localStorage.setItem('token', token.token)
-    setAuthToken(token)
+    setAuthToken(token.token)
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export const getProfile = async () => {
+  try {
+    const res = await axios.get('/api/users/profile')
+    return res.data.user
   } catch (err) {
     console.log(err)
   }
@@ -26,6 +35,33 @@ export const updateProfile = async (userData) => {
     })
   } catch (err) {
     console.log(err)
+  }
+}
+
+export const readAccessData = async () => {
+  try {
+    const res = await axios.get('/api/users/read-access')
+    return res.data
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export const updateAccess = async (userAccess) => {
+  const { email, password } = userAccess
+  await axios.put('/api/users/update-access', { email, password })
+}
+
+//pending checking
+export const userVerify = async (token) => {
+  try {
+    const res = await axios.post(`/api/users/verify`, {
+      localToken: token
+    })
+    return res.data.verifiqueichons
+  } catch (err) {
+    console.log(err)
+    return false
   }
 }
 

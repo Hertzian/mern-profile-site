@@ -1,8 +1,8 @@
 import { Component } from 'react'
-import axios from 'axios'
+//import axios from 'axios'
 import Card from '../Card'
 import { UserContext } from '../../context/UserContext'
-import { updateProfile } from '../../context/userActions'
+import { updateProfile, getProfile } from '../../context/userActions'
 
 class Profile extends Component {
   static contextType = UserContext
@@ -33,10 +33,23 @@ class Profile extends Component {
   }
 
   async componentDidMount() {
-    const res = await axios.get('/api/users/profile')
-    const data = res.data.user
-    const { name, lastname, github, linkedin, phone, bio, profession } = data
-    this.setState({ name, lastname, github, linkedin, phone, bio, profession })
+    getProfile()
+      .then((usr) => {
+        const { name, lastname, github, linkedin, phone, bio, profession } = usr
+        this.setState({
+          name,
+          lastname,
+          github,
+          linkedin,
+          phone,
+          bio,
+          profession
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+        //this.props.history.push('/mamalon/login')
+      })
   }
 
   render() {
