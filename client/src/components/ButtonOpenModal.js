@@ -1,12 +1,12 @@
-const ButtonOpenModal = ({ className, target, dataid, legend }) => {
+const ButtonOpenModal = ({ color, target, label }) => {
   return (
     <button
+      type='button'
       data-toggle='modal'
-      data-target={target}
-      dataid={dataid}
-      className={`btn ${className}`}
+      data-target={`#${target}`}
+      className={`btn btn-${color}`}
     >
-      {legend}
+      {label}
     </button>
   )
 }
