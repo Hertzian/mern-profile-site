@@ -4,10 +4,10 @@ const { protect } = require('../utils/protectRoutes')
 const usersController = require('../controllers/usersController')
 
 router.post('/login', usersController.login)
-router.get('/profile', usersController.getProfile)
+router.post('/verify', usersController.verifyAccess)
+router.get('/profile', protect, usersController.getProfile)
 router.put('/profile', protect, usersController.updateProfile)
-router.get('/portait-image', protect, usersController.getPortaitImage)
-router.get('/background-image', protect, usersController.getBackgroundImage)
-router.get('/access-credentials', protect, usersController.getAccessCredentials)
+router.get('/read-access', protect, usersController.readAccessData)
+router.put('/update-access', protect, usersController.updateAccess)
 
 module.exports = router

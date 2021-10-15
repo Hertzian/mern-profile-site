@@ -1,6 +1,7 @@
 const User = require('../models/user')
 const asyH = require('../utils/asyncHandler')
 const genToken = require('../utils/genToken')
+const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
 // @route   GET /api/users/profile
@@ -42,38 +43,30 @@ exports.updateProfile = asyH(async (req, res) => {
   }
 })
 
-// @route   GET /api/users/portait-image
+// @route   GET /api/users/read-access
 // @access  private
-exports.getPortaitImage = asyH(async (req, res) => {
+exports.readAccessData = asyH(async (req, res) => {
   const user = req.user
-  if (!req.files) return res.status(400).json({ error: 'Please upload a file' })
-
-  const file = req.files.portait
-  if (!file.mimetype.startsWith('image')) {
-    return res
-      .status(400)
-      .json({ error: `Less than ${process.env.MAX_FILE_UPLOAD} MB please` })
-  }
-
-  file.name = `portait_`
-
-  //todo...
+  return res.json({ email: user.email })
 })
 
-// @route   GET /api/users/background-image
+// @route   PUT /api/users/update-access
 // @access  private
-exports.getBackgroundImage = asyH(async (req, res) => {
-  console.log('background-image')
-  res.json({ data: 'background-image', success: true })
-})
-
-// @route   GET /api/users/access-credentials
-// @access  private
-exports.getAccessCredentials = asyH(async (req, res) => {
+exports.updateAccess = asyH(async (req, res) => {
   try {
-    res.json({ email: req.user.email, success: true })
+    const { email, password } = req.body
+    let user = await User.findById(req.user._id)
+
+    user.email = email || user.email
+    user.password = password || user.password
+
+    console.log('email: ', email)
+    console.log('password: ', password)
+
+    user.save()
+    return res.json({ email: user.email, user: user.password })
   } catch (err) {
-    res.json({ error: err })
+    return res.json({ error: err })
   }
 })
 
@@ -91,5 +84,20 @@ exports.login = asyH(async (req, res) => {
     console.log('nachos')
   } catch (err) {
     return res.status(401).json({ error: err })
+  }
+})
+
+// @route   POST /api/users/verify
+// @access  private
+exports.verifyAccess = asyH(async (req, res) => {
+  const clientToken = req.body.localToken
+  //console.log('req.body: ', req.body)
+  //console.log('serverTokenReceipt: ', clientToken)
+  try {
+    jwt.verify(clientToken, process.env.JWT_SECRET)
+    return res.json({ verifiqueichons: true })
+  } catch (err) {
+    console.log(err)
+    return res.json({ verifiqueichons: false, error: err })
   }
 })
