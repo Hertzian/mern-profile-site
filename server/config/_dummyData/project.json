@@ -5,5 +5,5 @@
   "pic": "test1",
   "desc1": "test1",
   "desc2": "test1",
-  "show": true
+  "show": "yes" 
 }

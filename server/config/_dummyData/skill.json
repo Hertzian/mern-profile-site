@@ -1,5 +1,5 @@
 {
   "name": "test1",
   "val": "test1",
-  "show": true
+  "show": "yes" 
 }
