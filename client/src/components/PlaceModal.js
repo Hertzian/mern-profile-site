@@ -1,31 +1,49 @@
 import { Component } from 'react'
+import axios from 'axios'
 
 class PlaceModal extends Component {
   constructor(props) {
     super(props)
     this.state = { company: '', job: '', year: '', assignment: '', show: 'no' }
+    //this.state = {
+    //company: this.props.company,
+    //job: this.props.job,
+    //year: this.props.year,
+    //assignment: this.props.assignment,
+    //show: this.props.show || 'no'
+    //}
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
+
   handleChange(e) {
-    this.setState({ ...this.state, [e.target.name]: e.target.value })
-    console.log(e.target.name)
+    this.setState({
+      ...this.state,
+      [e.target.name]: e.target.value
+    })
   }
 
   handleSubmit(e) {
     e.preventDefault()
     if (this.props.isModify) {
-      console.log('modifiqueichons')
+      console.log('isModify: ', this.props.isModify)
       console.log(this.state)
     } else {
-      console.log('new one')
-      console.log(this.state)
+      axios.post('/api/places/new-place', this.state).then((r) => {
+        this.setState({
+          company: '',
+          job: '',
+          year: '',
+          assignment: '',
+          show: ''
+        })
+        console.log('server: ', r.data)
+        console.log('data submited!')
+      })
     }
-    console.log('data submited!')
   }
 
   render() {
-    console.log('show state: ', this.state.show)
     return (
       <div
         className='modal fade'
@@ -130,11 +148,7 @@ class PlaceModal extends Component {
                 >
                   Close
                 </button>
-                <button
-                  type='submit'
-                  className='btn btn-primary'
-                  onClick={() => console.log(':)')}
-                >
+                <button type='submit' className='btn btn-primary'>
                   Save
                 </button>
               </div>

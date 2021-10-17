@@ -1,11 +1,58 @@
 import { Component } from 'react'
+import axios from 'axios'
 import AdminPage from '../templates/AdminPage'
 import Card from '../../components/Card'
 import ButtonOpenModal from '../../components/ButtonOpenModal'
 import PlaceModal from '../../components/PlaceModal'
 
 class PlacesSection extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { places: [] }
+  }
+
+  async componentDidMount() {
+    this.getPlaces()
+  }
+
+  async getPlaces() {
+    try {
+      let places = []
+      let res = await axios.get('/api/places/get-all')
+      for (let i = 0; i < res.data.places.length; i++) {
+        places.push(res.data.places[i])
+      }
+      this.setState({ places: [...places] })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   render() {
+    const places = this.state.places.map((place) => {
+      return (
+        <tr key={place._id}>
+          <td>{place.company}</td>
+          <td>{place.assignment}</td>
+          <td>{place.year}</td>
+          <td>{place.show}</td>
+          <td>
+            <ButtonOpenModal
+              target={`update-place-${place._id}`}
+              color='primary mr-2'
+              label='Update'
+            />
+            <PlaceModal
+              target={`update-place-${place._id}`}
+              isModify={true}
+              placeId={place._id}
+            />
+            <button className='btn btn-danger'>X</button>
+          </td>
+        </tr>
+      )
+    })
+
     return (
       <AdminPage {...this.props}>
         <Card header={'Places'}>
@@ -14,8 +61,8 @@ class PlacesSection extends Component {
             color='primary mb-2'
             label='New place'
           />
-          <PlaceModal target='new-place' isModify={true} />
-          <table class='table table-bordered'>
+          <PlaceModal target='new-place' isModify={false} />
+          <table className='table table-bordered'>
             <thead>
               <tr>
                 <th scope='col'>Company</th>
@@ -25,26 +72,7 @@ class PlacesSection extends Component {
                 <th scope='col'>Actions</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>Mark</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>
-                  <ButtonOpenModal
-                    target={`edit-place-`}
-                    color='primary'
-                    label='Update'
-                  />
-                  <ButtonOpenModal
-                    target={`delete-place-`}
-                    color='danger ml-2'
-                    label='delete'
-                  />
-                </td>
-              </tr>
-            </tbody>
+            <tbody>{places}</tbody>
           </table>
         </Card>
       </AdminPage>
