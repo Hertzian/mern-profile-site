@@ -6,7 +6,7 @@ const placeSchema = mongoose.Schema(
     job: { type: String, required: true },
     year: { type: String, required: true },
     assignment: { type: String, required: true },
-    show: { type: Boolean, required: true }
+    show: { type: String, required: true }
   },
   { timestamps: true }
 )

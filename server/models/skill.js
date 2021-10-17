@@ -4,7 +4,7 @@ const skillSchema = mongoose.Schema(
   {
     name: { type: String, required: true },
     val: { type: String, required: true },
-    show: { type: Boolean, required: true }
+    show: { type: String, required: true }
   },
   { timestamps: true }
 )
