@@ -9,5 +9,6 @@ router.get('/profile', protect, usersController.getProfile)
 router.put('/profile', protect, usersController.updateProfile)
 router.get('/read-access', protect, usersController.readAccessData)
 router.put('/update-access', protect, usersController.updateAccess)
+//router.get('/portait-image', protect, usersController.getPortaitImage)
 
 module.exports = router

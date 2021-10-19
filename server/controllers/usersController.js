@@ -10,7 +10,7 @@ exports.getProfile = asyH(async (req, res) => {
   try {
     const user = await User.findOne({ email: 'test@test.com' })
     const { name, lastname, github, linkedin, phone, bio, profession } = user
-    //console.log(user)
+    console.log(user)
     res.json({
       error: false,
       user: { name, lastname, github, linkedin, phone, bio, profession }

@@ -1,6 +1,7 @@
 import { Component } from 'react'
+import axios from 'axios'
 import Card from '../Card'
-import { readAccessData, updateAccess } from '../../context/userActions'
+import { updateAccess } from '../../context/userActions'
 
 class Access extends Component {
   constructor(props) {
@@ -11,13 +12,12 @@ class Access extends Component {
   }
 
   async componentDidMount() {
-    readAccessData()
-      .then((acc) => {
-        this.setState({ email: acc.email })
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    this.readAccessData()
+  }
+
+  async readAccessData() {
+    const res = await axios('/api/users/read-access')
+    this.setState({ email: res.data.email })
   }
 
   handleChange(e) {
