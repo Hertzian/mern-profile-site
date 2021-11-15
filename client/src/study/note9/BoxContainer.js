@@ -11,8 +11,8 @@ class BoxContainer extends Component {
   render() {
     //console.log('boxContainer', this.props.allColors)
 
-    const boxes = Array.from({ length: this.props.numBoxes }).map(() => (
-      <Box colors={this.props.allColors} />
+    const boxes = Array.from({ length: this.props.numBoxes }).map((c, idx) => (
+      <Box key={idx} colors={this.props.allColors} />
       //<Box />
     ))
     //console.log(boxes.length)

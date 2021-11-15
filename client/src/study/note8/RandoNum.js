@@ -8,7 +8,7 @@ class RandoNum extends Component {
   }
 
   randomize(e) {
-    console.log(e)
+    //console.log(e)
     this.setState({ number: Math.floor(Math.random() * 10) + 1 })
   }
 
