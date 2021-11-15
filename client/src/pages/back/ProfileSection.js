@@ -4,6 +4,7 @@ import Profile from '../../components/forms/Profile'
 import Access from '../../components/forms/Access'
 import MainImages from '../../components/forms/MainImages'
 import AdminPage from '../templates/AdminPage'
+import Alert from '../../components/Alert'
 import { UserContext } from '../../context/UserContext'
 
 class ProfileSection extends Component {
@@ -14,6 +15,7 @@ class ProfileSection extends Component {
       <>
         {isAuthenticated ? (
           <AdminPage {...this.props}>
+            <Alert message='This is an alert example' color='danger mt-2' />
             <Profile />
             <Access />
             <MainImages />

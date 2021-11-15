@@ -15,8 +15,8 @@ export const adminMenu = [
   { label: 'Projects', component: 'AdminProjects' }
 ]
 
-export const image =
-  'https://t4.ftcdn.net/jpg/02/07/87/79/360_F_207877921_BtG6ZKAVvtLyc5GWpBNEIlIxsffTtWkv.jpg'
+export const image = 'nada'
+//'https://t4.ftcdn.net/jpg/02/07/87/79/360_F_207877921_BtG6ZKAVvtLyc5GWpBNEIlIxsffTtWkv.jpg'
 
 export const places = [
   { company: 'Dynamics', job: 'FullStack developer', year: '2019', show: true },

@@ -4,16 +4,53 @@ import axios from 'axios'
 class PlaceModal extends Component {
   constructor(props) {
     super(props)
-    this.state = { company: '', job: '', year: '', assignment: '', show: 'no' }
-    //this.state = {
-    //company: this.props.company,
-    //job: this.props.job,
-    //year: this.props.year,
-    //assignment: this.props.assignment,
-    //show: this.props.show || 'no'
-    //}
+    this.state = {
+      _id: this.props._id || '',
+      company: this.props.company || '',
+      job: this.props.job || '',
+      year: this.props.year || '',
+      assignment: this.props.assignment || '',
+      show: this.props.show || 'no'
+    }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
+  }
+
+  closeModal() {
+    const modal = document.getElementById(this.props.target)
+    modal.classList.remove('show', 'd-block')
+    modal.style = 'display: none'
+    modal.setAttribute('aria-hidden', 'true')
+    modal.removeAttribute('role')
+    modal.removeAttribute('aria-modal')
+    document.querySelectorAll('.modal-open').forEach((el) => {
+      el.classList.remove('modal-open')
+    })
+    document.querySelectorAll('.modal-backdrop').forEach((el) => {
+      el.remove()
+    })
+  }
+
+  async getPlace(placeId) {
+    try {
+      const res = await axios.get(`/api/places/get-place/${placeId}`)
+      const { _id, company, job, year, assignment, show } = res.data.place
+      this.setState({ _id, company, job, year, assignment, show })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  async updatePlace(placeId, placeData) {
+    try {
+      await axios.put(`/api/places/update-place/${placeId}`, placeData)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  async componentDidMount() {
+    this.props.placeId && this.getPlace(this.props.placeId)
   }
 
   handleChange(e) {
@@ -26,8 +63,9 @@ class PlaceModal extends Component {
   handleSubmit(e) {
     e.preventDefault()
     if (this.props.isModify) {
-      console.log('isModify: ', this.props.isModify)
-      console.log(this.state)
+      this.updatePlace(this.props.placeId, this.state)
+      this.props.placeChange(this.state)
+      this.closeModal()
     } else {
       axios.post('/api/places/new-place', this.state).then((r) => {
         this.setState({
@@ -37,9 +75,8 @@ class PlaceModal extends Component {
           assignment: '',
           show: ''
         })
-        console.log('server: ', r.data)
-        console.log('data submited!')
       })
+      this.closeModal()
     }
   }
 

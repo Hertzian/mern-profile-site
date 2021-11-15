@@ -7,6 +7,7 @@ import ProfileSection from '../pages/back/ProfileSection'
 import PlacesSection from '../pages/back/PlacesSection'
 import SkillsSection from '../pages/back/SkillsSection'
 import ProjectsSection from '../pages/back/ProjectsSection'
+import StudySection from '../pages/back/StudySection'
 import PrivateRoute from '../components/PrivateRoute'
 import { UserContext } from '../context/UserContext'
 
@@ -26,6 +27,7 @@ class SiteRoutes extends Component {
             <PrivateRoute exact path='/admin/places' comp={PlacesSection} />
             <PrivateRoute exact path='/admin/skills' comp={SkillsSection} />
             <PrivateRoute exact path='/admin/projects' comp={ProjectsSection} />
+            <PrivateRoute exact path='/admin/study' comp={StudySection} />
           </>
         ) : (
           <Redirect to='/mamalon/login' />

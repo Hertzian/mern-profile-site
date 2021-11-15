@@ -3,6 +3,7 @@ import axios from 'axios'
 import Card from '../Card'
 import { UserContext } from '../../context/UserContext'
 import { updateProfile } from '../../context/userActions'
+import Alert from '../Alert'
 
 class Profile extends Component {
   static contextType = UserContext
@@ -53,6 +54,7 @@ class Profile extends Component {
   render() {
     return (
       <Card header='Profile' title='Check all your data master ;D'>
+        <Alert message='This is an alert example' color='primary' />
         <form onSubmit={this.handleSubmit}>
           <div className='row'>
             <div className='col-md-6'>

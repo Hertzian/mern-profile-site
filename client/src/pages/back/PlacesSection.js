@@ -9,6 +9,7 @@ class PlacesSection extends Component {
   constructor(props) {
     super(props)
     this.state = { places: [] }
+    this.placeChange = this.placeChange.bind(this)
   }
 
   async componentDidMount() {
@@ -17,35 +18,41 @@ class PlacesSection extends Component {
 
   async getPlaces() {
     try {
-      let places = []
-      let res = await axios.get('/api/places/get-all')
-      for (let i = 0; i < res.data.places.length; i++) {
-        places.push(res.data.places[i])
-      }
-      this.setState({ places: [...places] })
+      const res = await axios.get('/api/places/get-all')
+      this.setState({ places: res.data.places })
     } catch (err) {
       console.log(err)
     }
   }
 
+  placeChange(place) {
+    const removePlace = this.state.places.filter((p) => p._id !== place._id)
+    console.log('remove: ', removePlace)
+
+    this.setState({ places: [...this.state.places, place] })
+    //this.state.places.filter((p) => p._id === place._id)
+  }
+
   render() {
     const places = this.state.places.map((place) => {
+      const { company, year, assignment, show, _id } = place
       return (
-        <tr key={place._id}>
-          <td>{place.company}</td>
-          <td>{place.assignment}</td>
-          <td>{place.year}</td>
-          <td>{place.show}</td>
+        <tr key={_id}>
+          <td>{company}</td>
+          <td>{assignment}</td>
+          <td>{year}</td>
+          <td>{show}</td>
           <td>
             <ButtonOpenModal
-              target={`update-place-${place._id}`}
+              target={`update-place-${_id}`}
               color='primary mr-2'
               label='Update'
             />
             <PlaceModal
-              target={`update-place-${place._id}`}
+              target={`update-place-${_id}`}
               isModify={true}
-              placeId={place._id}
+              placeId={_id}
+              placeChange={this.placeChange}
             />
             <button className='btn btn-danger'>X</button>
           </td>
@@ -66,7 +73,7 @@ class PlacesSection extends Component {
             <thead>
               <tr>
                 <th scope='col'>Company</th>
-                <th scope='col'>Job</th>
+                <th scope='col'>Assignment</th>
                 <th scope='col'>Year</th>
                 <th scope='col'>Show</th>
                 <th scope='col'>Actions</th>
