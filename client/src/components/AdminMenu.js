@@ -45,6 +45,12 @@ const AdminMenu = (props) => {
                   </div>
                   Study Items
                 </NavLink>
+                <NavLink className='nav-link' to={`${url}/interviews`}>
+                  <div className='sb-nav-link-icon'>
+                    <i className='fas fa-folder-plus'></i>
+                  </div>
+                  Interviews
+                </NavLink>
               </div>
             </div>
             <div className='sb-sidenav-footer'>

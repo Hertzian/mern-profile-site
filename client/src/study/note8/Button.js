@@ -5,7 +5,7 @@ class Button extends Component {
     return (
       <button
         onClick={() => {
-          alert('clicked!')
+          console.log('clicked!')
         }}
       >
         Click me!

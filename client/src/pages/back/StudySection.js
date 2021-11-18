@@ -80,9 +80,7 @@ const StudySection = (props) => {
           <Note18 />
         </Card>
         <Card header='Note19 Route examples this one broke the app'>
-          {
-            //<Note19 />
-          }
+          {<Note19 />}
         </Card>
       </Card>
     </AdminPage>

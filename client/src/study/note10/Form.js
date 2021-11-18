@@ -14,7 +14,7 @@ class Form extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    alert(`You typed: ${this.state.username}`)
+    console.log(`You typed: ${this.state.username}`)
     this.setState({ username: '' })
   }
 

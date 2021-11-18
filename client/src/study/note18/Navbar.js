@@ -9,7 +9,7 @@ class Navbar extends Component {
   }
 
   handleLogin() {
-    alert('Logged you in!')
+    console.log('Logged you in!')
     this.props.history.push('/food/salmon')
   }
 

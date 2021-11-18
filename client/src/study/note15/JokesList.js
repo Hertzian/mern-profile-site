@@ -49,7 +49,7 @@ class JokesList extends Component {
           window.localStorage.setItem('jokes', JSON.stringify(this.state.jokes))
       )
     } catch (err) {
-      alert(err)
+      console.log(err)
       this.setState({ loading: false })
     }
   }

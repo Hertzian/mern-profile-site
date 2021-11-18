@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import Routes from './Routes'
+import DogRoutes from './DogRoutes'
 import Navbar from './Navbar'
 import whiskey from './images/dog1.jpg'
 import hazel from './images/dog3.jpg'
@@ -25,7 +25,7 @@ export default class Note19 extends Component {
         src: hazel,
         facts: [
           'Hazel has soooo much energy!',
-          'Hazel is hghly inteligent',
+          'Hazel is highly inteligent',
           'Hazel loves people more than dogs'
         ]
       },
@@ -46,7 +46,7 @@ export default class Note19 extends Component {
       <div>
         <Navbar dogs={this.props.dogs} />
         <div className='container'>
-          <Routes dogs={this.props.dogs} />
+          <DogRoutes dogs={this.props.dogs} />
         </div>
       </div>
     )
