@@ -22,7 +22,7 @@ export default function List() {
     setUsers(showUsers)
   }
 
-  const clicable = users.map((user) => (
+  const clickable = users.map((user) => (
     <ListItem
       key={user.id}
       id={user.id}
@@ -38,13 +38,13 @@ export default function List() {
         key={user.id}
         id={user.id}
         user={user.first_name}
-        show={toggleShow}
+        //show={toggleShow}
       />
     ))
 
   return (
     <div style={{ display: 'flex' }}>
-      <ul>{users && clicable}</ul>
+      <ul>{users && clickable}</ul>
       <ul>{renderUsers}</ul>
     </div>
   )
@@ -63,7 +63,7 @@ function ListItem(props) {
   if (clicked) style = { backgroundColor: 'green' }
 
   return (
-    <li style={style} onClick={handleClick}>
+    <li style={style} onClick={show && handleClick}>
       {user}
     </li>
   )
