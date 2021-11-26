@@ -15,7 +15,7 @@ class JokesList extends Component {
     }
     this.handleClick = this.handleClick.bind(this)
     this.seenJokes = new Set(this.state.jokes.map((j) => j.text))
-    console.log(this.seenJokes)
+    //console.log(this.seenJokes)
   }
 
   componentDidMount() {
@@ -49,7 +49,7 @@ class JokesList extends Component {
           window.localStorage.setItem('jokes', JSON.stringify(this.state.jokes))
       )
     } catch (err) {
-      console.log(err)
+      //console.log(err)
       this.setState({ loading: false })
     }
   }

@@ -7,11 +7,25 @@ export default function CustomerListFn() {
     setCustomers([...customers, newCustomer])
   }
 
+  const deleteCustomer = (delCustomer) => {
+    setCustomers(
+      customers.filter((customer) => {
+        return delCustomer !== customer
+      })
+    )
+  }
+
   const custs = customers.map((customer, idx) => {
-    return <Customer key={idx} customer={customer} id={idx} />
+    return (
+      <Customer
+        key={idx}
+        customer={customer}
+        id={idx}
+        delCustomer={deleteCustomer}
+      />
+    )
   })
 
-  console.log(customers)
   return (
     <div>
       <h3>Functional component</h3>
@@ -36,7 +50,7 @@ function CustomerForm(props) {
   }
 
   return (
-    <div>
+    <>
       <form onSubmit={handleSubmit}>
         <input
           type='text'
@@ -47,10 +61,14 @@ function CustomerForm(props) {
         />
         <button>Add Customer</button>
       </form>
-    </div>
+    </>
   )
 }
 
 function Customer(props) {
-  return <li>{props.customer}</li>
+  const deleteCustomer = () => {
+    props.delCustomer(props.customer)
+  }
+
+  return <li onClick={deleteCustomer}>{props.customer}</li>
 }

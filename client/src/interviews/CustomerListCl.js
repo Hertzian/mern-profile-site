@@ -5,15 +5,31 @@ class CustomerListCl extends Component {
     super(props)
     this.state = { customers: [] }
     this.createCustomer = this.createCustomer.bind(this)
+    this.deleteCustomer = this.deleteCustomer.bind(this)
   }
 
   createCustomer(newCustomer) {
     this.setState({ customers: [...this.state.customers, newCustomer] })
   }
 
+  deleteCustomer(customerDel) {
+    this.setState({
+      customers: this.state.customers.filter(
+        (customer) => customerDel !== customer
+      )
+    })
+  }
+
   render() {
     const customers = this.state.customers.map((customer, idx) => {
-      return <Customer key={idx} customer={customer} id={idx} />
+      return (
+        <Customer
+          key={idx}
+          customer={customer}
+          id={idx}
+          deleteCustomer={this.deleteCustomer}
+        />
+      )
     })
 
     return (
@@ -67,12 +83,11 @@ class CustomerForm extends Component {
 }
 
 class Customer extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { customer: this.props.customer }
-  }
-
   render() {
-    return <li>{this.state.customer.customer}</li>
+    const deleteCustomer = () => {
+      this.props.deleteCustomer(this.props.customer)
+    }
+
+    return <li onClick={deleteCustomer}>{this.props.customer.customer}</li>
   }
 }

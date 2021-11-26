@@ -19,7 +19,7 @@ class GithubUserInfo extends Component {
     return (
       <>
         <h1>Github User: {this.state.name}</h1>
-        <img src={this.state.imgUrl} />
+        <img src={this.state.imgUrl} alt='user info' />
       </>
     )
   }

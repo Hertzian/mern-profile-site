@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-export default function List() {
+export default function ListFn() {
   const [users, setUsers] = useState([])
   const URL = 'https://reqres.in/api/users?page=2'
 
@@ -43,10 +43,13 @@ export default function List() {
     ))
 
   return (
-    <div style={{ display: 'flex' }}>
-      <ul>{users && clickable}</ul>
-      <ul>{renderUsers}</ul>
-    </div>
+    <>
+      <h2>Clickable Items Fn</h2>
+      <div style={{ display: 'flex' }}>
+        <ul>{users && clickable}</ul>
+        <ul>{renderUsers}</ul>
+      </div>
+    </>
   )
 }
 

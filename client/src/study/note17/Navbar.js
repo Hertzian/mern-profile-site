@@ -5,7 +5,7 @@ import './Navbar.css'
 class Navbar extends Component {
   render() {
     return (
-      <div class='Navbar'>
+      <div className='Navbar'>
         <NavLink
           exact
           activeClassName='Navbar-active'

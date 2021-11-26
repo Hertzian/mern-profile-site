@@ -18,8 +18,8 @@ export default class Note1 extends Component {
           bangs={3}
           data={[1, 2, 3, 4, 5]}
           isFunny={true}
-          //img='https://media.tenor.com/images/9dd9f756d3704de25874dcb354161122/tenor.gif'
-          img='nada'
+          img='https://media.tenor.com/images/9dd9f756d3704de25874dcb354161122/tenor.gif'
+          //img='nada'
         />
         <Hello to='Britney' from='Adele' bangs={10} isFunny />
       </div>

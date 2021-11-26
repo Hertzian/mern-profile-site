@@ -12,14 +12,17 @@ export default class ZenQuote extends Component {
   componentDidMount() {
     console.log('inside component did mount')
     //load data
-    axios.get('https://api.github.com/zen').then((response) => {
-      setTimeout(
-        function () {
-          this.setState({ quote: response.data, isLoaded: true })
-        }.bind(this),
-        3000
-      )
-    })
+    axios
+      .get('https://api.github.com/zen')
+      .then((response) => {
+        setTimeout(
+          function () {
+            this.setState({ quote: response.data, isLoaded: true })
+          }.bind(this),
+          3000
+        )
+      })
+      .catch((err) => console.log(err))
     //set state with data
   }
 
