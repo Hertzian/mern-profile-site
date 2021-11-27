@@ -41,10 +41,10 @@ export default class ListCl extends Component {
 
     return (
       <>
-        <h2>Clickable Items Cl </h2>
+        <h2 className='mt-2'>Clickable Items Cl </h2>
         <div style={{ display: 'flex' }}>
-          <ul>{this.state.users && clickable}</ul>
-          <ul>{renderUsers}</ul>
+          <ul className='list-group mr-3'>{this.state.users && clickable}</ul>
+          <ul className='list-group mr-3'>{renderUsers}</ul>
         </div>
       </>
     )
@@ -68,7 +68,11 @@ class ListItem extends Component {
     if (this.state.clicked) style = { backgroundColor: 'green' }
 
     return (
-      <li style={style} onClick={this.props.show && this.handleClick}>
+      <li
+        className='list-group-item'
+        style={style}
+        onClick={this.props.show && this.handleClick}
+      >
         {this.props.user}
       </li>
     )

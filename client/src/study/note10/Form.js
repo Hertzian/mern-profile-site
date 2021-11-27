@@ -23,13 +23,18 @@ class Form extends Component {
       <div>
         <h1>Form Demo</h1>
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor='username'>Username</label>
-          <input
-            type='text'
-            value={this.state.username}
-            onChange={this.handleChange}
-          />
-          <button>Submit</button>
+          <div className='input-group mb-3'>
+            <input
+              className='form-control'
+              type='text'
+              placeholder='username'
+              value={this.state.username}
+              onChange={this.handleChange}
+            />
+            <div className='input-group-append'>
+              <button className='btn btn-primary'>Submit</button>
+            </div>
+          </div>
         </form>
       </div>
     )

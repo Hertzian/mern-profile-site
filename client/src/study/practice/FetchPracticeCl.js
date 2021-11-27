@@ -16,10 +16,10 @@ class FetchPracticeCl extends Component {
 
   render() {
     const users = this.state.users.map((user) => (
-      <ul key={user.id}>
-        <li>{user.id}</li>
-        <li>{user.first_name}</li>
-        <li>{user.email}</li>
+      <ul className='list-group mt-1' key={user.id}>
+        <li className='list-group-item'>{user.id}</li>
+        <li className='list-group-item'>{user.first_name}</li>
+        <li className='list-group-item'>{user.email}</li>
       </ul>
     ))
 

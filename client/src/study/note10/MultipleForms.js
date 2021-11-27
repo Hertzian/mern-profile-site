@@ -34,28 +34,33 @@ class MultipleForms extends Component {
       <div>
         <h1>Multiple Form Demo</h1>
         <form onSubmit={this.handleSubmit}>
-          <input
-            type='text'
-            name='username'
-            value={this.state.username}
-            onChange={this.handleChange}
-            placeholder='username'
-          />
-          <input
-            type='email'
-            name='email'
-            placeholder='email'
-            value={this.state.email}
-            onChange={this.handleChange}
-          />
-          <input
-            type='password'
-            name='password'
-            placeholder='password'
-            value={this.state.password}
-            onChange={this.handleChange}
-          />
-          <button>Submit</button>
+          <div className='form-group'>
+            <input
+              className='form-control mt-1'
+              type='text'
+              name='username'
+              value={this.state.username}
+              onChange={this.handleChange}
+              placeholder='username'
+            />
+            <input
+              className='form-control mt-1'
+              type='email'
+              name='email'
+              placeholder='email'
+              value={this.state.email}
+              onChange={this.handleChange}
+            />
+            <input
+              className='form-control mt-1'
+              type='password'
+              name='password'
+              placeholder='password'
+              value={this.state.password}
+              onChange={this.handleChange}
+            />
+          </div>
+          <button className='btn btn-primary btn-block'>Submit</button>
         </form>
       </div>
     )

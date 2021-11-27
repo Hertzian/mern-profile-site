@@ -14,16 +14,34 @@ const InterviewSection = (props) => {
       <Card header={'Interview section'}>
         <h3>Welcome to interviews section!</h3>
         <Card header={'MedTrainer'}>
-          <ListFn />
-          <ListCl />
+          <div className='row'>
+            <div className='col'>
+              <ListFn />
+            </div>
+            <div className='col'>
+              <ListCl />
+            </div>
+          </div>
         </Card>
         <Card header={'DivElement'}>
-          <CustomerListCl />
-          <CustomerListFn />
+          <div className='row'>
+            <div className='col'>
+              <CustomerListCl />
+            </div>
+            <div className='col'>
+              <CustomerListFn />
+            </div>
+          </div>
         </Card>
         <Card header={'Fetch practice'}>
-          <FetchPracticeCl />
-          <FetchPracticeFn />
+          <div className='row'>
+            <div className='col'>
+              <FetchPracticeCl />
+            </div>
+            <div className='col'>
+              <FetchPracticeFn />
+            </div>
+          </div>
         </Card>
       </Card>
     </AdminPage>

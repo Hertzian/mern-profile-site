@@ -44,10 +44,10 @@ export default function ListFn() {
 
   return (
     <>
-      <h2>Clickable Items Fn</h2>
+      <h2 className='mt-2'>Clickable Items Fn</h2>
       <div style={{ display: 'flex' }}>
-        <ul>{users && clickable}</ul>
-        <ul>{renderUsers}</ul>
+        <ul className='list-group mr-3'>{users && clickable}</ul>
+        <ul className='list-group mr-3'>{renderUsers}</ul>
       </div>
     </>
   )
@@ -66,7 +66,7 @@ function ListItem(props) {
   if (clicked) style = { backgroundColor: 'green' }
 
   return (
-    <li style={style} onClick={show && handleClick}>
+    <li className='list-group-item' style={style} onClick={show && handleClick}>
       {user}
     </li>
   )

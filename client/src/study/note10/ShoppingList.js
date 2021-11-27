@@ -23,9 +23,9 @@ class ShoppingList extends Component {
 
   renderItems() {
     return (
-      <ul>
+      <ul className='list-group'>
         {this.state.items.map((item) => (
-          <li key={item.id}>
+          <li className='list-group-item' key={item.id}>
             {item.name}:{item.qty}
           </li>
         ))}

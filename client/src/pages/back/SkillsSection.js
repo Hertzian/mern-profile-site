@@ -1,6 +1,7 @@
 import AdminPage from '../templates/AdminPage'
 import Card from '../../components/Card'
-import Calculator from '../../components/temp/Calculator'
+import CalculatorCl from '../../study/temp/CalculatorCl'
+import CalculatorFn from '../../study/temp/CalculatorFn'
 
 const SkillsSection = (props) => {
   return (
@@ -14,7 +15,14 @@ const SkillsSection = (props) => {
         >
           New Skill
         </button>
-        <Calculator />
+        <div className='row'>
+          <div className='col'>
+            <CalculatorCl />
+          </div>
+          <div className='col'>
+            <CalculatorFn />
+          </div>
+        </div>
       </Card>
     </AdminPage>
   )

@@ -1,6 +1,6 @@
 import { Component } from 'react'
 
-export default class Calculator extends Component {
+export default class CalculatorCl extends Component {
   constructor(props) {
     super(props)
     this.state = { temperature: '', scale: 'c' }
@@ -25,7 +25,8 @@ export default class Calculator extends Component {
       scale === 'c' ? tryConvert(temperature, toFahrenheit) : temperature
 
     return (
-      <div>
+      <>
+        <h2>Temperature Calculator Cl</h2>
         <TemperatureInput
           scale='c'
           temperature={celsius}
@@ -37,7 +38,7 @@ export default class Calculator extends Component {
           onTemperatureChange={this.handleFahrenheitChange}
         />
         <BoilingVerdict celsius={parseFloat(celsius)} />
-      </div>
+      </>
     )
   }
 }
@@ -45,7 +46,7 @@ export default class Calculator extends Component {
 class TemperatureInput extends Component {
   constructor(props) {
     super(props)
-    this.state = { temperature: '' }
+    //this.state = { temperature: '' }
     this.handleChange = this.handleChange.bind(this)
   }
 
@@ -54,21 +55,27 @@ class TemperatureInput extends Component {
   }
 
   render() {
-    const temperature = this.props.temperature
-    const scale = this.props.scale
+    const { temperature, scale } = this.props
+    //const temperature = this.props.temperature
+    //const scale = this.props.scale
 
     return (
-      <fieldset>
-        <legend>Enter temperature in {scaleNames[scale]}:</legend>
-        <input value={temperature} onChange={this.handleChange} />
-      </fieldset>
+      <div className='form-group'>
+        <label>Enter temperature in {scaleNames[scale]}:</label>
+        <input
+          className='form-control'
+          value={temperature}
+          onChange={this.handleChange}
+        />
+      </div>
     )
   }
 }
 
 const BoilingVerdict = (props) => {
-  if (props.celsius >= 100) return <p>The water would boil.</p>
-  return <p>The water would not boil.</p>
+  if (props.celsius >= 100)
+    return <p className='text-danger'>The water would boil.</p>
+  return <p className='text-info'>The water would not boil.</p>
 }
 
 const scaleNames = { c: 'Celsius', f: 'Fahrenheit' }

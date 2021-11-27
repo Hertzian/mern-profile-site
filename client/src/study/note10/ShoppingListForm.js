@@ -21,25 +21,27 @@ class ShoppingListForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label htmlFor='name'>Name: </label>
-        <input
-          type='text'
-          id='name'
-          name='name'
-          placeholder='name'
-          value={this.state.name}
-          onChange={this.handleChange}
-        />
-        <label htmlFor='qty'>Quantity: </label>
-        <input
-          type='text'
-          id='qty'
-          name='qty'
-          placeholder='quantity'
-          value={this.state.qty}
-          onChange={this.handleChange}
-        />
-        <button>Add Item</button>
+        <div className='form-group'>
+          <input
+            className='form-control mt-1'
+            type='text'
+            id='name'
+            name='name'
+            placeholder='name'
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
+          <input
+            className='form-control mt-1'
+            type='text'
+            id='qty'
+            name='qty'
+            placeholder='quantity'
+            value={this.state.qty}
+            onChange={this.handleChange}
+          />
+        </div>
+        <button className='btn btn-primary btn-block'>Add Item</button>
       </form>
     )
   }

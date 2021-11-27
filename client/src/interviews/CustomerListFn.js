@@ -27,11 +27,11 @@ export default function CustomerListFn() {
   })
 
   return (
-    <div>
-      <h3>Functional component</h3>
+    <>
+      <h3 className='mt-2'>Functional component</h3>
       <CustomerForm newCustomer={createCustomer} />
-      {custs.length >= 1 && <ul>{custs}</ul>}
-    </div>
+      {custs.length >= 1 && <ul className='list-group'>{custs}</ul>}
+    </>
   )
 }
 
@@ -52,14 +52,19 @@ function CustomerForm(props) {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <input
-          type='text'
-          name='customer'
-          placeholder='Name'
-          onChange={handleChange}
-          value={customer}
-        />
-        <button>Add Customer</button>
+        <div className='input-group mb-3'>
+          <input
+            className='form-control'
+            type='text'
+            name='customer'
+            placeholder='Name'
+            onChange={handleChange}
+            value={customer}
+          />
+          <div className='input-group-append'>
+            <button className='btn btn-outline-primary'>Add Customer</button>
+          </div>
+        </div>
       </form>
     </>
   )
@@ -70,5 +75,9 @@ function Customer(props) {
     props.delCustomer(props.customer)
   }
 
-  return <li onClick={deleteCustomer}>{props.customer}</li>
+  return (
+    <li className='list-group-item' onClick={deleteCustomer}>
+      {props.customer}
+    </li>
+  )
 }

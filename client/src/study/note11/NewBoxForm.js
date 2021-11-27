@@ -23,29 +23,28 @@ export default class NewBoxForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <div>
-          <label htmlFor='height'>Height</label>
+        <div className='form-group'>
           <input
+            className='form-control mt-1'
+            placeholder='Height:'
             id='height'
             name='height'
             value={this.state.height}
             type='text'
             onChange={this.handleChange}
           />
-        </div>
-        <div>
-          <label htmlFor='width'>Width</label>
           <input
+            className='form-control mt-1'
+            placeholder='Width:'
             id='width'
             name='width'
             value={this.state.width}
             type='text'
             onChange={this.handleChange}
           />
-        </div>
-        <div>
-          <label htmlFor='color'>Color</label>
           <input
+            className='form-control mt-1'
+            placeholder='Color:'
             id='color'
             name='color'
             value={this.state.color}
@@ -53,7 +52,7 @@ export default class NewBoxForm extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <button>Add new box</button>
+        <button className='btn btn-primary btn-block'>Add new box</button>
       </form>
     )
   }

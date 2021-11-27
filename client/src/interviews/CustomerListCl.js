@@ -33,11 +33,13 @@ class CustomerListCl extends Component {
     })
 
     return (
-      <div>
-        <h3>Class based component</h3>
+      <>
+        <h3 className='mt-2'>Class based component</h3>
         <CustomerForm newCustomer={this.createCustomer} />
-        {this.state.customers.length >= 1 && <ul>{customers}</ul>}
-      </div>
+        {this.state.customers.length >= 1 && (
+          <ul className='list-group'>{customers}</ul>
+        )}
+      </>
     )
   }
 }
@@ -65,18 +67,21 @@ class CustomerForm extends Component {
   render() {
     return (
       <>
-        <div>
-          <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit}>
+          <div className='input-group mb-3'>
             <input
+              className='form-control'
               type='text'
               name='customer'
               placeholder='Name'
               value={this.state.customer}
               onChange={this.handleChange}
             />
-            <button>Add customer</button>
-          </form>
-        </div>
+            <div className='input-group-append'>
+              <button className='btn btn-outline-primary'>Add customer</button>
+            </div>
+          </div>
+        </form>
       </>
     )
   }
@@ -88,6 +93,10 @@ class Customer extends Component {
       this.props.deleteCustomer(this.props.customer)
     }
 
-    return <li onClick={deleteCustomer}>{this.props.customer.customer}</li>
+    return (
+      <li className='list-group-item' onClick={deleteCustomer}>
+        {this.props.customer.customer}
+      </li>
+    )
   }
 }
