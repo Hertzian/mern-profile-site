@@ -28,8 +28,8 @@ exports.getPlace = asyH(async (req, res) => {
 exports.newPlace = asyH(async (req, res) => {
   try {
     const { company, job, year, assignment, show } = req.body
-    await Place.create({ company, job, year, assignment, show })
-    return res.json({ message: 'Place created!' })
+    const place = await Place.create({ company, job, year, assignment, show })
+    return res.json({ message: 'Place created!', place })
   } catch (err) {
     return res.json(err)
   }
@@ -48,6 +48,18 @@ exports.updatePlace = asyH(async (req, res) => {
     place.show = show || place.show
     place.save()
     return res.json({ message: 'Place updated', place })
+  } catch (err) {
+    return res.json({ err })
+  }
+})
+
+// @route   DELETE /api/places/delete-place/:placeId
+// @access   private
+exports.deletePlace = asyH(async (req, res) => {
+  try {
+    const place = await Place.findById(req.params.placeId)
+    await place.remove()
+    return res.json({ message: `ALV place ${placeId}` })
   } catch (err) {
     return res.json({ err })
   }
