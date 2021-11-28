@@ -4,8 +4,6 @@ import ListFn from '../../interviews/ListFn'
 import ListCl from '../../interviews/ListCl'
 import CustomerListCl from '../../interviews/CustomerListCl'
 import CustomerListFn from '../../interviews/CustomerListFn'
-import FetchPracticeCl from '../../study/practice/FetchPracticeCl'
-import FetchPracticeFn from '../../study/practice/FetchPracticeFn'
 
 const InterviewSection = (props) => {
   //const flex = { flexDirection: 'column' }
@@ -30,16 +28,6 @@ const InterviewSection = (props) => {
             </div>
             <div className='col'>
               <CustomerListFn />
-            </div>
-          </div>
-        </Card>
-        <Card header={'Fetch practice'}>
-          <div className='row'>
-            <div className='col'>
-              <FetchPracticeCl />
-            </div>
-            <div className='col'>
-              <FetchPracticeFn />
             </div>
           </div>
         </Card>

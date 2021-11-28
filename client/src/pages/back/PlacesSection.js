@@ -41,7 +41,6 @@ class PlacesSection extends Component {
       }
       return place
     })
-    console.log('updated: ', updatedPlaces)
     this.setState({ places: updatedPlaces })
   }
 
@@ -77,7 +76,6 @@ class PlacesSection extends Component {
               target={`delete-place-${_id}`}
               color='danger mr-2'
               label='X'
-              //onClick={() => this.deletePlace(_id)}
             />
             <ConfirmModal
               confirmFunction={this.deletePlace}
