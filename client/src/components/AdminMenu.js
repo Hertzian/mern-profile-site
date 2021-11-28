@@ -39,11 +39,17 @@ const AdminMenu = (props) => {
                   </div>
                   Projects
                 </NavLink>
+                <NavLink className='nav-link' to={`${url}/practice`}>
+                  <div className='sb-nav-link-icon'>
+                    <i className='fas fa-folder-plus'></i>
+                  </div>
+                  Practice
+                </NavLink>
                 <NavLink className='nav-link' to={`${url}/study`}>
                   <div className='sb-nav-link-icon'>
                     <i className='fas fa-folder-plus'></i>
                   </div>
-                  Study Items
+                  Study
                 </NavLink>
                 <NavLink className='nav-link' to={`${url}/interviews`}>
                   <div className='sb-nav-link-icon'>

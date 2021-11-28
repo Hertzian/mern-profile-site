@@ -13,12 +13,6 @@ export default class TodoList extends Component {
     this.toggleCompletion = this.toggleCompletion.bind(this)
   }
 
-  //componentDidUpdate(prevProps, prevState) {
-  //console.log('in component did update')
-  //console.log(prevState.todos)
-  //console.log(this.state.todos)
-  //}
-
   create(newTodo) {
     this.setState({ todos: [...this.state.todos, newTodo] })
   }

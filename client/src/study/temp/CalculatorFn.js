@@ -42,7 +42,7 @@ function TemperatureInput(props) {
   const handleChange = (e) => onTemperatureChange(e.target.value)
 
   return (
-    <div class='form-group'>
+    <div className='form-group'>
       <label>Enter temperature in {scaleNames[scale]}</label>
       <input
         className='form-control'
@@ -56,8 +56,8 @@ function TemperatureInput(props) {
 
 const BoilingVerdict = (props) => {
   if (props.celsius >= 100)
-    return <p class='text-danger'>The water would boil.</p>
-  return <p class='text-info'>The water would not boil.</p>
+    return <p className='text-danger'>The water would boil.</p>
+  return <p className='text-info'>The water would not boil.</p>
 }
 
 const scaleNames = { c: 'Celsius', f: 'Fahrenheit' }

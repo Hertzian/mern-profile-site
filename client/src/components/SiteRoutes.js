@@ -9,6 +9,7 @@ import SkillsSection from '../pages/back/SkillsSection'
 import ProjectsSection from '../pages/back/ProjectsSection'
 import StudySection from '../pages/back/StudySection'
 import InterviewSection from '../pages/back/InterviewSection'
+import PracticeSection from '../pages/back/PracticeSection'
 import PrivateRoute from '../components/PrivateRoute'
 import { UserContext } from '../context/UserContext'
 import DogRoutes from '../study/note19/DogRoutes'
@@ -65,6 +66,7 @@ class SiteRoutes extends Component {
             <PrivateRoute exact path='/admin/places' comp={PlacesSection} />
             <PrivateRoute exact path='/admin/skills' comp={SkillsSection} />
             <PrivateRoute exact path='/admin/projects' comp={ProjectsSection} />
+            <PrivateRoute exact path='/admin/practice' comp={PracticeSection} />
             <PrivateRoute exact path='/admin/study' comp={StudySection} />
             <PrivateRoute
               exact
