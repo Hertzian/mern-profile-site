@@ -4,12 +4,15 @@ import AdminPage from '../templates/AdminPage'
 import Card from '../../components/Card'
 import ButtonOpenModal from '../../components/ButtonOpenModal'
 import PlaceModal from '../../components/PlaceModal'
+import ConfirmModal from '../../components/ConfirmModal'
 
 class PlacesSection extends Component {
   constructor(props) {
     super(props)
     this.state = { places: [] }
-    this.placeChange = this.placeChange.bind(this)
+    this.newPlace = this.newPlace.bind(this)
+    this.updatePlace = this.updatePlace.bind(this)
+    this.deletePlace = this.deletePlace.bind(this)
   }
 
   async componentDidMount() {
@@ -25,12 +28,28 @@ class PlacesSection extends Component {
     }
   }
 
-  placeChange(place) {
-    const removePlace = this.state.places.filter((p) => p._id !== place._id)
-    console.log('remove: ', removePlace)
+  async newPlace(newPlace) {
+    await axios.post('/api/places/new-place', newPlace)
+    this.setState({ places: [...this.state.places, newPlace] })
+  }
 
-    this.setState({ places: [...this.state.places, place] })
-    //this.state.places.filter((p) => p._id === place._id)
+  async updatePlace(placeId, updatedPlace) {
+    await axios.put(`/api/places/update-place/${placeId}`, updatedPlace)
+    const updatedPlaces = this.state.places.map((place) => {
+      if (place._id === placeId) {
+        return updatedPlace
+      }
+      return place
+    })
+    console.log('updated: ', updatedPlaces)
+    this.setState({ places: updatedPlaces })
+  }
+
+  async deletePlace(placeId) {
+    await axios.delete(`/api/places/delete-place/${placeId}`)
+    this.setState({
+      places: this.state.places.filter((place) => place._id !== placeId)
+    })
   }
 
   render() {
@@ -52,9 +71,19 @@ class PlacesSection extends Component {
               target={`update-place-${_id}`}
               isModify={true}
               placeId={_id}
-              placeChange={this.placeChange}
+              addUpdatePlace={this.updatePlace}
             />
-            <button className='btn btn-danger'>X</button>
+            <ButtonOpenModal
+              target={`delete-place-${_id}`}
+              color='danger mr-2'
+              label='X'
+              //onClick={() => this.deletePlace(_id)}
+            />
+            <ConfirmModal
+              confirmFunction={this.deletePlace}
+              itemId={_id}
+              target={`delete-place-${_id}`}
+            />
           </td>
         </tr>
       )
@@ -68,7 +97,11 @@ class PlacesSection extends Component {
             color='primary mb-2'
             label='New place'
           />
-          <PlaceModal target='new-place' isModify={false} />
+          <PlaceModal
+            target='new-place'
+            isModify={false}
+            addUpdatePlace={this.newPlace}
+          />
           <table className='table table-bordered'>
             <thead>
               <tr>

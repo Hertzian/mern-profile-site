@@ -16,6 +16,49 @@ class PlaceModal extends Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
+  async componentDidMount() {
+    this.props.placeId && this.getPlace(this.props.placeId)
+  }
+
+  async getPlace(placeId) {
+    try {
+      const res = await axios.get(`/api/places/get-place/${placeId}`)
+      const { _id, company, job, year, assignment, show } = res.data.place
+      this.setState({ _id, company, job, year, assignment, show })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  handleChange(e) {
+    this.setState({
+      ...this.state,
+      [e.target.name]: e.target.value
+    })
+  }
+  clearState() {
+    this.setState({
+      _id: '',
+      company: '',
+      job: '',
+      year: '',
+      assignment: '',
+      show: ''
+    })
+  }
+
+  handleSubmit(e) {
+    e.preventDefault()
+    if (this.props.isModify) {
+      this.props.addUpdatePlace(this.state._id, this.state)
+      this.closeModal()
+    } else {
+      this.props.addUpdatePlace(this.state)
+      this.closeModal()
+      this.clearState()
+    }
+  }
+
   closeModal() {
     const modal = document.getElementById(this.props.target)
     modal.classList.remove('show', 'd-block')
@@ -29,55 +72,6 @@ class PlaceModal extends Component {
     document.querySelectorAll('.modal-backdrop').forEach((el) => {
       el.remove()
     })
-  }
-
-  async getPlace(placeId) {
-    try {
-      const res = await axios.get(`/api/places/get-place/${placeId}`)
-      const { _id, company, job, year, assignment, show } = res.data.place
-      this.setState({ _id, company, job, year, assignment, show })
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
-  async updatePlace(placeId, placeData) {
-    try {
-      await axios.put(`/api/places/update-place/${placeId}`, placeData)
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
-  async componentDidMount() {
-    this.props.placeId && this.getPlace(this.props.placeId)
-  }
-
-  handleChange(e) {
-    this.setState({
-      ...this.state,
-      [e.target.name]: e.target.value
-    })
-  }
-
-  handleSubmit(e) {
-    e.preventDefault()
-    if (this.props.isModify) {
-      this.updatePlace(this.props.placeId, this.state)
-      this.props.placeChange(this.state)
-      this.closeModal()
-    } else {
-      axios.post('/api/places/new-place', this.state).then((r) => {
-        this.setState({
-          company: '',
-          job: '',
-          year: '',
-          assignment: '',
-          show: ''
-        })
-      })
-      this.closeModal()
-    }
   }
 
   render() {
@@ -94,7 +88,7 @@ class PlaceModal extends Component {
           <div className='modal-content'>
             <div className='modal-header'>
               <h5 className='modal-title' id='exampleModalLabel'>
-                Modal title
+                {this.props.isModify ? 'Update Place' : 'New Place'}
               </h5>
               <button
                 type='button'
