@@ -29,6 +29,7 @@ class ConfirmModal extends Component {
   }
 
   render() {
+    console.log('confirmModal:', this.props.itemId)
     return (
       <div
         className='modal fade'
@@ -64,7 +65,7 @@ class ConfirmModal extends Component {
                   Close
                 </button>
                 <button type='submit' className='btn btn-primary'>
-                  Save
+                  Delete
                 </button>
               </div>
             </form>

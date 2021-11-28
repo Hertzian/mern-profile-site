@@ -1,34 +1,24 @@
 import { Component } from 'react'
-import axios from 'axios'
 
-class PlaceModal extends Component {
+class SkillModal extends Component {
   constructor(props) {
     super(props)
     this.state = {
       _id: this.props._id || '',
-      company: this.props.company || '',
-      job: this.props.job || '',
-      year: this.props.year || '',
-      assignment: this.props.assignment || '',
+      name: this.props.name || '',
+      value: this.props.value || '',
       show: this.props.show || 'no'
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  async componentDidMount() {
-    this.props.placeId && this.getPlace(this.props.placeId)
-  }
-
-  async getPlace(placeId) {
-    try {
-      const res = await axios.get(`/api/places/get-place/${placeId}`)
-      const { _id, company, job, year, assignment, show } = res.data.place
-      this.setState({ _id, company, job, year, assignment, show })
-    } catch (err) {
-      console.log(err)
-    }
-  }
+  //async componentDidMount() {
+  //this.props.skillId && this.getSkill(this.props.skillId)
+  //}
+  //async getSkill(skillId) {
+  //console.log(skillId)
+  //}
 
   handleChange(e) {
     this.setState({ ...this.state, [e.target.name]: e.target.value })
@@ -36,21 +26,20 @@ class PlaceModal extends Component {
   clearState() {
     this.setState({
       _id: '',
-      company: '',
-      job: '',
-      year: '',
-      assignment: '',
-      show: ''
+      name: '',
+      value: '',
+      show: 'no'
     })
   }
 
   handleSubmit(e) {
+    const { addUpdateSkill, isModify, skillId } = this.props
     e.preventDefault()
-    if (this.props.isModify) {
-      this.props.addUpdatePlace(this.state._id, this.state)
+    if (isModify) {
+      addUpdateSkill(skillId, 'updateSkill')
       this.closeModal()
     } else {
-      this.props.addUpdatePlace(this.state)
+      addUpdateSkill(this.state)
       this.closeModal()
       this.clearState()
     }
@@ -85,7 +74,7 @@ class PlaceModal extends Component {
           <div className='modal-content'>
             <div className='modal-header'>
               <h5 className='modal-title' id='exampleModalLabel'>
-                {this.props.isModify ? 'Update Place' : 'New Place'}
+                {this.props.isModify ? 'Update Skill' : 'New Skill'}
               </h5>
               <button
                 type='button'
@@ -99,47 +88,27 @@ class PlaceModal extends Component {
             <form onSubmit={this.handleSubmit}>
               <div className='modal-body'>
                 <div className='form-group'>
-                  <label htmlFor='company'>Company:</label>
+                  <label htmlFor='name'>Name:</label>
                   <input
-                    name='company'
+                    name='name'
                     onChange={this.handleChange}
                     className='form-control'
                     type='text'
-                    value={this.state.company}
+                    value={this.state.name}
                   />
                 </div>
                 <div className='form-group'>
-                  <label htmlFor='job'>Job:</label>
+                  <label htmlFor='value'>Value:</label>
                   <input
-                    name='job'
+                    name='value'
                     onChange={this.handleChange}
                     className='form-control'
                     type='text'
-                    value={this.state.job}
+                    value={this.state.value}
                   />
                 </div>
                 <div className='form-group'>
-                  <label htmlFor='year'>Year:</label>
-                  <input
-                    name='year'
-                    onChange={this.handleChange}
-                    className='form-control'
-                    type='text'
-                    value={this.state.year}
-                  />
-                </div>
-                <div className='form-group'>
-                  <label htmlFor='assignment'>Assignment:</label>
-                  <input
-                    name='assignment'
-                    onChange={this.handleChange}
-                    className='form-control'
-                    type='text'
-                    value={this.state.assignment}
-                  />
-                </div>
-                <div className='form-group'>
-                  <label htmlFor='show'>Do you want to show</label>
+                  <label htmlFor='show'>Do you want to show?</label>
                   <div className='form-check'>
                     <input
                       name='show'
@@ -188,4 +157,4 @@ class PlaceModal extends Component {
   }
 }
 
-export default PlaceModal
+export default SkillModal
