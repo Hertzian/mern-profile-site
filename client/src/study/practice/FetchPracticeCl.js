@@ -24,7 +24,7 @@ class FetchPracticeCl extends Component {
     ))
 
     return (
-      <div>
+      <div className='col'>
         <h2>FetchPracticeCl</h2>
         {users}
       </div>

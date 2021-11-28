@@ -19,7 +19,7 @@ export default function CalculatorFn() {
   }
 
   return (
-    <>
+    <div className='col'>
       <h2>Temperature Calculator Fn</h2>
       <TemperatureInput
         scale='c'
@@ -32,7 +32,7 @@ export default function CalculatorFn() {
         onTemperatureChange={handleFahrenheitChange}
       />
       <BoilingVerdict celsius={parseFloat(celsius)} />
-    </>
+    </div>
   )
 }
 

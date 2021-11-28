@@ -26,7 +26,7 @@ function FetchPracticeFn() {
     ))
 
   return (
-    <div>
+    <div className='col'>
       <h2>FetchPracticeFn</h2>
       {renderUsers}
     </div>

@@ -25,7 +25,7 @@ export default class CalculatorCl extends Component {
       scale === 'c' ? tryConvert(temperature, toFahrenheit) : temperature
 
     return (
-      <>
+      <div className='col'>
         <h2>Temperature Calculator Cl</h2>
         <TemperatureInput
           scale='c'
@@ -38,7 +38,7 @@ export default class CalculatorCl extends Component {
           onTemperatureChange={this.handleFahrenheitChange}
         />
         <BoilingVerdict celsius={parseFloat(celsius)} />
-      </>
+      </div>
     )
   }
 }
