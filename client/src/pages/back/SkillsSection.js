@@ -26,10 +26,14 @@ class SkillsSection extends Component {
     const resSkill = res.data.skill
     this.setState({ skills: [...this.state.skills, resSkill] })
   }
-  updateSkill(skillId, updatedSkill) {
-    //console.log(skillId, updatedSkill)
+  async updateSkill(skillId, updatedSkill) {
+    const res = await axios.put(
+      `/api/skills/update-skill/${skillId}`,
+      updatedSkill
+    )
+    const resSkill = res.data.skill
     const updatedSkills = this.state.skills.map((skill) => {
-      if (skill._id === skillId) return updatedSkill
+      if (skill._id === skillId) return resSkill
       return skill
     })
     this.setState({ skills: updatedSkills })

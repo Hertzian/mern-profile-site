@@ -40,7 +40,7 @@ class SkillModal extends Component {
     const { addUpdateSkill, isModify, skillId, target } = this.props
     e.preventDefault()
     if (isModify) {
-      addUpdateSkill(skillId, 'updateSkill')
+      addUpdateSkill(skillId, this.state)
       closeModal(target)
     } else {
       addUpdateSkill(this.state)
