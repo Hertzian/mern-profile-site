@@ -31,6 +31,25 @@ exports.newSkill = asyH(async (req, res) => {
   }
 })
 
+// @route   PUT /api/skills/update-skill/:skillId
+// @access   private
+exports.updateSkill = asyH(async (req, res) => {
+  try {
+    const skillId = req.params.skillId
+    const { name, value, show } = req.body
+    const skill = await Skill.findById(skillId)
+    console.log(skillId)
+    console.log(req.body)
+    skill.name = name || updatedSkill.name
+    skill.value = value || updatedSkill.value
+    skill.show = show || updatedSkill.show
+    skill.save()
+    return res.json({ message: 'Skill updated!', skill })
+  } catch (err) {
+    return res.json(err)
+  }
+})
+
 // @route   DELETE /api/skills/delete-skill/:skillId
 // @access   private
 exports.deleteSkill = asyH(async (req, res) => {
