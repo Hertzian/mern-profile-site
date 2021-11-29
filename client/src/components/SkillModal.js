@@ -1,25 +1,28 @@
 import { Component } from 'react'
+import axios from 'axios'
 import closeModal from '../utils/closeModal'
 
 class SkillModal extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      _id: this.props._id || '',
-      name: this.props.name || '',
-      value: this.props.value || '',
-      show: this.props.show || 'no'
+      _id: '',
+      name: '',
+      value: '',
+      show: 'no'
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  //async componentDidMount() {
-  //this.props.skillId && this.getSkill(this.props.skillId)
-  //}
-  //async getSkill(skillId) {
-  //console.log(skillId)
-  //}
+  async componentDidMount() {
+    this.props.skillId && this.getSkill(this.props.skillId)
+  }
+  async getSkill(skillId) {
+    const res = await axios.get(`/api/skills/get-skill/${skillId}`)
+    const skill = res.data.skill
+    this.setState(skill)
+  }
 
   handleChange(e) {
     this.setState({ ...this.state, [e.target.name]: e.target.value })
@@ -45,21 +48,6 @@ class SkillModal extends Component {
       this.clearState()
     }
   }
-
-  //closeModal() {
-  //const modal = document.getElementById(this.props.target)
-  //modal.classList.remove('show', 'd-block')
-  //modal.style = 'display: none'
-  //modal.setAttribute('aria-hidden', 'true')
-  //modal.removeAttribute('role')
-  //modal.removeAttribute('aria-modal')
-  //document.querySelectorAll('.modal-open').forEach((el) => {
-  //el.classList.remove('modal-open')
-  //})
-  //document.querySelectorAll('.modal-backdrop').forEach((el) => {
-  //el.remove()
-  //})
-  //}
 
   render() {
     return (

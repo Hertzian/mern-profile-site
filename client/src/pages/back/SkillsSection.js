@@ -21,32 +21,34 @@ class SkillsSection extends Component {
     this.setState({ ...this.state, skills })
   }
 
-  newSkill(newSkill) {
-    console.log(newSkill)
-    this.setState({ skills: [...this.state.skills, newSkill] })
+  async newSkill(newSkill) {
+    const res = await axios.post('/api/skills/new-skill', newSkill)
+    const resSkill = res.data.skill
+    this.setState({ skills: [...this.state.skills, resSkill] })
   }
   updateSkill(skillId, updatedSkill) {
-    console.log(skillId, updatedSkill)
+    //console.log(skillId, updatedSkill)
     const updatedSkills = this.state.skills.map((skill) => {
       if (skill._id === skillId) return updatedSkill
       return skill
     })
     this.setState({ skills: updatedSkills })
   }
-  deleteSkill(skillId) {
+  async deleteSkill(skillId) {
+    await axios.delete(`/api/skills/delete-skill/${skillId}`)
     this.setState({
       skills: this.state.skills.filter((skill) => skill._id !== skillId)
     })
   }
 
   render() {
-    console.log(this.state)
+    //console.log(this.state)
     const skills = this.state.skills.map((skill) => {
-      const { name, val, show, _id } = skill
+      const { name, value, show, _id } = skill
       return (
         <tr key={_id}>
           <td>{name}</td>
-          <td>{val}</td>
+          <td>{value}</td>
           <td>{show}</td>
           <td>
             <ButtonOpenModal
