@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import closeModal from '../utils/closeModal'
 
 class SkillModal extends Component {
   constructor(props) {
@@ -33,32 +34,32 @@ class SkillModal extends Component {
   }
 
   handleSubmit(e) {
-    const { addUpdateSkill, isModify, skillId } = this.props
+    const { addUpdateSkill, isModify, skillId, target } = this.props
     e.preventDefault()
     if (isModify) {
       addUpdateSkill(skillId, 'updateSkill')
-      this.closeModal()
+      closeModal(target)
     } else {
       addUpdateSkill(this.state)
-      this.closeModal()
+      closeModal(target)
       this.clearState()
     }
   }
 
-  closeModal() {
-    const modal = document.getElementById(this.props.target)
-    modal.classList.remove('show', 'd-block')
-    modal.style = 'display: none'
-    modal.setAttribute('aria-hidden', 'true')
-    modal.removeAttribute('role')
-    modal.removeAttribute('aria-modal')
-    document.querySelectorAll('.modal-open').forEach((el) => {
-      el.classList.remove('modal-open')
-    })
-    document.querySelectorAll('.modal-backdrop').forEach((el) => {
-      el.remove()
-    })
-  }
+  //closeModal() {
+  //const modal = document.getElementById(this.props.target)
+  //modal.classList.remove('show', 'd-block')
+  //modal.style = 'display: none'
+  //modal.setAttribute('aria-hidden', 'true')
+  //modal.removeAttribute('role')
+  //modal.removeAttribute('aria-modal')
+  //document.querySelectorAll('.modal-open').forEach((el) => {
+  //el.classList.remove('modal-open')
+  //})
+  //document.querySelectorAll('.modal-backdrop').forEach((el) => {
+  //el.remove()
+  //})
+  //}
 
   render() {
     return (

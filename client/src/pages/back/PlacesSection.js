@@ -29,11 +29,13 @@ class PlacesSection extends Component {
   }
 
   async newPlace(newPlace) {
-    await axios.post('/api/places/new-place', newPlace)
-    this.setState({ places: [...this.state.places, newPlace] })
+    const res = await axios.post('/api/places/new-place', newPlace)
+    const newPlaceRes = res.data.place
+    this.setState({ places: [...this.state.places, newPlaceRes] })
   }
 
   async updatePlace(placeId, updatedPlace) {
+    console.log(placeId)
     await axios.put(`/api/places/update-place/${placeId}`, updatedPlace)
     const updatedPlaces = this.state.places.map((place) => {
       if (place._id === placeId) {
@@ -53,7 +55,7 @@ class PlacesSection extends Component {
 
   render() {
     const places = this.state.places.map((place) => {
-      const { company, year, assignment, show, _id } = place
+      const { _id, company, year, assignment, show } = place
       return (
         <tr key={_id}>
           <td>{company}</td>

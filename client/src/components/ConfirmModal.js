@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import closeModal from '../utils/closeModal'
 
 class ConfirmModal extends Component {
   constructor(props) {
@@ -6,30 +7,14 @@ class ConfirmModal extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  closeModal() {
-    const modal = document.getElementById(this.props.target)
-    modal.classList.remove('show', 'd-block')
-    modal.style = 'display: none'
-    modal.setAttribute('aria-hidden', 'true')
-    modal.removeAttribute('role')
-    modal.removeAttribute('aria-modal')
-    document.querySelectorAll('.modal-open').forEach((el) => {
-      el.classList.remove('modal-open')
-    })
-    document.querySelectorAll('.modal-backdrop').forEach((el) => {
-      el.remove()
-    })
-  }
-
   handleSubmit(e) {
-    const { itemId, confirmFunction } = this.props
+    const { itemId, confirmFunction, target } = this.props
     e.preventDefault()
     confirmFunction(itemId)
-    this.closeModal()
+    closeModal(target)
   }
 
   render() {
-    console.log('confirmModal:', this.props.itemId)
     return (
       <div
         className='modal fade'

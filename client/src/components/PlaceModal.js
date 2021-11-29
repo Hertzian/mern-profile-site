@@ -1,16 +1,17 @@
 import { Component } from 'react'
 import axios from 'axios'
+import closeModal from '../utils/closeModal'
 
 class PlaceModal extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      _id: this.props._id || '',
-      company: this.props.company || '',
-      job: this.props.job || '',
-      year: this.props.year || '',
-      assignment: this.props.assignment || '',
-      show: this.props.show || 'no'
+      _id: '',
+      company: '',
+      job: '',
+      year: '',
+      assignment: '',
+      show: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -45,30 +46,16 @@ class PlaceModal extends Component {
   }
 
   handleSubmit(e) {
+    const { isModify, target } = this.props
     e.preventDefault()
-    if (this.props.isModify) {
+    if (isModify) {
       this.props.addUpdatePlace(this.state._id, this.state)
-      this.closeModal()
+      closeModal(target)
     } else {
       this.props.addUpdatePlace(this.state)
-      this.closeModal()
+      closeModal(target)
       this.clearState()
     }
-  }
-
-  closeModal() {
-    const modal = document.getElementById(this.props.target)
-    modal.classList.remove('show', 'd-block')
-    modal.style = 'display: none'
-    modal.setAttribute('aria-hidden', 'true')
-    modal.removeAttribute('role')
-    modal.removeAttribute('aria-modal')
-    document.querySelectorAll('.modal-open').forEach((el) => {
-      el.classList.remove('modal-open')
-    })
-    document.querySelectorAll('.modal-backdrop').forEach((el) => {
-      el.remove()
-    })
   }
 
   render() {
