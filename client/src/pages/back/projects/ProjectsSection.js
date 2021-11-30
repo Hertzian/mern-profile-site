@@ -50,12 +50,22 @@ class ProjectsSection extends Component {
   render() {
     const projects = this.state.projects.map((project) => {
       const { _id, name, url, repo, show } = project
+      const showIcon =
+        show === 'yes' ? (
+          <td className='text-success'>
+            <i className='far fa-check-circle fa-2x'></i>
+          </td>
+        ) : (
+          <td className='text-danger'>
+            <i className='far fa-times-circle fa-2x'></i>
+          </td>
+        )
       return (
         <tr key={_id}>
           <td>{name}</td>
           <td>{url}</td>
           <td>{repo}</td>
-          <td>{show}</td>
+          {showIcon}
           <td>
             <ButtonOpenModal
               target={`update-project-${_id}`}

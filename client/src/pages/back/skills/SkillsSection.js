@@ -48,11 +48,21 @@ class SkillsSection extends Component {
   render() {
     const skills = this.state.skills.map((skill) => {
       const { name, value, show, _id } = skill
+      const showIcon =
+        show === 'yes' ? (
+          <td className='text-success'>
+            <i className='far fa-check-circle fa-2x'></i>
+          </td>
+        ) : (
+          <td className='text-danger'>
+            <i className='far fa-times-circle fa-2x'></i>
+          </td>
+        )
       return (
         <tr key={_id}>
           <td>{name}</td>
           <td>{value}</td>
-          <td>{show}</td>
+          {showIcon}
           <td>
             <ButtonOpenModal
               target={`update-skill-${_id}`}

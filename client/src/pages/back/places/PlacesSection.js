@@ -56,12 +56,22 @@ class PlacesSection extends Component {
   render() {
     const places = this.state.places.map((place) => {
       const { _id, company, year, assignment, show } = place
+      const showIcon =
+        show === 'yes' ? (
+          <td className='text-success'>
+            <i className='far fa-check-circle fa-2x'></i>
+          </td>
+        ) : (
+          <td className='text-danger'>
+            <i className='far fa-times-circle fa-2x'></i>
+          </td>
+        )
       return (
         <tr key={_id}>
           <td>{company}</td>
           <td>{assignment}</td>
           <td>{year}</td>
-          <td>{show}</td>
+          {showIcon}
           <td>
             <ButtonOpenModal
               target={`update-place-${_id}`}
