@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { logout } from '../../../context/userActions'
+import { logout } from '../../../utils/logout'
 import { UserContext } from '../../../context/UserContext'
 
 class AdminNav extends Component {

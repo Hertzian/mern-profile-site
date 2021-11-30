@@ -46,7 +46,6 @@ class SkillsSection extends Component {
   }
 
   render() {
-    //console.log(this.state)
     const skills = this.state.skills.map((skill) => {
       const { name, value, show, _id } = skill
       return (

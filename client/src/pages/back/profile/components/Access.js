@@ -1,7 +1,6 @@
 import { Component } from 'react'
 import axios from 'axios'
 import Card from '../../../../components/Card'
-import { updateAccess } from '../../../../context/userActions'
 
 class Access extends Component {
   constructor(props) {
@@ -12,10 +11,6 @@ class Access extends Component {
   }
 
   async componentDidMount() {
-    this.readAccessData()
-  }
-
-  async readAccessData() {
     const res = await axios('/api/users/read-access')
     this.setState({ email: res.data.email })
   }
@@ -23,10 +18,15 @@ class Access extends Component {
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value })
   }
+  async updateAccess(userData) {
+    const res = await axios.put('/api/users/update-access', userData)
+    const resData = res.data.email
+    console.log(resData)
+  }
 
   handleSubmit(e) {
     e.preventDefault()
-    updateAccess(this.state)
+    this.updateAccess(this.state)
     this.setState({ password: '' })
   }
 

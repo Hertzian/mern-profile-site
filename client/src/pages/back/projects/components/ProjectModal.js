@@ -2,60 +2,44 @@ import { Component } from 'react'
 import axios from 'axios'
 import closeModal from '../../../../utils/closeModal'
 
-class PlaceModal extends Component {
+class ProjectModal extends Component {
   constructor(props) {
     super(props)
     this.state = {
       _id: '',
-      company: '',
-      job: '',
-      year: '',
-      assignment: '',
+      name: '',
+      url: '',
+      repo: '',
+      image: '',
+      description: '',
       show: 'no'
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   async componentDidMount() {
-    this.props.placeId && this.getPlace(this.props.placeId)
+    this.props.projectId && this.getProject(this.props.projectId)
   }
-
-  async getPlace(placeId) {
-    try {
-      const res = await axios.get(`/api/places/get-place/${placeId}`)
-      const { _id, company, job, year, assignment, show } = res.data.place
-      this.setState({ _id, company, job, year, assignment, show })
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
-  handleChange(e) {
-    this.setState({ ...this.state, [e.target.name]: e.target.value })
-  }
-  clearState() {
-    this.setState({
-      _id: '',
-      company: '',
-      job: '',
-      year: '',
-      assignment: '',
-      show: ''
-    })
+  async getProject(projectId) {
+    const res = await axios.get(`/api/projects/get-project/${projectId}`)
+    const project = res.data.project
+    this.setState(project)
   }
 
   handleSubmit(e) {
-    const { isModify, target } = this.props
+    const { projectId, addUpdateProject, target, isModify } = this.props
     e.preventDefault()
     if (isModify) {
-      this.props.addUpdatePlace(this.state._id, this.state)
+      addUpdateProject(projectId, this.state)
       closeModal(target)
     } else {
-      this.props.addUpdatePlace(this.state)
+      addUpdateProject(this.state)
       closeModal(target)
-      this.clearState()
     }
+  }
+  handleChange(e) {
+    this.setState({ ...this.state, [e.target.name]: e.target.value })
   }
 
   render() {
@@ -72,7 +56,7 @@ class PlaceModal extends Component {
           <div className='modal-content'>
             <div className='modal-header'>
               <h5 className='modal-title' id='exampleModalLabel'>
-                {this.props.isModify ? 'Update Place' : 'New Place'}
+                {this.props.isModify ? 'Update Project' : 'New Project'}
               </h5>
               <button
                 type='button'
@@ -86,47 +70,58 @@ class PlaceModal extends Component {
             <form onSubmit={this.handleSubmit}>
               <div className='modal-body'>
                 <div className='form-group'>
-                  <label htmlFor='company'>Company:</label>
+                  <label htmlFor='name'>Name:</label>
                   <input
-                    name='company'
+                    name='name'
                     onChange={this.handleChange}
                     className='form-control'
                     type='text'
-                    value={this.state.company}
+                    value={this.state.name}
                   />
                 </div>
                 <div className='form-group'>
-                  <label htmlFor='job'>Job:</label>
+                  <label htmlFor='url'>url:</label>
                   <input
-                    name='job'
+                    name='url'
                     onChange={this.handleChange}
                     className='form-control'
                     type='text'
-                    value={this.state.job}
+                    value={this.state.url}
                   />
                 </div>
                 <div className='form-group'>
-                  <label htmlFor='year'>Year:</label>
+                  <label htmlFor='repo'>Repo:</label>
                   <input
-                    name='year'
+                    name='repo'
                     onChange={this.handleChange}
                     className='form-control'
                     type='text'
-                    value={this.state.year}
+                    value={this.state.repo}
                   />
                 </div>
                 <div className='form-group'>
-                  <label htmlFor='assignment'>Assignment:</label>
+                  <label htmlFor='image'>Image:</label>
                   <input
-                    name='assignment'
+                    name='image'
                     onChange={this.handleChange}
                     className='form-control'
                     type='text'
-                    value={this.state.assignment}
+                    value={this.state.image}
                   />
                 </div>
                 <div className='form-group'>
-                  <label htmlFor='show'>Do you want to show</label>
+                  <label htmlFor='description'>Description:</label>
+                  <textarea
+                    className='form-control'
+                    name='description'
+                    value={this.state.description}
+                    onChange={this.handleChange}
+                    cols='20'
+                    rows='3'
+                  ></textarea>
+                </div>
+                <div className='form-group'>
+                  <label htmlFor='show'>Do you want to show?</label>
                   <div className='form-check'>
                     <input
                       name='show'
@@ -175,4 +170,4 @@ class PlaceModal extends Component {
   }
 }
 
-export default PlaceModal
+export default ProjectModal

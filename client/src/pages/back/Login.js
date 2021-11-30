@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import AdminFooter from './partials/AdminFooter'
 import { UserContext } from '../../context/UserContext'
-import { hasToken } from '../../context/userActions'
+import { hasToken } from '../../utils/hasToken'
 import setAuthToken from '../../utils/setAuthToken'
 import '../../styles/back.css'
 

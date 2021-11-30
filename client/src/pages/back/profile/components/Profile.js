@@ -2,12 +2,10 @@ import { Component } from 'react'
 import axios from 'axios'
 import Card from '../../../../components/Card'
 import { UserContext } from '../../../../context/UserContext'
-import { updateProfile } from '../../../../context/userActions'
 import Alert from '../../../../components/Alert'
 
 class Profile extends Component {
   static contextType = UserContext
-
   constructor(props) {
     super(props)
     this.state = {
@@ -23,32 +21,28 @@ class Profile extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  async componentDidMount() {
+    this.state && this.getProfile()
+  }
+
+  async getProfile() {
+    const res = await axios.get('/api/users/profile')
+    const resUser = res.data.user
+    this.setState(resUser)
+  }
+  async updateProfile(userData) {
+    const res = await axios.put(`/api/users/profile`, userData)
+    const resUser = res.data.user
+    this.setState(resUser)
+  }
+
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value })
   }
 
   handleSubmit(e) {
     e.preventDefault()
-    updateProfile(this.state)
-  }
-
-  async getProfile() {
-    const res = await axios.get('/api/users/profile')
-    const { name, lastname, github, linkedin, phone, bio, profession } =
-      res.data.user
-    this.setState({
-      name,
-      lastname,
-      github,
-      linkedin,
-      phone,
-      bio,
-      profession
-    })
-  }
-
-  async componentDidMount() {
-    this.getProfile()
+    this.updateProfile(this.state)
   }
 
   render() {

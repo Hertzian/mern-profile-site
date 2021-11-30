@@ -19,6 +19,7 @@ export class UserProvider extends Component {
   }
 
   logout() {
+    localStorage.removeItem('token')
     this.setState({ isAuthenticated: false })
   }
 
