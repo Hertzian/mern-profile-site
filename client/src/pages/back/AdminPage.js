@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import AdminMenu from '../../components/AdminMenu'
-import AdminNav from '../../components/AdminNav'
+import AdminMenu from './partials/AdminMenu'
+import AdminNav from './partials/AdminNav'
 import setAuthToken from '../../utils/setAuthToken'
 import '../../styles/tables.css'
 import '../../styles/back.css'

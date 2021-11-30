@@ -1,6 +1,6 @@
 import { Component } from 'react'
-import Card from '../Card'
-import { image } from '../../dummy/dummy'
+import Card from '../../../../components/Card'
+import { image } from '../../../../menuConfig/menuConfig'
 
 class MainImages extends Component {
   render() {

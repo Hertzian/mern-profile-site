@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import Footer from '../../components/AdminFooter'
+import AdminFooter from './partials/AdminFooter'
 import { UserContext } from '../../context/UserContext'
 import { hasToken } from '../../context/userActions'
 import setAuthToken from '../../utils/setAuthToken'
@@ -107,7 +107,7 @@ class Login extends Component {
           </main>
         </div>
         <div id='layoutAuthentication_footer'>
-          <Footer />
+          <AdminFooter />
         </div>
       </div>
     )

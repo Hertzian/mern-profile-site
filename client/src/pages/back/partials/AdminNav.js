@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { logout } from '../context/userActions'
-import { UserContext } from '../context/UserContext'
+import { logout } from '../../../context/userActions'
+import { UserContext } from '../../../context/UserContext'
 
 class AdminNav extends Component {
   static contextType = UserContext

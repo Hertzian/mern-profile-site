@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import axios from 'axios'
-import closeModal from '../utils/closeModal'
+import closeModal from '../../../../utils/closeModal'
 
 class SkillModal extends Component {
   constructor(props) {

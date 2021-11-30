@@ -1,9 +1,9 @@
-import AdminPage from '../templates/AdminPage'
-import Card from '../../components/Card'
-import FetchPracticeCl from '../../study/practice/FetchPracticeCl'
-import FetchPracticeFn from '../../study/practice/FetchPracticeFn'
-import CalculatorCl from '../../study/temp/CalculatorCl'
-import CalculatorFn from '../../study/temp/CalculatorFn'
+import AdminPage from '../AdminPage'
+import Card from '../../../components/Card'
+import FetchPracticeCl from './components/fetchPractice/FetchPracticeCl'
+import FetchPracticeFn from './components/fetchPractice/FetchPracticeFn'
+import CalculatorCl from './components/tempCalc/CalculatorCl'
+import CalculatorFn from './components/tempCalc/CalculatorFn'
 
 const PracticeSection = (props) => {
   return (

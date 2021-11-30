@@ -1,9 +1,9 @@
-import AdminPage from '../templates/AdminPage'
-import Card from '../../components/Card'
-import ListFn from '../../interviews/ListFn'
-import ListCl from '../../interviews/ListCl'
-import CustomerListCl from '../../interviews/CustomerListCl'
-import CustomerListFn from '../../interviews/CustomerListFn'
+import AdminPage from '../AdminPage'
+import Card from '../../../components/Card'
+import ListFn from './components/ListFn'
+import ListCl from './components/ListCl'
+import CustomerListCl from './components/CustomerListCl'
+import CustomerListFn from './components/CustomerListFn'
 
 const InterviewSection = (props) => {
   //const flex = { flexDirection: 'column' }

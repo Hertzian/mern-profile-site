@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import MenuItem from './MenuItem'
-import { menuItems } from '../dummy/dummy'
+import { frontMenu } from '../../../menuConfig/menuConfig'
 
 const Menu = () => {
   const [menuIsOpen, setMenuIsOpen] = useState(false)
 
   const menuHandler = () => setMenuIsOpen(!menuIsOpen)
 
-  const menuList = menuItems.map((item, idx) => (
+  const menuList = frontMenu.map((item, idx) => (
     <MenuItem
       key={idx}
       label={item.label}

@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import axios from 'axios'
-import Card from '../Card'
-import { updateAccess } from '../../context/userActions'
+import Card from '../../../../components/Card'
+import { updateAccess } from '../../../../context/userActions'
 
 class Access extends Component {
   constructor(props) {

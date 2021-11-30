@@ -1,9 +1,9 @@
 import { Component } from 'react'
 import axios from 'axios'
-import Card from '../Card'
-import { UserContext } from '../../context/UserContext'
-import { updateProfile } from '../../context/userActions'
-import Alert from '../Alert'
+import Card from '../../../../components/Card'
+import { UserContext } from '../../../../context/UserContext'
+import { updateProfile } from '../../../../context/userActions'
+import Alert from '../../../../components/Alert'
 
 class Profile extends Component {
   static contextType = UserContext

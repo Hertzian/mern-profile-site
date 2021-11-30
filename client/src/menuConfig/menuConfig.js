@@ -1,4 +1,4 @@
-export const menuItems = [
+export const frontMenu = [
   { label: 'Home', refe: '#home' },
   { label: 'My experience', refe: '#places' },
   { label: 'About', refe: '#about' },
@@ -9,31 +9,16 @@ export const menuItems = [
 ]
 
 export const adminMenu = [
-  { label: 'Profile', component: 'AdminProfile' },
-  { label: 'Places', component: 'AdminPlaces' },
-  { label: 'Skills', component: 'AdminSkills' },
-  { label: 'Projects', component: 'AdminProjects' }
+  { label: 'Profile' },
+  { label: 'Places' },
+  { label: 'Skills' },
+  { label: 'Projects' },
+  { label: 'Study' },
+  { label: 'Interviews' }
 ]
 
 export const image =
   'https://t4.ftcdn.net/jpg/02/07/87/79/360_F_207877921_BtG6ZKAVvtLyc5GWpBNEIlIxsffTtWkv.jpg'
-
-export const places = [
-  { company: 'Dynamics', job: 'FullStack developer', year: '2019', show: true },
-  {
-    company: 'Dynamics',
-    job: 'FullStack developer',
-    year: '2019',
-    show: false
-  },
-  { company: 'Dynamics', job: 'FullStack developer', year: '2019', show: true }
-]
-
-export const skills = [
-  { name: 'English', value: '90', show: true },
-  { name: 'English', value: '90', show: false },
-  { name: 'English', value: '90', show: true }
-]
 
 export const projects = [
   {

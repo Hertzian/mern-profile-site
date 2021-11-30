@@ -1,10 +1,10 @@
 import { Component } from 'react'
 import axios from 'axios'
-import AdminPage from '../templates/AdminPage'
-import Card from '../../components/Card'
-import ButtonOpenModal from '../../components/ButtonOpenModal'
-import PlaceModal from '../../components/PlaceModal'
-import ConfirmModal from '../../components/ConfirmModal'
+import AdminPage from '../AdminPage'
+import Card from '../../../components/Card'
+import ButtonOpenModal from '../../../components/ButtonOpenModal'
+import PlaceModal from './components/PlaceModal'
+import ConfirmModal from '../../../components/ConfirmModal'
 
 class PlacesSection extends Component {
   constructor(props) {

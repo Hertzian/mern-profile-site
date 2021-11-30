@@ -1,4 +1,4 @@
-import SiteRoutes from './components/SiteRoutes'
+import SiteRoutes from './routing/SiteRoutes'
 import { UserProvider } from './context/UserContext'
 
 function App() {

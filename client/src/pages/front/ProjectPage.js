@@ -1,5 +1,5 @@
-import Menu from '../../components/Menu'
-import Footer from '../../components/Footer'
+import Menu from './partials/Menu'
+import Footer from './partials/Footer'
 import '../../styles/front.css'
 
 const DetailPage = () => {

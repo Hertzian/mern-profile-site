@@ -1,5 +1,5 @@
-import AdminPage from '../templates/AdminPage'
-import Card from '../../components/Card'
+import AdminPage from '../AdminPage'
+import Card from '../../../components/Card'
 
 const ProjectsSection = (props) => {
   return (
