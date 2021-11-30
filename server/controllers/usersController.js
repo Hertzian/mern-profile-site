@@ -8,9 +8,8 @@ const bcrypt = require('bcryptjs')
 // @access  public
 exports.getProfile = asyH(async (req, res) => {
   try {
-    const user = await User.findOne({ email: 'test@test.com' })
+    const user = req.user
     const { name, lastname, github, linkedin, phone, bio, profession } = user
-    console.log(user)
     res.json({
       error: false,
       user: { name, lastname, github, linkedin, phone, bio, profession }
@@ -48,6 +47,7 @@ exports.updateProfile = asyH(async (req, res) => {
 exports.readAccessData = asyH(async (req, res) => {
   try {
     const user = req.user
+    //console.log(user)
     return res.json({ email: user.email })
   } catch (err) {
     console.log(err)
@@ -65,8 +65,8 @@ exports.updateAccess = asyH(async (req, res) => {
     user.email = email || user.email
     user.password = password || user.password
 
-    console.log('email: ', email)
-    console.log('password: ', password)
+    //console.log('email: ', email)
+    //console.log('password: ', password)
 
     user.save()
     return res.json({ email: user.email, user: user.password })
@@ -86,7 +86,6 @@ exports.login = asyH(async (req, res) => {
     if (user && (await user.matchPassword(password))) {
       return res.json({ token: genToken(user._id) })
     }
-    console.log('nachos')
   } catch (err) {
     return res.status(401).json({ error: err })
   }
