@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { logout } from '../../../utils/logout'
 import { UserContext } from '../../../context/UserContext'
@@ -7,9 +8,15 @@ class AdminNav extends Component {
   static contextType = UserContext
   constructor(props) {
     super(props)
-    this.state = { isOpen: false }
+    this.state = { isOpen: false, name: '' }
     this.toggleOpen = this.toggleOpen.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
+  }
+
+  async componentDidMount() {
+    const res = await axios.get('/api/users/profile')
+    const user = `${res.data.user.name} ${res.data.user.lastname}`
+    this.setState({ name: user })
   }
 
   toggleOpen() {
@@ -36,6 +43,7 @@ class AdminNav extends Component {
           <i className='fas fa-bars'></i>
         </button>
         <div className='d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0'></div>
+        <span className='navbar-nav text-light'>Welcome {this.state.name}</span>
         <ul className='navbar-nav ml-auto ml-md-0'>
           <li className='nav-item dropdown'>
             <span

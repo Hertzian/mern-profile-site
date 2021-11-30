@@ -21,7 +21,7 @@
 }
 
 a {
-  font-size: 2rem;
+  /*font-size: 2rem;*/
   text-decoration: none;
   color: white;
   transition: all 4s ease-out;

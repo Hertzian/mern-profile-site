@@ -1,8 +1,28 @@
-import { NavLink } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 import Footer from './AdminFooter'
+import { adminMenu } from '../../../menuConfig/menuConfig'
+import AdminSideBarItem from './AdminSideBarItem'
 
 const AdminMenu = (props) => {
-  const url = '/admin'
+  const [name, setName] = useState('')
+  useEffect(() => {
+    const getName = async () => {
+      const res = await axios.get('/api/users/profile')
+      const user = `${res.data.user.name} ${res.data.user.lastname}`
+      setName(user)
+    }
+    getName()
+  })
+
+  const sideItems = adminMenu.map((item, idx) => (
+    <AdminSideBarItem
+      key={idx}
+      label={item.label}
+      icon={item.icon}
+      route={item.route}
+    />
+  ))
 
   return (
     <>
@@ -15,53 +35,12 @@ const AdminMenu = (props) => {
             <div className='sb-sidenav-menu'>
               <div className='nav'>
                 <div className='sb-sidenav-menu-heading'>Welcome</div>
-                <NavLink className='nav-link' to={`${url}/profile`}>
-                  <div className='sb-nav-link-icon'>
-                    <i className='fas fa-user'></i>
-                  </div>
-                  Profile
-                </NavLink>
-                <NavLink className='nav-link' to={`${url}/places`}>
-                  <div className='sb-nav-link-icon'>
-                    <i className='fas fa-chart-area'></i>
-                  </div>
-                  Places
-                </NavLink>
-                <NavLink className='nav-link' to={`${url}/skills`}>
-                  <div className='sb-nav-link-icon'>
-                    <i className='fas fa-table'></i>
-                  </div>
-                  Skills
-                </NavLink>
-                <NavLink className='nav-link' to={`${url}/projects`}>
-                  <div className='sb-nav-link-icon'>
-                    <i className='fas fa-folder-plus'></i>
-                  </div>
-                  Projects
-                </NavLink>
-                <NavLink className='nav-link' to={`${url}/practice`}>
-                  <div className='sb-nav-link-icon'>
-                    <i className='fas fa-folder-plus'></i>
-                  </div>
-                  Practice
-                </NavLink>
-                <NavLink className='nav-link' to={`${url}/study`}>
-                  <div className='sb-nav-link-icon'>
-                    <i className='fas fa-folder-plus'></i>
-                  </div>
-                  Study
-                </NavLink>
-                <NavLink className='nav-link' to={`${url}/interviews`}>
-                  <div className='sb-nav-link-icon'>
-                    <i className='fas fa-folder-plus'></i>
-                  </div>
-                  Interviews
-                </NavLink>
+                {sideItems}
               </div>
             </div>
             <div className='sb-sidenav-footer'>
               <div className='small'>Logged in as:</div>
-              Your name
+              {name}
             </div>
           </nav>
         </div>
