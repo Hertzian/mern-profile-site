@@ -1,21 +1,26 @@
 const path = require('path')
 const multer = require('multer')
 
-//config storage
-const storage = multer.diskStorage({
-  destination: './public/uploads/',
-  filename: (req, file, cb) => {
-    cb(null, `${Date.now()}${path.extname(file.originalname)}`)
-  }
-})
+//config storage & have same name from upload field (name="imgFile")
+const storage = (newImageName) => {
+  multer.diskStorage({
+    destination: './public/uploads/',
+    filename: (req, file, cb) => {
+      cb(null, newImageName)
+    }
+  })
+}
 
-const upload = multer({
-  storage: storage,
-  limits: { fileSize: 1000000 },
-  fileFilter: function (req, file, cb) {
-    checkFileType(file, cb)
-  }
-}).single('myImage')
+//parameter is for preserve same name from upload field (name="imgFile")
+const upload = (imageFile) => {
+  multer({
+    storage: storage(imageFile),
+    limits: { fileSize: 1000000 },
+    fileFilter: function (req, file, cb) {
+      checkFileType(file, cb)
+    }
+  }).single(imageFile)
+}
 
 const checkFileType = (file, cb) => {
   const filetypes = /jpeg|jpg|png|gif/

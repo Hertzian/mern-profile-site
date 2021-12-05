@@ -105,3 +105,11 @@ exports.verifyAccess = asyH(async (req, res) => {
     return res.json({ verifiqueichons: false, error: err })
   }
 })
+
+// @route   POST /api/users/upload-portait
+// @access  private
+exports.uploadPortait = asyH(async (req, res) => {
+  req.body
+  console.log(req.body)
+  return
+})

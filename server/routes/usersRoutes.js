@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const { upload } = require('../utils/uploadImages')
 const { protect } = require('../utils/protectRoutes')
 const usersController = require('../controllers/usersController')
 
@@ -9,6 +10,11 @@ router.get('/profile', protect, usersController.getProfile)
 router.put('/profile', protect, usersController.updateProfile)
 router.get('/read-access', protect, usersController.readAccessData)
 router.put('/update-access', protect, usersController.updateAccess)
-//router.get('/portait-image', protect, usersController.getPortaitImage)
+router.post(
+  '/upload-portait',
+  protect,
+  upload.single('portait'),
+  usersController.uploadPortait
+)
 
 module.exports = router
