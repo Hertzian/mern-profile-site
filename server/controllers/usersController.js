@@ -1,8 +1,8 @@
+const path = require('path')
 const User = require('../models/user')
 const asyH = require('../utils/asyncHandler')
 const genToken = require('../utils/genToken')
 const jwt = require('jsonwebtoken')
-const bcrypt = require('bcryptjs')
 
 // @route   GET /api/users/profile
 // @access  public
@@ -109,7 +109,64 @@ exports.verifyAccess = asyH(async (req, res) => {
 // @route   POST /api/users/upload-portait
 // @access  private
 exports.uploadPortait = asyH(async (req, res) => {
-  req.body
-  console.log(req.body)
-  return
+  const file = req.files.portait
+
+  if (!req.files || Object.keys(req.files).length === 0)
+    return res.json({ err: 'No file were uploaded' })
+
+  file.name = `portait${path.parse(file.name).ext}`
+  const uploadPath = `${path.resolve(__dirname, '../public/uploads')}/${
+    file.name
+  }`
+
+  file.mv(uploadPath, async (err) => {
+    if (err) {
+      console.error(err)
+      return res.json({ err: 'Problem with your file upload' })
+    }
+    let user = await User.findById(req.user._id)
+    user.portait = file.name || user.portait
+    user.save()
+    return res.json(user.portait)
+  })
+})
+
+// @route   POST /api/users/upload-background
+// @access  private
+exports.uploadBackground = asyH(async (req, res) => {
+  const file = req.files.background
+
+  if (!req.files || Object.keys(req.files).length === 0)
+    return res.json({ err: 'No file were uploaded' })
+
+  file.name = `background${path.parse(file.name).ext}`
+  const uploadPath = `${path.resolve(__dirname, '../public/uploads')}/${
+    file.name
+  }`
+
+  file.mv(uploadPath, async (err) => {
+    if (err) {
+      console.error(err)
+      return res.json({ err: 'Problem with your file upload' })
+    }
+    let user = await User.findById(req.user._id)
+    user.background = file.name || file.background
+    user.save()
+    return res.json(user.background)
+  })
+  //return res.json({ message: req.files })
+})
+
+// @route   GET /api/users/load-portait
+// @access  private
+exports.loadPortait = asyH(async (req, res) => {
+  const user = req.user
+  return res.json({ image: user.portait })
+})
+
+// @route   GET /api/users/background
+// @access  private
+exports.loadBackground = asyH(async (req, res) => {
+  const user = req.user
+  return res.json({ image: user.background })
 })
