@@ -43,6 +43,7 @@ class SimpleMainImages extends Component {
     e.preventDefault()
     const { label } = this.props
     const { image } = this.state
+    if (typeof image !== 'object') return
     const formData = new FormData()
     formData.append(label, image, image.name)
     this.imageUpload(label, formData)
