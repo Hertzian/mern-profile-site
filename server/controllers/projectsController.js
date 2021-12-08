@@ -1,3 +1,4 @@
+const { unlink } = require('fs/promises')
 const path = require('path')
 const Project = require('../models/project')
 const asyH = require('../utils/asyncHandler')
@@ -64,9 +65,15 @@ exports.delteProject = asyH(async (req, res) => {
   try {
     const projectId = req.params.projectId
     const project = await Project.findById(projectId)
+    if (project.image !== 'placeholder.jpg') {
+      await unlink(
+        `${path.resolve(__dirname, '../public/uploads')}/${project.image}`
+      )
+    }
     await project.remove()
     return res.json({ message: `Project gone, ${projectId}` })
   } catch (err) {
+    console.log(err)
     return res.json(err)
   }
 })

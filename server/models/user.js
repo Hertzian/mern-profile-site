@@ -11,8 +11,8 @@ const userSchema = mongoose.Schema(
     bio: { type: String, required: true },
     profession: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    background: { type: String, required: true },
-    portait: { type: String, required: true },
+    background: { type: String, required: false, default: 'placeholder.jpg' },
+    portait: { type: String, required: false, default: 'placeholder.jpg' },
     password: { type: String, required: true }
   },
   { timestamps: true }
