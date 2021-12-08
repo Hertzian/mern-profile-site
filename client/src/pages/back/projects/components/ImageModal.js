@@ -5,13 +5,11 @@ import SimpleMainImages from '../../../../components/SimpleMainImages'
 class ImageModal extends Component {
   constructor(props) {
     super(props)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleClose = this.handleClose.bind(this)
   }
 
-  handleSubmit(e) {
+  handleClose() {
     const { target } = this.props
-    e.preventDefault()
-    this.props.addImageProject()
     closeModal(target)
   }
   render() {
@@ -44,6 +42,7 @@ class ImageModal extends Component {
                 label='project'
                 section='projects'
                 itemId={this.props.imageId}
+                close={this.handleClose}
               />
             </div>
             <div className='modal-footer'>

@@ -14,7 +14,6 @@ class ProjectsSection extends Component {
     this.newProject = this.newProject.bind(this)
     this.updateProject = this.updateProject.bind(this)
     this.deleteProject = this.deleteProject.bind(this)
-    this.imageProject = this.imageProject.bind(this)
   }
 
   async componentDidMount() {
@@ -35,8 +34,11 @@ class ProjectsSection extends Component {
     )
     const resProject = res.data.project
     const updatedProjects = this.state.projects.map((project) => {
-      if (project._id === projectId) return resProject
-      return project
+      if (project._id === projectId) {
+        return resProject
+      } else {
+        return project
+      }
     })
     this.setState({ projects: updatedProjects })
   }
@@ -47,9 +49,6 @@ class ProjectsSection extends Component {
         (project) => project._id !== projectId
       )
     })
-  }
-  async imageProject() {
-    console.log('imageProject')
   }
 
   render() {
@@ -88,11 +87,7 @@ class ProjectsSection extends Component {
               color='info mr-2'
               label='Img'
             />
-            <ImageModal
-              target={`image-project-${_id}`}
-              imageId={_id}
-              addImageProject={this.imageProject}
-            />
+            <ImageModal target={`image-project-${_id}`} imageId={_id} />
             <ButtonOpenModal
               target={`confirm-project-${_id}`}
               color='danger mr-2'
@@ -130,7 +125,7 @@ class ProjectsSection extends Component {
                 <th scope='col'>actions</th>
               </tr>
             </thead>
-            <tbody>{projects}</tbody>
+            <tbody>{this.state.projects && projects}</tbody>
           </table>
         </Card>
       </AdminPage>

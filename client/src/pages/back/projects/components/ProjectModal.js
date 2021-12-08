@@ -10,7 +10,7 @@ class ProjectModal extends Component {
       name: '',
       url: '',
       repo: '',
-      image: '',
+      //image: '',
       description: '',
       show: 'no'
     }
