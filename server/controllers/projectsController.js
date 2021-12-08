@@ -1,3 +1,4 @@
+const path = require('path')
 const Project = require('../models/project')
 const asyH = require('../utils/asyncHandler')
 
@@ -24,16 +25,14 @@ exports.getProject = asyH(async (req, res) => {
 // @access   private
 exports.newProject = asyH(async (req, res) => {
   try {
-    const { name, url, repo, image, description, show } = req.body
+    const { name, url, repo, description, show } = req.body
     const project = await Project.create({
       name,
       url,
       repo,
-      image,
       description,
       show
     })
-    console.log(project)
     return res.json({ message: 'Project created!', project })
   } catch (err) {
     return res.json(err)
@@ -68,6 +67,45 @@ exports.delteProject = asyH(async (req, res) => {
     await project.remove()
     return res.json({ message: `Project gone, ${projectId}` })
   } catch (err) {
+    return res.json(err)
+  }
+})
+
+// @route   POST /api/projects/upload-project/:projectId
+// @access   private
+exports.uploadImage = asyH(async (req, res) => {
+  const file = req.files.project
+  const projectId = req.params.projectId
+
+  if (!req.files || Object.keys(req.files).length === 0)
+    return res.json({ err: 'No file were uploaded' })
+
+  file.name = `project-${projectId}${path.parse(file.name).ext}`
+  const uploadPath = `${path.resolve(__dirname, '../public/uploads')}/${
+    file.name
+  }`
+
+  file.mv(uploadPath, async (err) => {
+    if (err) {
+      console.error(err)
+      return res.json({ err: 'Problem with your file upload' })
+    }
+    let project = await Project.findById(projectId)
+    project.image = file.name || project.image
+    project.save()
+    return res.json(project.image)
+  })
+})
+
+// @route   GET /api/projects/load-project/:projectId
+// @access   private
+exports.loadImage = asyH(async (req, res) => {
+  try {
+    const projectId = req.params.projectId
+    const project = await Project.findById(projectId)
+    return res.json({ image: project.image })
+  } catch (err) {
+    console.log(err)
     return res.json(err)
   }
 })

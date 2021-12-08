@@ -7,5 +7,7 @@ router.get('/get-project/:projectId', projectsController.getProject)
 router.post('/new-project/', projectsController.newProject)
 router.put('/update-project/:projectId', projectsController.updateProject)
 router.delete('/delete-project/:projectId', projectsController.delteProject)
+router.post('/upload-project/:projectId', projectsController.uploadImage)
+router.get('/load-project/:projectId', projectsController.loadImage)
 
 module.exports = router
