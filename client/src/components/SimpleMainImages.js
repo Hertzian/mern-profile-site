@@ -46,6 +46,7 @@ class SimpleMainImages extends Component {
     const formData = new FormData()
     formData.append(label, image, image.name)
     this.imageUpload(label, formData)
+    this.props.close && this.props.close()
   }
   capitalize(str) {
     const words = []
