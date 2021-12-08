@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 function FetchPracticeFn() {
-  const [users, setUsers] = useState()
+  const [users, setUsers] = useState([])
 
   const URL = 'https://reqres.in/api/users?page=2'
 
@@ -18,17 +18,26 @@ function FetchPracticeFn() {
   const renderUsers =
     users &&
     users.map((user) => (
-      <ul className='list-group mt-1' key={user.id}>
-        <li className='list-group-item'>{user.id}</li>
-        <li className='list-group-item'>{user.first_name}</li>
-        <li className='list-group-item'>{user.email}</li>
-      </ul>
+      <tr key={user.id}>
+        <td>{user.id}</td>
+        <td>{user.first_name}</td>
+        <td>{user.email}</td>
+      </tr>
     ))
 
   return (
     <div className='col'>
       <h2>FetchPracticeFn</h2>
-      {renderUsers}
+      <table className='table'>
+        <thead>
+          <tr>
+            <th scope='col'>#</th>
+            <th scope='col'>name</th>
+            <th scope='col'>email</th>
+          </tr>
+        </thead>
+        <tbody>{renderUsers}</tbody>
+      </table>
     </div>
   )
 }

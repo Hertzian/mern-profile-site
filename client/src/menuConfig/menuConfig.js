@@ -14,12 +14,12 @@ export const adminMenu = [
   { label: 'Skills', icon: 'fa fa-table', route: '/admin/skills' },
   { label: 'Projects', icon: 'fa fa-folder-plus', route: '/admin/projects' },
   { label: 'Practice', icon: 'fas fa-podcast', route: '/admin/practice' },
-  { label: 'Study', icon: 'fas fa-book-open', route: '/admin/study' },
   {
     label: 'Interviews',
     icon: 'fa fa-question-circle',
     route: '/admin/Interviews'
-  }
+  },
+  { label: 'Study', icon: 'fas fa-book-open', route: '/admin/study' }
 ]
 
 export const image =
