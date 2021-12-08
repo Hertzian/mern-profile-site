@@ -67,7 +67,7 @@ class ProjectModal extends Component {
                 <span aria-hidden='true'>&times;</span>
               </button>
             </div>
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} encType='multipart/form-data'>
               <div className='modal-body'>
                 <div className='form-group'>
                   <label htmlFor='name'>Name:</label>
@@ -97,16 +97,6 @@ class ProjectModal extends Component {
                     className='form-control'
                     type='text'
                     value={this.state.repo}
-                  />
-                </div>
-                <div className='form-group'>
-                  <label htmlFor='image'>Image:</label>
-                  <input
-                    name='image'
-                    onChange={this.handleChange}
-                    className='form-control'
-                    type='text'
-                    value={this.state.image}
                   />
                 </div>
                 <div className='form-group'>

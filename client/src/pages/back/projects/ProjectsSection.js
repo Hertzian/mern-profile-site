@@ -5,6 +5,7 @@ import Card from '../../../components/Card'
 import ProjectModal from './components/ProjectModal'
 import ButtonOpenModal from '../../../components/ButtonOpenModal'
 import ConfirmModal from '../../../components/ConfirmModal'
+import ImageModal from './components/ImageModal'
 
 class ProjectsSection extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class ProjectsSection extends Component {
     this.newProject = this.newProject.bind(this)
     this.updateProject = this.updateProject.bind(this)
     this.deleteProject = this.deleteProject.bind(this)
+    this.imageProject = this.imageProject.bind(this)
   }
 
   async componentDidMount() {
@@ -46,6 +48,9 @@ class ProjectsSection extends Component {
       )
     })
   }
+  async imageProject() {
+    console.log('imageProject')
+  }
 
   render() {
     const projects = this.state.projects.map((project) => {
@@ -77,6 +82,16 @@ class ProjectsSection extends Component {
               isModify={true}
               projectId={_id}
               addUpdateProject={this.updateProject}
+            />
+            <ButtonOpenModal
+              target={`image-project-${_id}`}
+              color='info mr-2'
+              label='Img'
+            />
+            <ImageModal
+              target={`image-project-${_id}`}
+              imageId={_id}
+              addImageProject={this.imageProject}
             />
             <ButtonOpenModal
               target={`confirm-project-${_id}`}
