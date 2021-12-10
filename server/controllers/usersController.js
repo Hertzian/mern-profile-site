@@ -1,6 +1,9 @@
 const { unlink } = require('fs/promises')
 const path = require('path')
 const User = require('../models/user')
+const Place = require('../models/place')
+const Skill = require('../models/skill')
+const Project = require('../models/project')
 const asyH = require('../utils/asyncHandler')
 const genToken = require('../utils/genToken')
 const jwt = require('jsonwebtoken')
@@ -11,13 +14,49 @@ exports.getProfile = asyH(async (req, res) => {
   try {
     const user = req.user
     const { name, lastname, github, linkedin, phone, bio, profession } = user
-    res.json({
+    return res.json({
       error: false,
       user: { name, lastname, github, linkedin, phone, bio, profession }
     })
   } catch (err) {
     console.log(err)
     res.json({ success: false, error: err })
+  }
+})
+
+exports.getFrontProfile = asyH(async (req, res) => {
+  try {
+    const user = await User.findOne({ email: process.env.USER_EMAIL })
+    const places = await Place.find()
+    const projects = await Project.find()
+    const skills = await Skill.find()
+
+    const { name, lastname, email, github, linkedin, phone, bio, profession } =
+      user
+    const showPlaces = places.filter((place) => place.show === 'yes')
+    const showSkills = skills.filter((skill) => skill.show === 'yes')
+    const showProjects = projects.filter((project) => project.show === 'yes')
+
+    return res.json({
+      user: {
+        name,
+        lastname,
+        email,
+        github,
+        linkedin,
+        phone,
+        bio,
+        profession,
+        portait: `/public/uploads/${user.portait}`,
+        background: `/public/uploads/${user.background}`
+      },
+      places: showPlaces,
+      skills: showSkills,
+      projects: showProjects
+    })
+  } catch (err) {
+    console.log(err)
+    return res.json(err)
   }
 })
 

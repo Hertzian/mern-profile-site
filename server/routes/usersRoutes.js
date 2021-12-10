@@ -5,6 +5,7 @@ const usersController = require('../controllers/usersController')
 
 router.post('/login', usersController.login)
 router.post('/verify', usersController.verifyAccess)
+router.get('/get-front-profile', usersController.getFrontProfile)
 router.get('/profile', protect, usersController.getProfile)
 router.put('/profile', protect, usersController.updateProfile)
 router.get('/read-access', protect, usersController.readAccessData)
