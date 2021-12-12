@@ -35,6 +35,15 @@ class ProjectModal extends Component {
       closeModal(target)
     } else {
       addUpdateProject(this.state)
+      this.setState({
+        _id: '',
+        name: '',
+        url: '',
+        repo: '',
+        //image: '',
+        description: '',
+        show: 'no'
+      })
       closeModal(target)
     }
   }

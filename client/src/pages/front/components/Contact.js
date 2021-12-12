@@ -1,4 +1,4 @@
-const Contact = () => {
+const Contact = ({ email, phone }) => {
   return (
     <section className='contact' id='contact'>
       <h2 className='section__title section__title--contact'>Contact</h2>
@@ -6,13 +6,13 @@ const Contact = () => {
         <div>
           <span>email: </span>
           <a className='footer-link' href='#email'>
-            email
+            {email}
           </a>
         </div>
         <div>
           <span>phone: </span>
           <a className='footer-link' href='#tel'>
-            2345
+            {phone}
           </a>
         </div>
       </div>

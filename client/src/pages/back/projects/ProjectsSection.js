@@ -52,56 +52,59 @@ class ProjectsSection extends Component {
   }
 
   render() {
-    const projects = this.state.projects.map((project) => {
-      const { _id, name, url, repo, show } = project
-      const showIcon =
-        show === 'yes' ? (
-          <td className='text-success'>
-            <i className='far fa-check-circle fa-2x'></i>
-          </td>
-        ) : (
-          <td className='text-danger'>
-            <i className='far fa-times-circle fa-2x'></i>
-          </td>
+    const { projects } = this.state
+    const projectsRender =
+      projects &&
+      projects.map((project) => {
+        const { _id, name, url, repo, show } = project
+        const showIcon =
+          show === 'yes' ? (
+            <td className='text-success'>
+              <i className='far fa-check-circle fa-2x'></i>
+            </td>
+          ) : (
+            <td className='text-danger'>
+              <i className='far fa-times-circle fa-2x'></i>
+            </td>
+          )
+        return (
+          <tr key={_id}>
+            <td>{name}</td>
+            <td>{url}</td>
+            <td>{repo}</td>
+            {showIcon}
+            <td>
+              <ButtonOpenModal
+                target={`update-project-${_id}`}
+                color='primary mr-2'
+                label='Update'
+              />
+              <ProjectModal
+                target={`update-project-${_id}`}
+                isModify={true}
+                projectId={_id}
+                addUpdateProject={this.updateProject}
+              />
+              <ButtonOpenModal
+                target={`image-project-${_id}`}
+                color='info mr-2'
+                label='Img'
+              />
+              <ImageModal target={`image-project-${_id}`} imageId={_id} />
+              <ButtonOpenModal
+                target={`confirm-project-${_id}`}
+                color='danger mr-2'
+                label='X'
+              />
+              <ConfirmModal
+                confirmFunction={this.deleteProject}
+                itemId={_id}
+                target={`confirm-project-${_id}`}
+              />
+            </td>
+          </tr>
         )
-      return (
-        <tr key={_id}>
-          <td>{name}</td>
-          <td>{url}</td>
-          <td>{repo}</td>
-          {showIcon}
-          <td>
-            <ButtonOpenModal
-              target={`update-project-${_id}`}
-              color='primary mr-2'
-              label='Update'
-            />
-            <ProjectModal
-              target={`update-project-${_id}`}
-              isModify={true}
-              projectId={_id}
-              addUpdateProject={this.updateProject}
-            />
-            <ButtonOpenModal
-              target={`image-project-${_id}`}
-              color='info mr-2'
-              label='Img'
-            />
-            <ImageModal target={`image-project-${_id}`} imageId={_id} />
-            <ButtonOpenModal
-              target={`confirm-project-${_id}`}
-              color='danger mr-2'
-              label='X'
-            />
-            <ConfirmModal
-              confirmFunction={this.deleteProject}
-              itemId={_id}
-              target={`confirm-project-${_id}`}
-            />
-          </td>
-        </tr>
-      )
-    })
+      })
     return (
       <AdminPage {...this.props}>
         <Card header={'Projects'}>
@@ -125,7 +128,7 @@ class ProjectsSection extends Component {
                 <th scope='col'>actions</th>
               </tr>
             </thead>
-            <tbody>{this.state.projects && projects}</tbody>
+            <tbody>{projectsRender}</tbody>
           </table>
         </Card>
       </AdminPage>

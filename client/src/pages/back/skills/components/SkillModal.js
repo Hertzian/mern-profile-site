@@ -87,13 +87,15 @@ class SkillModal extends Component {
                   />
                 </div>
                 <div className='form-group'>
-                  <label htmlFor='value'>Value:</label>
+                  <label htmlFor=''>Value</label>
                   <input
                     name='value'
-                    onChange={this.handleChange}
-                    className='form-control'
-                    type='text'
                     value={this.state.value}
+                    className='form-control-range'
+                    type='range'
+                    min='0'
+                    max='100'
+                    onChange={this.handleChange}
                   />
                 </div>
                 <div className='form-group'>

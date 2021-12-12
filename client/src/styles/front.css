@@ -441,6 +441,7 @@ header {
 }
 
 .portfolio__img {
+  width: unset !important;
   transition: transform 750ms cubic-bezier(0.5, 0, 0.5, 1), opacity 250ms linear;
 }
 
@@ -543,7 +544,7 @@ header {
 }
 
 .footer-link:hover,
-.social-list__link.btn:hover {
+.social-list__link:hover {
   opacity: 0.7;
 }
 

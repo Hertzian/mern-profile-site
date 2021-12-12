@@ -117,13 +117,14 @@ class PlaceModal extends Component {
                 </div>
                 <div className='form-group'>
                   <label htmlFor='assignment'>Assignment:</label>
-                  <input
-                    name='assignment'
-                    onChange={this.handleChange}
+                  <textarea
                     className='form-control'
-                    type='text'
+                    name='assignment'
                     value={this.state.assignment}
-                  />
+                    onChange={this.handleChange}
+                    cols='20'
+                    rows='3'
+                  ></textarea>
                 </div>
                 <div className='form-group'>
                   <label htmlFor='show'>Do you want to show</label>
