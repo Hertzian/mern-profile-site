@@ -24,6 +24,8 @@ exports.getProfile = asyH(async (req, res) => {
   }
 })
 
+// @route   GET /api/users/get-front-profile
+// @access  public
 exports.getFrontProfile = asyH(async (req, res) => {
   try {
     const user = await User.findOne({ email: process.env.USER_EMAIL })

@@ -20,7 +20,7 @@ class DetailPage extends Component {
 
   render() {
     const project = this.state.project && this.state.project
-    console.log(project)
+    //console.log(project)
     return (
       <>
         <Menu />

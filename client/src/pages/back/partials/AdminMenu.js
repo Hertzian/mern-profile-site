@@ -1,20 +1,8 @@
-import { useEffect, useState } from 'react'
-import axios from 'axios'
 import Footer from './AdminFooter'
 import { adminMenu } from '../../../menuConfig/menuConfig'
 import AdminSideBarItem from './AdminSideBarItem'
 
 const AdminMenu = (props) => {
-  const [name, setName] = useState('')
-  useEffect(() => {
-    const getName = async () => {
-      const res = await axios.get('/api/users/profile')
-      const user = `${res.data.user.name} ${res.data.user.lastname}`
-      setName(user)
-    }
-    getName()
-  })
-
   const sideItems = adminMenu.map((item, idx) => (
     <AdminSideBarItem
       key={idx}
@@ -40,7 +28,7 @@ const AdminMenu = (props) => {
             </div>
             <div className='sb-sidenav-footer'>
               <div className='small'>Logged in as:</div>
-              {name}
+              {props.name}
             </div>
           </nav>
         </div>
@@ -48,7 +36,7 @@ const AdminMenu = (props) => {
           <main>
             <div className='container-fluid'>{props.children}</div>
           </main>
-          <Footer />
+          <Footer name={props.name} />
         </div>
       </div>
     </>

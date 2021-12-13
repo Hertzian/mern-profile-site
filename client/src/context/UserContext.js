@@ -1,17 +1,25 @@
 import { Component, createContext } from 'react'
+import axios from 'axios'
 
 export const UserContext = createContext()
 
 export class UserProvider extends Component {
   constructor(props) {
     super(props)
-    this.state = { isAuthenticated: false, loading: true }
+    this.state = { isAuthenticated: false, isLoading: true, user: '' }
     this.authorize = this.authorize.bind(this)
     this.logout = this.logout.bind(this)
+    this.loadUser = this.loadUser.bind(this)
+  }
+
+  async loadUser() {
+    const res = await axios.get('/api/users/profile')
+    const resUser = res.data.user
+    this.setState({ user: resUser })
   }
 
   setLoading() {
-    this.setState({ loading: false })
+    this.setState({ isLoading: !this.state.isLoading })
   }
 
   authorize() {
@@ -30,7 +38,8 @@ export class UserProvider extends Component {
           ...this.state,
           authorize: this.authorize,
           logout: this.logout,
-          setLoading: this.setLoading
+          setLoading: this.setLoading,
+          loadUser: this.loadUser
         }}
       >
         {this.props.children}

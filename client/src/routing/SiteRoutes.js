@@ -54,13 +54,15 @@ class SiteRoutes extends Component {
     ]
   }
   render() {
+    const { isAuthenticated } = this.context
+
     return (
       <Switch>
         <Route exact path='/' component={HomePage} />
         <Route exact path='/project/:projectId' component={ProjectPage} />
         <Route exact path='/mamalon/login' component={Login} />
 
-        {this.context.isAuthenticated ? (
+        {isAuthenticated ? (
           <>
             <PrivateRoute exact path='/admin/profile' comp={ProfileSection} />
             <PrivateRoute exact path='/admin/places' comp={PlacesSection} />

@@ -22,32 +22,36 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    const token = hasToken()
-    //console.log('hasToken: ', token)
-    axios
-      .post('/api/users/verify', {
-        localToken: token
-      })
-      .then((valid) => {
-        if (token && valid) {
-          this.props.history.push('/admin/profile')
-          this.context.authorize()
-        }
-      })
+    this.verify()
   }
-
+  async verify() {
+    try {
+      const token = hasToken()
+      const res = await axios.post('/api/users/verify', { localToken: token })
+      const tokenRes = res.data.verifiqueichons
+      if (token && tokenRes) {
+        const localToken = localStorage.getItem('token')
+        setAuthToken(localToken)
+        this.context.authorize()
+        this.context.loadUser()
+        this.props.history.push('/admin/profile')
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
   async handleSubmit(e) {
     e.preventDefault()
     try {
-      const login = await axios.post('/api/users/login', {
+      const res = await axios.post('/api/users/login', {
         email: this.state.email,
         password: this.state.password
       })
-      const token = login.data
-      console.log(token)
-      localStorage.setItem('token', token.token)
-      setAuthToken(token.token)
+      const token = res.data.token
+      localStorage.setItem('token', token)
+      setAuthToken(token)
       this.context.authorize()
+      this.context.loadUser()
       this.props.history.push('/admin/profile')
     } catch (err) {
       console.log('peluquin: ', err)
