@@ -25,6 +25,12 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.14",
     "morgan": "^1.10.0",
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.25.5",
     "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.5.2"
   }
 }

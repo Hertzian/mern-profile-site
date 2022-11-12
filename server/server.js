@@ -4,8 +4,9 @@ const dotenv = require('dotenv')
 const morgan = require('morgan')
 const fileupload = require('express-fileupload')
 dotenv.config()
-const connectDB = require('./config/connectDB')
-connectDB()
+const { sequelize } = require('./lib/db/models')
+// const connectDB = require('./config/connectDB')
+// connectDB()
 const app = express()
 
 const usersRoutes = require('./routes/usersRoutes')
@@ -27,7 +28,9 @@ app.use('/api/projects', projectsRoutes)
 
 app.listen(
   process.env.PORT,
-  console.log(
-    `Server running on http://localhost:${process.env.PORT}, in ${process.env.NODE_ENV} mode`
-  )
+  async () => {
+    console.log(`Server running on http://localhost:${process.env.PORT}, in ${process.env.NODE_ENV} mode`)
+    await sequelize.authenticate()
+    console.log('Database connected!')
+  }
 )
