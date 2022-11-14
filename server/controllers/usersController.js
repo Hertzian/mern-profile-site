@@ -49,7 +49,7 @@ exports.getFrontProfile = asyH(async (req, res) => {
         phone,
         bio,
         profession,
-        portait: `/public/uploads/${user.portait}`,
+        portrait: `/public/uploads/${user.portrait}`,
         background: `/public/uploads/${user.background}`
       },
       places: showPlaces,
@@ -148,18 +148,17 @@ exports.verifyAccess = asyH(async (req, res) => {
   }
 })
 
-// @route   POST /api/users/upload-portait
+// @route   POST /api/users/upload-portrait
 // @access  private
-exports.uploadPortait = asyH(async (req, res) => {
-  const file = req.files.portait
+exports.uploadportrait = asyH(async (req, res) => {
+  const file = req.files.portrait
 
   if (!req.files || Object.keys(req.files).length === 0)
     return res.json({ err: 'No file were uploaded' })
 
-  file.name = `portait${path.parse(file.name).ext}`
-  const uploadPath = `${path.resolve(__dirname, '../public/uploads')}/${
-    file.name
-  }`
+  file.name = `portrait${path.parse(file.name).ext}`
+  const uploadPath = `${path.resolve(__dirname, '../public/uploads')}/${file.name
+    }`
 
   file.mv(uploadPath, async (err) => {
     if (err) {
@@ -167,9 +166,9 @@ exports.uploadPortait = asyH(async (req, res) => {
       return res.json({ err: 'Problem with your file upload' })
     }
     let user = await User.findById(req.user._id)
-    user.portait = file.name || user.portait
+    user.portrait = file.name || user.portrait
     user.save()
-    return res.json(user.portait)
+    return res.json(user.portrait)
   })
 })
 
@@ -182,9 +181,8 @@ exports.uploadBackground = asyH(async (req, res) => {
     return res.json({ err: 'No file were uploaded' })
 
   file.name = `background${path.parse(file.name).ext}`
-  const uploadPath = `${path.resolve(__dirname, '../public/uploads')}/${
-    file.name
-  }`
+  const uploadPath = `${path.resolve(__dirname, '../public/uploads')}/${file.name
+    }`
 
   file.mv(uploadPath, async (err) => {
     if (err) {
@@ -199,11 +197,11 @@ exports.uploadBackground = asyH(async (req, res) => {
   //return res.json({ message: req.files })
 })
 
-// @route   GET /api/users/load-portait
+// @route   GET /api/users/load-portrait
 // @access  private
-exports.loadPortait = asyH(async (req, res) => {
+exports.loadportrait = asyH(async (req, res) => {
   const user = req.user
-  return res.json({ image: user.portait })
+  return res.json({ image: user.portrait })
 })
 
 // @route   GET /api/users/background

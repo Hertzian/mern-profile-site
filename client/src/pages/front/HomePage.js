@@ -30,7 +30,7 @@ class HomePage extends Component {
     const {
       name,
       lastname,
-      portait,
+      portrait,
       background,
       email,
       phone,
@@ -46,11 +46,11 @@ class HomePage extends Component {
         <Intro
           name={name}
           lastname={lastname}
-          portait={portait}
+          portrait={portrait}
           profession={profession}
         />
         <Places places={places} background={background} />
-        <About bio={bio} portait={portait} profession={profession} />
+        <About bio={bio} portrait={portrait} profession={profession} />
         <Skills skills={skills} />
         <Projects projects={projects} />
         <Contact email={email} phone={phone} />

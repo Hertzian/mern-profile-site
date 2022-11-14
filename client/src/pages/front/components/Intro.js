@@ -3,7 +3,7 @@ import TypeWriter from '../../../components/TypeWriter'
 
 class Intro extends Component {
   render() {
-    const { name, lastname, portait, profession } = this.props
+    const { name, lastname, portrait, profession } = this.props
     return (
       <section className='intro' id='home'>
         <h1 className='section__title section__title--intro'>
@@ -13,7 +13,7 @@ class Intro extends Component {
           </strong>
         </h1>
         <TypeWriter words={profession} />
-        <img src={portait} className='intro__img' alt='just me' />
+        <img src={portrait} className='intro__img' alt='just me' />
       </section>
     )
   }

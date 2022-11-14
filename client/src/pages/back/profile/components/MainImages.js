@@ -7,7 +7,7 @@ class MainImages extends Component {
     return (
       <Card header='Images' title='Modify your main images'>
         <div className='row'>
-          <SimpleMainImages label={'portait'} section={'users'} />
+          <SimpleMainImages label={'portrait'} section={'users'} />
           <SimpleMainImages label={'background'} section={'users'} />
         </div>
       </Card>

@@ -10,9 +10,9 @@ router.get('/profile', protect, usersController.getProfile)
 router.put('/profile', protect, usersController.updateProfile)
 router.get('/read-access', protect, usersController.readAccessData)
 router.put('/update-access', protect, usersController.updateAccess)
-router.get('/load-portait', protect, usersController.loadPortait)
+router.get('/load-portrait', protect, usersController.loadportrait)
 router.get('/load-background', protect, usersController.loadBackground)
-router.post('/upload-portait', protect, usersController.uploadPortait)
+router.post('/upload-portrait', protect, usersController.uploadportrait)
 router.post('/upload-background', protect, usersController.uploadBackground)
 
 module.exports = router
