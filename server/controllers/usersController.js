@@ -1,9 +1,6 @@
 const { unlink } = require('fs/promises')
 const path = require('path')
-const User = require('../models/user')
-const Place = require('../models/place')
-const Skill = require('../models/skill')
-const Project = require('../models/project')
+const { user: User, place: Place, skill: Skill, project: Project } = require('../lib/db/models')
 const asyH = require('../utils/asyncHandler')
 const genToken = require('../utils/genToken')
 const jwt = require('jsonwebtoken')
@@ -28,16 +25,17 @@ exports.getProfile = asyH(async (req, res) => {
 // @access  public
 exports.getFrontProfile = asyH(async (req, res) => {
   try {
-    const user = await User.findOne({ email: process.env.USER_EMAIL })
-    const places = await Place.find()
-    const projects = await Project.find()
-    const skills = await Skill.find()
+    const user = await User.findOne({ where: { email: process.env.USER_EMAIL } })
+    console.log(user)
+    const places = await Place.findAll({ where: { userId: user.id } })
+    const projects = await Project.findAll({ where: { userId: user.id } })
+    const skills = await Skill.findAll({ where: { userId: user.id } })
 
     const { name, lastname, email, github, linkedin, phone, bio, profession } =
       user
-    const showPlaces = places.filter((place) => place.show === 'yes')
-    const showSkills = skills.filter((skill) => skill.show === 'yes')
-    const showProjects = projects.filter((project) => project.show === 'yes')
+    const showPlaces = places.filter((place) => place.show === true)
+    const showSkills = skills.filter((skill) => skill.show === true)
+    const showProjects = projects.filter((project) => project.show === true)
 
     return res.json({
       user: {
@@ -68,7 +66,7 @@ exports.updateProfile = asyH(async (req, res) => {
   try {
     const { name, lastname, github, linkedin, phone, bio, profession } =
       req.body
-    let user = await User.findById(req.user._id)
+    let user = await User.findByPk(req.user.id)
     user.name = name || user.name
     user.lastname = lastname || user.lastname
     user.github = github || user.github
@@ -102,7 +100,7 @@ exports.readAccessData = asyH(async (req, res) => {
 exports.updateAccess = asyH(async (req, res) => {
   try {
     const { email, password } = req.body
-    let user = await User.findById(req.user._id)
+    let user = await User.findByPk(req.user.id)
 
     user.email = email || user.email
     user.password = password || user.password
@@ -124,9 +122,9 @@ exports.login = asyH(async (req, res) => {
   //const isMatch = await user.matchPassword(password)
   //res.json({ isMatch, password, user })
   try {
-    const user = await User.findOne({ email })
+    const user = await User.findOne({ where: { email } })
     if (user && (await user.matchPassword(password))) {
-      return res.json({ token: genToken(user._id) })
+      return res.json({ token: genToken(user.id) })
     }
   } catch (err) {
     return res.status(401).json({ error: err })

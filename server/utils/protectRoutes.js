@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const asyH = require('./asyncHandler')
-const User = require('../models/user')
+const User = require('../lib/db/models')
 
 //protect routes
 exports.protect = asyH(async (req, res, next) => {

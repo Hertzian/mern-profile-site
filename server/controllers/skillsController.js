@@ -1,4 +1,4 @@
-const Skill = require('../models/skill')
+const { skill: Skill } = require('../lib/db/models')
 const asyH = require('../utils/asyncHandler')
 
 // @route   GET /api/skills/get-all

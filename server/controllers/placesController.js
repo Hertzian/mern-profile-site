@@ -1,4 +1,4 @@
-const Place = require('../models/place')
+const { place: Place } = require('../lib/db/models')
 const asyH = require('../utils/asyncHandler')
 
 // @route   GET /api/places/get-all

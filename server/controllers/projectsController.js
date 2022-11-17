@@ -1,6 +1,6 @@
 const { unlink } = require('fs/promises')
 const path = require('path')
-const Project = require('../models/project')
+const { project: Project } = require('../lib/db/models')
 const asyH = require('../utils/asyncHandler')
 
 // @route   GET /api/projects/get-all
@@ -88,9 +88,8 @@ exports.uploadImage = asyH(async (req, res) => {
     return res.json({ err: 'No file were uploaded' })
 
   file.name = `project-${projectId}${path.parse(file.name).ext}`
-  const uploadPath = `${path.resolve(__dirname, '../public/uploads')}/${
-    file.name
-  }`
+  const uploadPath = `${path.resolve(__dirname, '../public/uploads')}/${file.name
+    }`
 
   file.mv(uploadPath, async (err) => {
     if (err) {

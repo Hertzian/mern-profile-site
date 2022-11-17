@@ -4,8 +4,8 @@ const { Model } = require('sequelize')
 
 module.exports = (sequelize, DataTypes) => {
   class Place extends Model {
-    static associate({ User }) {
-      this.belongsTo(User, { foreignKey: 'userId' })
+    static associate({ user }) {
+      this.belongsTo(user, { foreignKey: 'userId' })
     }
   }
 

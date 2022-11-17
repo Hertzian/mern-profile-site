@@ -1,13 +1,14 @@
 'use strict'
+const bcrypt = require('bcryptjs')
 
 const { Model } = require('sequelize')
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    static associate({ Place, Project, Skill }) {
-      this.hasMany(Place, { foreignKey: 'userId', as: 'places' })
-      this.hasMany(Project, { foreignKey: 'userId', as: 'projects' })
-      this.hasMany(Skill, { foreignKey: 'userId', as: 'skills' })
+    static associate({ place, project, skill }) {
+      this.hasMany(place, { foreignKey: 'userId', as: 'places' })
+      this.hasMany(project, { foreignKey: 'userId', as: 'projects' })
+      this.hasMany(skill, { foreignKey: 'userId', as: 'skills' })
     }
   }
 

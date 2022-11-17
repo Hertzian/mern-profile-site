@@ -5,26 +5,20 @@ const morgan = require('morgan')
 const fileupload = require('express-fileupload')
 dotenv.config()
 const { sequelize } = require('./lib/db/models')
-// const connectDB = require('./config/connectDB')
-// connectDB()
 const app = express()
-
-const usersRoutes = require('./routes/usersRoutes')
-const placesRoutes = require('./routes/placesRoutes')
-const skillsRoutes = require('./routes/skillsRoutes')
-const projectsRoutes = require('./routes/projectsRoutes')
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
+// to store images
 app.use('/public', express.static(path.join(__dirname, 'public')))
 
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
 
 app.use(fileupload())
-app.use('/api/users', usersRoutes)
-app.use('/api/places', placesRoutes)
-app.use('/api/skills', skillsRoutes)
-app.use('/api/projects', projectsRoutes)
+app.use('/api/users', require('./routes/usersRoutes'))
+app.use('/api/places', require('./routes/placesRoutes'))
+app.use('/api/skills', require('./routes/skillsRoutes'))
+app.use('/api/projects', require('./routes/projectsRoutes'))
 
 app.listen(
   process.env.PORT,
