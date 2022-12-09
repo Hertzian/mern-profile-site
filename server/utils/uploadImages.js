@@ -1,7 +1,7 @@
 const path = require('path')
 const multer = require('multer')
 
-//config storage & have same name from upload field (name="imgFile")
+// config storage & have same name from upload field (name="imgFile")
 const storage = (newImageName) => {
   multer.diskStorage({
     destination: './public/uploads/',
@@ -11,7 +11,7 @@ const storage = (newImageName) => {
   })
 }
 
-//parameter is for preserve same name from upload field (name="imgFile")
+// parameter is for preserve same name from upload field (name="imgFile")
 const upload = (imageFile) => {
   multer({
     storage: storage(imageFile),

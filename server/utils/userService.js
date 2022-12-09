@@ -1,9 +1,16 @@
 const jwt = require('jsonwebtoken')
-const asyH = require('./asyncHandler')
 const User = require('../lib/db/models')
 
-//protect routes
-exports.protect = asyH(async (req, res, next) => {
+const genToken = (userId) => {
+  return jwt.sign(
+    { userId },
+    process.env.JWT_SECRET,
+    { expiresIn: process.env.JWT_EXPIRE }
+  )
+}
+
+// protect routes
+const protect = async (req, res, next) => {
   let token
   if (
     req.headers.authorization &&
@@ -20,4 +27,9 @@ exports.protect = asyH(async (req, res, next) => {
   } catch (err) {
     return res.status(401).json({ error: 'Unauthorized to use this route' })
   }
-})
+}
+
+module.exports = {
+  genToken,
+  protect
+}
