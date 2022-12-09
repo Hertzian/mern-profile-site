@@ -3,8 +3,8 @@
 const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class Project extends Model {
-    static associate({ user }) {
-      this.belongsTo(user, { foreignKey: 'userId' })
+    static associate ({ User }) {
+      this.belongsTo(User, { foreignKey: 'userId' })
     }
   }
 
@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     timestamps: true,
-    modelName: 'project',
+    modelName: 'Project'
   })
 
   return Project
