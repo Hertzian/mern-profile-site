@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const protect = require('../utils/protectRoutes')
+const { userService: { protect } } = require('../utils')
 const placesController = require('../controllers/placesController')
 
 router.get('/get-all', placesController.allPlaces)

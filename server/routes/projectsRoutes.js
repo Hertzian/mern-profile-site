@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const { userService: { protect } } = require('../utils')
 const projectsController = require('../controllers/projectsController')
 
 router.get('/get-all', projectsController.getProjects)

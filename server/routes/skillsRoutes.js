@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const { userService: { protect } } = require('../utils')
 const skillsController = require('../controllers/skillsController')
 
 router.get('/get-all', skillsController.getSkills)
