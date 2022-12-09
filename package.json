@@ -10,7 +10,8 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "migrate:undo": "npx sequelize-cli db:migrate:undo:all",
     "migrate:all": "npx sequelize-cli db:migrate",
-    "seed:all": "npx sequelize-cli db:seed:all"
+    "seed:all": "npx sequelize-cli db:seed:all",
+    "lint-fix": "standard --fix"
   },
   "keywords": [],
   "author": "",

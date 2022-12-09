@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up (queryInterface, Sequelize) {
     await queryInterface.createTable('projects', {
       id: {
         allowNull: false,
@@ -45,10 +45,10 @@ module.exports = {
         onUpdate: 'cascade',
         onDelete: 'cascade',
         allowNull: false
-      },
+      }
     })
   },
-  async down(queryInterface, Sequelize) {
+  async down (queryInterface, Sequelize) {
     await queryInterface.dropTable('projects')
   }
 }
