@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
-const User = require('../lib/db/models')
+const { User } = require('../lib/db/models')
+const bcrypt = require('bcryptjs')
 
 const genToken = (userId) => {
   return jwt.sign(
@@ -7,6 +8,10 @@ const genToken = (userId) => {
     process.env.JWT_SECRET,
     { expiresIn: process.env.JWT_EXPIRE }
   )
+}
+
+const matchPassword = async (enteredPassword, existingPassword) => {
+  return await bcrypt.compare(enteredPassword, existingPassword)
 }
 
 // protect routes
@@ -22,7 +27,7 @@ const protect = async (req, res, next) => {
   if (!token) return res.status(401).json({ error: 'Unauthorized' })
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
-    req.user = await User.findById(decoded.userId)
+    req.user = await User.findByPk(decoded.userId)
     next()
   } catch (err) {
     return res.status(401).json({ error: 'Unauthorized to use this route' })
@@ -31,5 +36,6 @@ const protect = async (req, res, next) => {
 
 module.exports = {
   genToken,
+  matchPassword,
   protect
 }

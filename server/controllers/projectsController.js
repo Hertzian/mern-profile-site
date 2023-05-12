@@ -15,7 +15,7 @@ exports.getProjects = asyH(async (req, res) => {
 // @access   private
 exports.getProject = asyH(async (req, res) => {
   try {
-    const project = await Project.findById(req.params.projectId)
+    const project = await Project.findByPk(req.params.projectId)
     return res.json({ project })
   } catch (err) {
     return res.json(err)
@@ -45,7 +45,7 @@ exports.newProject = asyH(async (req, res) => {
 exports.updateProject = asyH(async (req, res) => {
   try {
     const { name, url, repo, image, description, show } = req.body
-    const project = await Project.findById(req.params.projectId)
+    const project = await Project.findByPk(req.params.projectId)
     project.name = name || project.name
     project.url = url || project.url
     project.repo = repo || project.repo
@@ -64,7 +64,7 @@ exports.updateProject = asyH(async (req, res) => {
 exports.delteProject = asyH(async (req, res) => {
   try {
     const projectId = req.params.projectId
-    const project = await Project.findById(projectId)
+    const project = await Project.findByPk(projectId)
     if (project.image !== 'placeholder.jpg') {
       await unlink(
         `${path.resolve(__dirname, '../public/uploads')}/${project.image}`
@@ -84,8 +84,7 @@ exports.uploadImage = asyH(async (req, res) => {
   const file = req.files.project
   const projectId = req.params.projectId
 
-  if (!req.files || Object.keys(req.files).length === 0)
-    return res.json({ err: 'No file were uploaded' })
+  if (!req.files || Object.keys(req.files).length === 0) { return res.json({ err: 'No file were uploaded' }) }
 
   file.name = `project-${projectId}${path.parse(file.name).ext}`
   const uploadPath = `${path.resolve(__dirname, '../public/uploads')}/${file.name
@@ -96,7 +95,7 @@ exports.uploadImage = asyH(async (req, res) => {
       console.error(err)
       return res.json({ err: 'Problem with your file upload' })
     }
-    let project = await Project.findById(projectId)
+    const project = await Project.findByPk(projectId)
     project.image = file.name || project.image
     project.save()
     return res.json(project.image)
@@ -108,7 +107,7 @@ exports.uploadImage = asyH(async (req, res) => {
 exports.loadImage = asyH(async (req, res) => {
   try {
     const projectId = req.params.projectId
-    const project = await Project.findById(projectId)
+    const project = await Project.findByPk(projectId)
     return res.json({ image: project.image })
   } catch (err) {
     console.log(err)

@@ -12,7 +12,7 @@ exports.getSkills = asyH(async (req, res) => {
 // @access   private
 exports.getSkill = asyH(async (req, res) => {
   try {
-    const skill = await Skill.findById(req.params.skillId)
+    const skill = await Skill.findByPk(req.params.skillId)
     return res.json({ skill })
   } catch (err) {
     return res.json(err)
@@ -37,7 +37,7 @@ exports.updateSkill = asyH(async (req, res) => {
   try {
     const skillId = req.params.skillId
     const { name, value, show } = req.body
-    const skill = await Skill.findById(skillId)
+    const skill = await Skill.findByPk(skillId)
     skill.name = name || updatedSkill.name
     skill.value = value || updatedSkill.value
     skill.show = show || updatedSkill.show
@@ -53,7 +53,7 @@ exports.updateSkill = asyH(async (req, res) => {
 exports.deleteSkill = asyH(async (req, res) => {
   try {
     const skillId = req.params.skillId
-    const skill = await Skill.findById(skillId)
+    const skill = await Skill.findByPk(skillId)
     await skill.remove()
     return res.json({ message: `Skill gone, ${skillId}` })
   } catch (err) {

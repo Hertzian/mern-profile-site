@@ -16,7 +16,7 @@ exports.allPlaces = asyH(async (req, res) => {
 // @access   private
 exports.getPlace = asyH(async (req, res) => {
   try {
-    const place = await Place.findById(req.params.placeId)
+    const place = await Place.findByPk(req.params.placeId)
     return res.json({ place })
   } catch (err) {
     return res.json(err)
@@ -40,7 +40,7 @@ exports.newPlace = asyH(async (req, res) => {
 exports.updatePlace = asyH(async (req, res) => {
   try {
     const { company, job, year, assignment, show } = req.body
-    let place = await Place.findById(req.params.placeId)
+    const place = await Place.findByPk(req.params.placeId)
     place.company = company || place.company
     place.job = job || place.job
     place.year = year || place.year
@@ -57,7 +57,7 @@ exports.updatePlace = asyH(async (req, res) => {
 // @access   private
 exports.deletePlace = asyH(async (req, res) => {
   try {
-    const place = await Place.findById(req.params.placeId)
+    const place = await Place.findByPk(req.params.placeId)
     await place.remove()
     return res.json({ message: `ALV place ${placeId}` })
   } catch (err) {
