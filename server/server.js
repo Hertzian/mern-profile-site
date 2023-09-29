@@ -1,9 +1,8 @@
 const path = require('path')
 const express = require('express')
-const dotenv = require('dotenv')
 const morgan = require('morgan')
 const fileupload = require('express-fileupload')
-dotenv.config()
+require('dotenv').config()
 const { sequelize } = require('./lib/db/models')
 const app = express()
 
