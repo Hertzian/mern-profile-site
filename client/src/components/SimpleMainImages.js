@@ -1,5 +1,4 @@
 import { Component } from 'react'
-import axios from 'axios'
 
 class SimpleMainImages extends Component {
   constructor(props) {
@@ -10,28 +9,30 @@ class SimpleMainImages extends Component {
     this.capitalize = this.capitalize.bind(this)
   }
 
-  componentDidMount() {
-    if (!this.props.image) this.loadImage()
-  }
-  async loadImage() {
-    const res = await axios.get(
-      this.props.itemId
-        ? `/api/${this.props.section}/load-${this.props.label}/${this.props.itemId}`
-        : `/api/${this.props.section}/load-${this.props.label}`
-    )
-    const image = res.data.image
-    this.setState({ image: image, url: `/public/uploads/${image}` })
-  }
-  async imageUpload(label, formData) {
-    const res = await axios.post(
-      this.props.itemId
-        ? `/api/${this.props.section}/upload-${label}/${this.props.itemId}`
-        : `/api/${this.props.section}/upload-${label}`,
-      formData
-    )
-    const image = res.data
-    this.setState({ image: image })
-  }
+  // componentDidMount() {
+  //   if (!this.props.image) this.loadImage()
+  // }
+
+  // async loadImage() {
+  //   const res = await axios.get(
+  //     this.props.itemId
+  //       ? `/api/${this.props.section}/load-${this.props.label}/${this.props.itemId}`
+  //       : `/api/${this.props.section}/load-${this.props.label}`
+  //   )
+  //   const image = res.data.image
+  //   this.setState({ image: image, url: `/public/uploads/${image}` })
+  // }
+
+  // async imageUpload(label, formData) {
+  //   const res = await axios.post(
+  //     this.props.itemId
+  //       ? `/api/${this.props.section}/upload-${label}/${this.props.itemId}`
+  //       : `/api/${this.props.section}/upload-${label}`,
+  //     formData
+  //   )
+  //   const image = res.data
+  //   this.setState({ image: image })
+  // }
 
   handleChange(e) {
     this.setState({

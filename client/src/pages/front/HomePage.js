@@ -1,22 +1,20 @@
 import { useEffect } from 'react'
-import Footer from './partials/Footer'
-import Menu from './partials/Menu'
-import Intro from './components/Intro'
-import Places from './components/Places'
-import About from './components/About'
-import Skills from './components/Skills'
-import Projects from './components/Projects'
-import Contact from './components/Contact'
-import '../../styles/front.css'
-import { useActions } from '../../hooks/useActions'
 import { useSelector } from 'react-redux'
+import '../../styles/front.css'
+
+import About from './components/About'
+import Contact from './components/Contact'
+import Footer from './partials/Footer'
+import Intro from './components/Intro'
+import Menu from './partials/Menu'
+import Places from './components/Places'
+import Projects from './components/Projects'
+import Skills from './components/Skills'
+import { useActions } from '../../hooks/useActions'
 
 function HomePage() {
-
   const { getFrontProfile } = useActions()
-  const {
-    user
-  } = useSelector((state) => state.user)
+  const { user } = useSelector((state) => state.user)
 
   useEffect(() => {
     getFrontProfile()

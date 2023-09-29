@@ -17,7 +17,7 @@ function App() {
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/project/:projectId' element={<ProjectPage />} />
-          <Route path='/test/login' element={<Login />} />
+          <Route path='/mamalon/login' element={<Login />} />
 
           <Route path='/admin/profile' element={<ProfileSection />} />
           <Route path='/admin/places' element={<PlacesSection />} />

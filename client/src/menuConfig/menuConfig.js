@@ -5,7 +5,7 @@ export const frontMenu = [
   { label: 'Skills', refe: '/#skills' },
   { label: 'Projects', refe: '/#projects' },
   { label: 'Contact', refe: '/#contact' },
-  { label: 'Admin', refe: '/test/login' },
+  { label: 'Admin', refe: '/mamalon/login' },
 
   { label: '- profile', refe: '/admin/profile' },
   { label: '- places', refe: '/admin/places' },
@@ -20,7 +20,8 @@ export const adminMenu = [
   { label: 'Projects', icon: 'fa fa-folder-plus', route: '/admin/projects' },
 ]
 
-export const image = 'https://t4.ftcdn.net/jpg/02/07/87/79/360_F_207877921_BtG6ZKAVvtLyc5GWpBNEIlIxsffTtWkv.jpg'
+export const image =
+  'https://t4.ftcdn.net/jpg/02/07/87/79/360_F_207877921_BtG6ZKAVvtLyc5GWpBNEIlIxsffTtWkv.jpg'
 
 export const projects = [
   {

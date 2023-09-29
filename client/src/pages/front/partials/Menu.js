@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import MenuItem from './MenuItem'
+
 import { frontMenu } from '../../../menuConfig/menuConfig'
+import MenuItem from './MenuItem'
 
 const Menu = () => {
   const [menuIsOpen, setMenuIsOpen] = useState(false)

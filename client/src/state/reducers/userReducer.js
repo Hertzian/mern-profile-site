@@ -19,7 +19,6 @@ const userReducer = (state = initialState, action) => {
 
   switch (type) {
     case GET_PROFILE:
-      console.log(payload)
       return {
         ...state,
         isAuthenticated: false,

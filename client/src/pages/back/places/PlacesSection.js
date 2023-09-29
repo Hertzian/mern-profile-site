@@ -66,6 +66,7 @@ class PlacesSection extends Component {
             <i className='far fa-times-circle fa-2x'></i>
           </td>
         )
+
       return (
         <tr key={_id}>
           <td>{company}</td>
@@ -128,6 +129,82 @@ class PlacesSection extends Component {
       </AdminPage>
     )
   }
+}
+
+function PlacesSection() {
+  const places = this.state.places.map((place) => {
+    const { _id, company, year, assignment, show } = place
+    const showIcon =
+      show === 'yes' ? (
+        <td className='text-success'>
+          <i className='far fa-check-circle fa-2x'></i>
+        </td>
+      ) : (
+        <td className='text-danger'>
+          <i className='far fa-times-circle fa-2x'></i>
+        </td>
+      )
+
+    return (
+      <tr key={_id}>
+        <td>{company}</td>
+        <td>{assignment}</td>
+        <td>{year}</td>
+        {showIcon}
+        <td>
+          <ButtonOpenModal
+            target={`update-place-${_id}`}
+            color='primary mr-2'
+            label='Update'
+          />
+          <PlaceModal
+            target={`update-place-${_id}`}
+            isModify={true}
+            placeId={_id}
+            addUpdatePlace={this.updatePlace}
+          />
+          <ButtonOpenModal
+            target={`delete-place-${_id}`}
+            color='danger mr-2'
+            label='X'
+          />
+          <ConfirmModal
+            confirmFunction={this.deletePlace}
+            itemId={_id}
+            target={`delete-place-${_id}`}
+          />
+        </td>
+      </tr>
+    )
+  })
+  return (
+    <AdminPage {...this.props}>
+      <Card header={'Places'}>
+        <ButtonOpenModal
+          target='new-place'
+          color='primary mb-2'
+          label='New place'
+        />
+        <PlaceModal
+          target='new-place'
+          isModify={false}
+          addUpdatePlace={this.newPlace}
+        />
+        <table className='table table-bordered'>
+          <thead>
+            <tr>
+              <th scope='col'>Company</th>
+              <th scope='col'>Assignment</th>
+              <th scope='col'>Year</th>
+              <th scope='col'>Show</th>
+              <th scope='col'>Actions</th>
+            </tr>
+          </thead>
+          <tbody>{places}</tbody>
+        </table>
+      </Card>
+    </AdminPage>
+  )
 }
 
 export default PlacesSection
