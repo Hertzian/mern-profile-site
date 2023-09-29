@@ -5,10 +5,10 @@ import { store } from './state'
 import HomePage from './pages/front/HomePage'
 import ProjectPage from './pages/front/ProjectPage'
 import Login from './pages/back/Login'
-import ProfileSection from './pages/back/ProfileSection'
-import PlacesSection from './pages/back/PlacesSection'
-import SkillsSection from './pages/back/SkillsSection'
-import ProjectsSection from './pages/back/ProjectsSection'
+import ProfileSection from './pages/back/profile/ProfileSection'
+import PlacesSection from './pages/back/places/PlacesSection'
+import SkillsSection from './pages/back/skills/SkillsSection'
+import ProjectsSection from './pages/back/projects/ProjectsSection'
 
 function App() {
   return (

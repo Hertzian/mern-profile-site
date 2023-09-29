@@ -1,28 +1,29 @@
+const path = require('path')
 const express = require('express')
-const dotenv = require('dotenv')
 const morgan = require('morgan')
-dotenv.config()
-const connectDB = require('./config/connectDB')
-connectDB()
+const fileupload = require('express-fileupload')
+require('dotenv').config()
+const { sequelize } = require('./lib/db/models')
 const app = express()
 
-const usersRoutes = require('./routes/usersRoutes')
-const placesRoutes = require('./routes/placesRoutes')
-const skillsRoutes = require('./routes/skillsRoutes')
-const projectsRoutes = require('./routes/projectsRoutes')
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
+// to store images
+app.use('/public', express.static(path.join(__dirname, 'public')))
 
-if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'))
-}
+if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
 
-app.use('/api/users', usersRoutes)
-app.use('/api/places', placesRoutes)
-app.use('/api/skills', skillsRoutes)
-app.use('/api/projects', projectsRoutes)
+app.use(fileupload())
+app.use('/api/users', require('./routes/usersRoutes'))
+app.use('/api/places', require('./routes/placesRoutes'))
+app.use('/api/skills', require('./routes/skillsRoutes'))
+app.use('/api/projects', require('./routes/projectsRoutes'))
 
 app.listen(
   process.env.PORT,
-  console.log(
-    `Server running on port ${process.env.PORT}, in ${process.env.NODE_ENV} mode`
-  )
+  async () => {
+    console.log(`Server running on http://localhost:${process.env.PORT}, in ${process.env.NODE_ENV} mode`)
+    await sequelize.authenticate()
+    console.log('Database connected!')
+  }
 )

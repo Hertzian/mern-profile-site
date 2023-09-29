@@ -8,18 +8,31 @@
     "server": "nodemon server/server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "insert": "node server/seeder.js -i",
-    "destroy": "node server/seeder.js -d"
+    "migrate:undo": "npx sequelize-cli db:migrate:undo:all",
+    "migrate:all": "npx sequelize-cli db:migrate",
+    "seed:all": "npx sequelize-cli db:seed:all",
+    "lint-fix": "standard --fix"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "concurrently": "^6.0.0",
-    "dotenv": "^8.2.0",
+    "concurrently": "^6.4.0",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "mongoose": "^5.12.3",
-    "morgan": "^1.10.0"
+    "express-fileupload": "^1.2.1",
+    "jquery": "^3.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.14",
+    "morgan": "^1.10.0",
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.25.5",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "sequelize-cli": "^6.5.2"
   }
 }

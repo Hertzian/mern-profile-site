@@ -75,13 +75,13 @@ const Login = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </main>
-      </div>
+          </div >
+        </main >
+      </div >
       <div id='layoutAuthentication_footer'>
         <AdminFooter />
       </div>
-    </div>
+    </div >
   )
 }
 
