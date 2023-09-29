@@ -1,12 +1,10 @@
-import { Component } from 'react'
-import { Redirect } from 'react-router-dom'
 import Profile from './components/Profile'
 import Access from './components/Access'
 import MainImages from './components/MainImages'
 import AdminPage from '../AdminPage'
 import Alert from '../../../components/Alert'
-import { UserContext } from '../../../context/UserContext'
 
+<<<<<<< Updated upstream:client2/src/pages/back/profile/ProfileSection.js
 class ProfileSection extends Component {
   static contextType = UserContext
   render () {
@@ -28,6 +26,18 @@ class ProfileSection extends Component {
       </>
     )
   }
+=======
+const ProfileSection = (props) => {
+  return (
+    <>
+      <AdminPage {...props}>
+        <Profile />
+        <Access />
+        <MainImages />
+      </AdminPage>
+    </>
+  )
+>>>>>>> Stashed changes:client/src/pages/back/profile/ProfileSection.js
 }
 
 export default ProfileSection

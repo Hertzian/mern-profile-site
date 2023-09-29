@@ -1,10 +1,10 @@
-const Card = (props) => {
+const Card = ({ header, title, children }) => {
   return (
-    <div className={'card mt-2'}>
-      <div className='card-header'>{props.header}</div>
+    <div className='card mt-2'>
+      <div className='card-header'>{header}</div>
       <div className='card-body'>
-        <h5 className='card-title'>{props.title}</h5>
-        {props.children}
+        <h5 className='card-title'>{title}</h5>
+        {children}
       </div>
     </div>
   )

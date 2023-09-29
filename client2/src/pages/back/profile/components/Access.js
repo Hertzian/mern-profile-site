@@ -1,7 +1,7 @@
-import { Component } from 'react'
-import axios from 'axios'
+import { useState } from 'react'
 import Card from '../../../../components/Card'
 
+<<<<<<< Updated upstream:client2/src/pages/back/profile/components/Access.js
 class Access extends Component {
   constructor (props) {
     super(props)
@@ -26,11 +26,20 @@ class Access extends Component {
   }
 
   handleSubmit (e) {
+=======
+const Access = () => {
+  const [formData, setFormData] = useState({ email: '', password: '' })
+  const { email, password } = formData
+
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value })
+
+  const handleSubmit = (e) => {
+>>>>>>> Stashed changes:client/src/pages/back/profile/components/Access.js
     e.preventDefault()
-    this.updateAccess(this.state)
-    this.setState({ password: '' })
+    console.log(formData)
   }
 
+<<<<<<< Updated upstream:client2/src/pages/back/profile/components/Access.js
   render () {
     return (
       <Card header='Credentials' title='Verify or modify your access data'>
@@ -61,13 +70,43 @@ class Access extends Component {
                   onChange={this.handleChange}
                 />
               </div>
+=======
+  return (
+    <Card header='Credentials' title='Verify or modify your access data'>
+      <form onSubmit={handleSubmit}>
+        <div className='row'>
+          <div className='col-md-6'>
+            <div className='form-group'>
+              <label htmlFor='email'>Email</label>
+              <input
+                value={email}
+                name='email'
+                // type='email'
+                className='form-control'
+                placeholder='email'
+                onChange={handleChange}
+              />
+>>>>>>> Stashed changes:client/src/pages/back/profile/components/Access.js
             </div>
           </div>
-          <button className='btn btn-primary mt-2'>Update</button>
-        </form>
-      </Card>
-    )
-  }
+          <div className='col-md-6'>
+            <div className='form-group'>
+              <label htmlFor='password'>Password</label>
+              <input
+                value={password}
+                name='password'
+                type='password'
+                className='form-control'
+                placeholder='password'
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+        </div>
+        <button className='btn btn-primary mt-2'>Update</button>
+      </form>
+    </Card>
+  )
 }
 
 export default Access

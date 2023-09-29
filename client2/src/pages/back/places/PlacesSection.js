@@ -1,11 +1,12 @@
-import { Component } from 'react'
-import axios from 'axios'
+import { useState } from 'react'
 import AdminPage from '../AdminPage'
 import Card from '../../../components/Card'
 import ButtonOpenModal from '../../../components/ButtonOpenModal'
 import PlaceModal from './components/PlaceModal'
 import ConfirmModal from '../../../components/ConfirmModal'
+import { dummyData } from '../../../dummyEndpoints'
 
+<<<<<<< Updated upstream:client2/src/pages/back/places/PlacesSection.js
 class PlacesSection extends Component {
   constructor (props) {
     super(props)
@@ -39,13 +40,28 @@ class PlacesSection extends Component {
     await axios.put(`/api/places/update-place/${placeId}`, updatedPlace)
     const updatedPlaces = this.state.places.map((place) => {
       if (place._id === placeId) {
+=======
+const PlacesSection = (props) => {
+  const { places: perrito } = dummyData
+  const [places, setPlaces] = useState(perrito)
+
+  const newPlace = (newPlace) => {
+    setPlaces({ ...places, newPlace })
+  }
+
+  const updatePlace = (placeId, updatedPlace) => {
+    const updatedPlaces = places.find((place) => {
+      if (place.id === placeId) {
+>>>>>>> Stashed changes:client/src/pages/back/places/PlacesSection.js
         return updatedPlace
       }
       return place
     })
-    this.setState({ places: updatedPlaces })
+
+    setPlaces({ ...places, updatedPlaces })
   }
 
+<<<<<<< Updated upstream:client2/src/pages/back/places/PlacesSection.js
   async deletePlace (placeId) {
     await axios.delete(`/api/places/delete-place/${placeId}`)
     this.setState({
@@ -104,32 +120,81 @@ class PlacesSection extends Component {
     return (
       <AdminPage {...this.props}>
         <Card header='Places'>
+=======
+  const deletePlace = (placeId) => {
+    setPlaces({
+      places: places.filter((place) => place.id !== placeId)
+    })
+  }
+
+  const renderPlaces = places && places.map((place) => {
+    const { id, company, year, assignment, show } = place
+    const showIcon = show
+      ? (<td className='text-success'> <i className='far fa-check-circle fa-2x' /> </td>)
+      : (<td className='text-danger'> <i className='far fa-times-circle fa-2x' /> </td>)
+
+    return (
+      <tr key={id}>
+        <td>{company}</td>
+        <td>{assignment}</td>
+        <td>{year}</td>
+        {showIcon}
+        <td>
+>>>>>>> Stashed changes:client/src/pages/back/places/PlacesSection.js
           <ButtonOpenModal
-            target='new-place'
-            color='primary mb-2'
-            label='New place'
+            target={`update-place-${id}`}
+            color='primary mr-2'
+            label='Update'
           />
           <PlaceModal
-            target='new-place'
-            isModify={false}
-            addUpdatePlace={this.newPlace}
+            target={`update-place-${id}`}
+            isModify
+            placeId={id}
+            addUpdatePlace={updatePlace}
           />
-          <table className='table table-bordered'>
-            <thead>
-              <tr>
-                <th scope='col'>Company</th>
-                <th scope='col'>Assignment</th>
-                <th scope='col'>Year</th>
-                <th scope='col'>Show</th>
-                <th scope='col'>Actions</th>
-              </tr>
-            </thead>
-            <tbody>{places}</tbody>
-          </table>
-        </Card>
-      </AdminPage>
+          <ButtonOpenModal
+            target={`delete-place-${id}`}
+            color='danger mr-2'
+            label='X'
+          />
+          <ConfirmModal
+            confirmFunction={deletePlace}
+            itemId={id}
+            target={`delete-place-${id}`}
+          />
+        </td>
+      </tr>
     )
-  }
+  })
+
+  return (
+    <AdminPage {...props}>
+      <Card header='Places'>
+        <ButtonOpenModal
+          target='new-place'
+          color='primary mb-2'
+          label='New place'
+        />
+        <PlaceModal
+          target='new-place'
+          isModify={false}
+          addUpdatePlace={newPlace}
+        />
+        <table className='table table-bordered'>
+          <thead>
+            <tr>
+              <th scope='col'>Company</th>
+              <th scope='col'>Assignment</th>
+              <th scope='col'>Year</th>
+              <th scope='col'>Show</th>
+              <th scope='col'>Actions</th>
+            </tr>
+          </thead>
+          <tbody>{renderPlaces}</tbody>
+        </table>
+      </Card>
+    </AdminPage>
+  )
 }
 
 export default PlacesSection

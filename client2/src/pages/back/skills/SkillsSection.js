@@ -1,11 +1,12 @@
-import { Component } from 'react'
-import axios from 'axios'
+import { useState } from 'react'
 import AdminPage from '../AdminPage'
 import Card from '../../../components/Card'
 import ButtonOpenModal from '../../../components/ButtonOpenModal'
 import SkillModal from './components/SkillModal'
 import ConfirmModal from '../../../components/ConfirmModal'
+import { dummyData } from '../../../dummyEndpoints'
 
+<<<<<<< Updated upstream:client2/src/pages/back/skills/SkillsSection.js
 class SkillsSection extends Component {
   constructor (props) {
     super(props)
@@ -97,32 +98,98 @@ class SkillsSection extends Component {
     return (
       <AdminPage {...this.propsprops}>
         <Card header='Skills'>
+=======
+const SkillsSection = (props) => {
+  const { skills: dummySkills } = dummyData
+  const [skills, setSkills] = useState(dummySkills)
+
+  const newSkill = (newSkill) => {
+    setSkills({ ...skills, newSkill })
+  }
+
+  const updateSkill = (skillId, updatedSkill) => {
+    const updatedSkills = skills.map((skill) => {
+      if (skill.id === skillId) {
+        return updateSkill
+      }
+      console.log(skill)
+      return skill
+    })
+    setSkills({ ...skills, updatedSkills })
+  }
+
+  const deleteSkill = (skillId) => {
+    setSkills(skills.filter((skill) => skill.id !== skillId))
+  }
+
+  const renderSkills = skills && skills.map((skill) => {
+    const { name, value, show, id } = skill
+    const showIcon =
+      show
+        ? (<td className='text-success'> <i className='far fa-check-circle fa-2x' /> </td>)
+        : (<td className='text-danger'> <i className='far fa-times-circle fa-2x' /> </td>)
+
+    return (
+      <tr key={id}>
+        <td>{name}</td>
+        <td>{value}</td>
+        {showIcon}
+        <td>
+>>>>>>> Stashed changes:client/src/pages/back/skills/SkillsSection.js
           <ButtonOpenModal
-            target='new-skill'
-            color='primary mb-2'
-            label='New Skill'
+            target={`update-skill-${id}`}
+            color='primary mr-2'
+            label='Update'
           />
           <SkillModal
-            target='new-skill'
-            isModify={false}
-            addUpdateSkill={this.newSkill}
+            target={`update-skill-${id}`}
+            isModify
+            skillId={id}
+            addUpdateSkill={updateSkill}
           />
-
-          <table className='table table-bordered'>
-            <thead>
-              <tr>
-                <th scope='col'>Name</th>
-                <th scope='col'>Value</th>
-                <th scope='col'>Show</th>
-                <th scope='col'>Actions</th>
-              </tr>
-            </thead>
-            <tbody>{skills}</tbody>
-          </table>
-        </Card>
-      </AdminPage>
+          <ButtonOpenModal
+            target={`confirm-skill-${id}`}
+            color='danger mr-2'
+            label='X'
+          />
+          <ConfirmModal
+            confirmFunction={deleteSkill}
+            itemId={id}
+            target={`confirm-skill-${id}`}
+          />
+        </td>
+      </tr>
     )
-  }
+  })
+
+  return (
+    <AdminPage {...props}>
+      <Card header='Skills'>
+        <ButtonOpenModal
+          target='new-skill'
+          color='primary mb-2'
+          label='New Skill'
+        />
+        <SkillModal
+          target='new-skill'
+          isModify={false}
+          addUpdateSkill={newSkill}
+        />
+
+        <table className='table table-bordered'>
+          <thead>
+            <tr>
+              <th scope='col'>Name</th>
+              <th scope='col'>Value</th>
+              <th scope='col'>Show</th>
+              <th scope='col'>Actions</th>
+            </tr>
+          </thead>
+          <tbody>{renderSkills}</tbody>
+        </table>
+      </Card>
+    </AdminPage>
+  )
 }
 
 export default SkillsSection
