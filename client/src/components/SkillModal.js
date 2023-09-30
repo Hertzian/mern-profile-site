@@ -1,34 +1,27 @@
 import { Component } from 'react'
 import axios from 'axios'
-import closeModal from '../../../../utils/closeModal'
+import closeModal from '../utils/closeModal'
 
-class PlaceModal extends Component {
+class SkillModal extends Component {
   constructor(props) {
     super(props)
     this.state = {
       _id: '',
-      company: '',
-      job: '',
-      year: '',
-      assignment: '',
+      name: '',
+      value: '',
       show: 'no'
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   async componentDidMount() {
-    this.props.placeId && this.getPlace(this.props.placeId)
+    this.props.skillId && this.getSkill(this.props.skillId)
   }
-
-  async getPlace(placeId) {
-    try {
-      const res = await axios.get(`/api/places/get-place/${placeId}`)
-      const { _id, company, job, year, assignment, show } = res.data.place
-      this.setState({ _id, company, job, year, assignment, show })
-    } catch (err) {
-      console.log(err)
-    }
+  async getSkill(skillId) {
+    const res = await axios.get(`/api/skills/get-skill/${skillId}`)
+    const skill = res.data.skill
+    this.setState(skill)
   }
 
   handleChange(e) {
@@ -37,22 +30,20 @@ class PlaceModal extends Component {
   clearState() {
     this.setState({
       _id: '',
-      company: '',
-      job: '',
-      year: '',
-      assignment: '',
-      show: ''
+      name: '',
+      value: '',
+      show: 'no'
     })
   }
 
   handleSubmit(e) {
-    const { isModify, target } = this.props
+    const { addUpdateSkill, isModify, skillId, target } = this.props
     e.preventDefault()
     if (isModify) {
-      this.props.addUpdatePlace(this.state._id, this.state)
+      addUpdateSkill(skillId, this.state)
       closeModal(target)
     } else {
-      this.props.addUpdatePlace(this.state)
+      addUpdateSkill(this.state)
       closeModal(target)
       this.clearState()
     }
@@ -72,7 +63,7 @@ class PlaceModal extends Component {
           <div className='modal-content'>
             <div className='modal-header'>
               <h5 className='modal-title' id='exampleModalLabel'>
-                {this.props.isModify ? 'Update Place' : 'New Place'}
+                {this.props.isModify ? 'Update Skill' : 'New Skill'}
               </h5>
               <button
                 type='button'
@@ -86,48 +77,29 @@ class PlaceModal extends Component {
             <form onSubmit={this.handleSubmit}>
               <div className='modal-body'>
                 <div className='form-group'>
-                  <label htmlFor='company'>Company:</label>
+                  <label htmlFor='name'>Name:</label>
                   <input
-                    name='company'
+                    name='name'
                     onChange={this.handleChange}
                     className='form-control'
                     type='text'
-                    value={this.state.company}
+                    value={this.state.name}
                   />
                 </div>
                 <div className='form-group'>
-                  <label htmlFor='job'>Job:</label>
+                  <label htmlFor=''>Value</label>
                   <input
-                    name='job'
+                    name='value'
+                    value={this.state.value}
+                    className='form-control-range'
+                    type='range'
+                    min='0'
+                    max='100'
                     onChange={this.handleChange}
-                    className='form-control'
-                    type='text'
-                    value={this.state.job}
                   />
                 </div>
                 <div className='form-group'>
-                  <label htmlFor='year'>Year:</label>
-                  <input
-                    name='year'
-                    onChange={this.handleChange}
-                    className='form-control'
-                    type='text'
-                    value={this.state.year}
-                  />
-                </div>
-                <div className='form-group'>
-                  <label htmlFor='assignment'>Assignment:</label>
-                  <textarea
-                    className='form-control'
-                    name='assignment'
-                    value={this.state.assignment}
-                    onChange={this.handleChange}
-                    cols='20'
-                    rows='3'
-                  ></textarea>
-                </div>
-                <div className='form-group'>
-                  <label htmlFor='show'>Do you want to show</label>
+                  <label htmlFor='show'>Do you want to show?</label>
                   <div className='form-check'>
                     <input
                       name='show'
@@ -176,4 +148,4 @@ class PlaceModal extends Component {
   }
 }
 
-export default PlaceModal
+export default SkillModal

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Card from '../../../../components/Card'
+import Card from './Card'
 
 function Access() {
   const [access, setAccess] = useState({

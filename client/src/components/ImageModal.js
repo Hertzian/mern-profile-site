@@ -1,6 +1,6 @@
 import { Component } from 'react'
-import closeModal from '../../../../utils/closeModal'
-import SimpleMainImages from '../../../../components/SimpleMainImages'
+import closeModal from '../utils/closeModal'
+import SimpleMainImages from './SimpleMainImages'
 
 class ImageModal extends Component {
   constructor(props) {

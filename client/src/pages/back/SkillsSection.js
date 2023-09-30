@@ -1,10 +1,10 @@
 import { Component } from 'react'
 import axios from 'axios'
-import AdminPage from '../AdminPage'
-import Card from '../../../components/Card'
-import ButtonOpenModal from '../../../components/ButtonOpenModal'
-import SkillModal from './components/SkillModal'
-import ConfirmModal from '../../../components/ConfirmModal'
+import AdminPage from './AdminPage'
+import Card from '../../components/Card'
+import ButtonOpenModal from '../../components/ButtonOpenModal'
+import SkillModal from '../../components/SkillModal'
+import ConfirmModal from '../../components/ConfirmModal'
 
 class SkillsSection extends Component {
   constructor(props) {
@@ -119,6 +119,10 @@ class SkillsSection extends Component {
       </AdminPage>
     )
   }
+}
+
+function SkillsSection(props) {
+
 }
 
 export default SkillsSection

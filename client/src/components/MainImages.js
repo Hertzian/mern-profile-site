@@ -1,6 +1,6 @@
 import { Component } from 'react'
-import Card from '../../../../components/Card'
-import SimpleMainImages from '../../../../components/SimpleMainImages'
+import Card from './Card'
+import SimpleMainImages from './SimpleMainImages'
 
 class MainImages extends Component {
   render() {

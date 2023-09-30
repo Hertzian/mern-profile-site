@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Card from '../../../../components/Card'
+import Card from './Card'
 
 function Profile() {
   const [user, setUser] = useState({
