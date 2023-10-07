@@ -24,33 +24,12 @@ exports.login = async (req, res) => {
 // @access  public
 exports.getFrontProfile = async (req, res) => {
   try {
-    const user = await User.findOne({ where: { email: process.env.USER_EMAIL } })
-    const places = await Place.findAll({ where: { userId: user.id } })
-    const projects = await Project.findAll({ where: { userId: user.id } })
-    const skills = await Skill.findAll({ where: { userId: user.id } })
-
-    const { name, lastname, email, github, linkedin, phone, bio, profession } = user
-    const showPlaces = places.filter((place) => place.show === true)
-    const showSkills = skills.filter((skill) => skill.show === true)
-    const showProjects = projects.filter((project) => project.show === true)
-
-    return res.json({
-      user: {
-        name,
-        lastname,
-        email,
-        github,
-        linkedin,
-        phone,
-        bio,
-        profession,
-        portrait: `/public/uploads/${user.portrait}`,
-        background: `/public/uploads/${user.background}`
-      },
-      places: showPlaces,
-      skills: showSkills,
-      projects: showProjects
+    const user = await User.findOne({
+      where: { email: process.env.USER_EMAIL },
+      include: ['places', 'projects', 'skills']
     })
+
+    return res.json(user)
   } catch (err) {
     console.log(err)
     res.json(err)
@@ -59,7 +38,7 @@ exports.getFrontProfile = async (req, res) => {
 
 // @route   GET /api/users/profile
 // @access  private 
-exports.getProfile = async (req, res) => {
+exports.getProfile = (req, res) => {
   try {
     const user = req.user
     const { name, lastname, github, linkedin, phone, bio, profession } = user
