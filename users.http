@@ -1,8 +1,9 @@
 ### user login
 POST http://localhost:5001/api/users/login
 Content-Type: application/json
+
 {
-  "email":"test@test.com",
+  "email": "test@test.com",
   "password": "123456"
 }
 
@@ -12,6 +13,7 @@ GET http://localhost:5001/api/users/get-front-profile
 ### get user profile for back page **require token
 GET http://localhost:5001/api/users/profile
 Content-Type: application/json
+
 {
   token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU3YWE0Mzg1MWQ1MTNmMGRmNzlmNWQiLCJpYXQiOjE2MzQyNTQ2NzMsImV4cCI6MTYzNjg0NjY3M30.kTkeBY1ov_LLh6Sxawy26l_Y7IH0mIgiaB5S2Hw1xIA"
 }
@@ -19,6 +21,7 @@ Content-Type: application/json
 ### update user profile back page **require token
 PUT http://localhost:5001/api/users/profile
 Content-Type: application/json
+
 {
   token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU3YWE0Mzg1MWQ1MTNmMGRmNzlmNWQiLCJpYXQiOjE2MzQyNTQ2NzMsImV4cCI6MTYzNjg0NjY3M30.kTkeBY1ov_LLh6Sxawy26l_Y7IH0mIgiaB5S2Hw1xIA"
 }
@@ -26,6 +29,7 @@ Content-Type: application/json
 ### update access for user, back page **require token
 PUT http://localhost:5001/api/users/update-access
 Content-Type: application/json
+
 {
   token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU3YWE0Mzg1MWQ1MTNmMGRmNzlmNWQiLCJpYXQiOjE2MzQyNTQ2NzMsImV4cCI6MTYzNjg0NjY3M30.kTkeBY1ov_LLh6Sxawy26l_Y7IH0mIgiaB5S2Hw1xIA"
 }
@@ -41,6 +45,14 @@ GET http://localhost:5001/api/users/load-background
 POST http://localhost:5001/api/users/upload-portrait
 Content-Type: multipart/form-data
 
+{
+  ...
+}
+
 ## load background image, back page **no idea why this exists lol, **require token
 POST http://localhost:5001/api/users/upload-background
 Content-Type: multipart/form-data
+
+{
+  ...
+}
