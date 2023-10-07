@@ -1,0 +1,31 @@
+### get all places **require token I guess
+GET http://localhost:5001/api/places/get-all
+
+### get single place
+GET http://localhost:5001/api/places/get-place/:placeId
+
+### create new place **require token
+POST http://localhost:5001/api/places/new-place
+Content-Type: application/json
+{
+  "company": "test company",
+  "job": "test job",
+  "year": "1900",
+  "assignment": "test assignment",
+  "show": true
+}
+
+### update existing place **require token
+POST http://localhost:5001/api/places/update-place/:placeId
+Content-Type: application/json
+{
+  "company": "update company",
+  "job": "update job",
+  "year": "1900",
+  "assignment": "update assignment",
+  "show": true
+}
+
+### delete place **require token
+POST http://localhost:5001/api/places/delete-place/:placeId
+

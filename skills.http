@@ -1,0 +1,31 @@
+### get all skills **require token I guess
+GET http://localhost:5001/api/skills/get-all
+
+### get single skill
+GET http://localhost:5001/api/skills/get-skill/:skillId
+
+### create new skill **require token
+POST http://localhost:5001/api/skills/new-skill
+Content-Type: application/json
+{
+  "company": "test company",
+  "job": "test job",
+  "year": "1900",
+  "assignment": "test assignment",
+  "show": true
+}
+
+### update existing skill **require token
+POST http://localhost:5001/api/skills/update-skill/:skillId
+Content-Type: application/json
+{
+  "company": "update company",
+  "job": "update job",
+  "year": "1900",
+  "assignment": "update assignment",
+  "show": true
+}
+
+### delete skill **require token
+POST http://localhost:5001/api/skills/delete-skill/:skillId
+

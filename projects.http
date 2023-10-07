@@ -1,0 +1,37 @@
+### get all projects **require token I guess
+GET http://localhost:5001/api/projects/get-all
+
+### get single project
+GET http://localhost:5001/api/projects/get-project/:projectId
+
+### create new project **require token
+POST http://localhost:5001/api/projects/new-project
+Content-Type: application/json
+{
+  "company": "test company",
+  "job": "test job",
+  "year": "1900",
+  "assignment": "test assignment",
+  "show": true
+}
+
+### update existing project **require token
+POST http://localhost:5001/api/projects/update-project/:projectId
+Content-Type: multipart/form-data 
+{
+  "company": "update company",
+  "job": "update job",
+  "year": "1900",
+  "assignment": "update assignment",
+  "show": true
+}
+
+### delete project **require token
+POST http://localhost:5001/api/projects/delete-project/:projectId
+
+### upload project image **require token
+POST http://localhost:5001/api/projects/upload-image-project/:projectId
+Content-Type: multipart/form-data
+
+### upload project image **require token
+GET http://localhost:5001/api/projects/load-image-project/:projectId
