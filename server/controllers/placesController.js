@@ -1,31 +1,30 @@
 const { place: Place } = require('../lib/db/models')
-const asyH = require('../utils/asyncHandler')
 
 // @route   GET /api/places/get-all
 // @access   private
-exports.allPlaces = asyH(async (req, res) => {
+exports.allPlaces = async (req, res) => {
   try {
     const places = await Place.find({})
     return res.json({ places })
   } catch (err) {
     return res.json(err)
   }
-})
+}
 
 // @route   GET /api/places/get-place/:placeId
 // @access   private
-exports.getPlace = asyH(async (req, res) => {
+exports.getPlace = async (req, res) => {
   try {
     const place = await Place.findByPk(req.params.placeId)
     return res.json({ place })
   } catch (err) {
     return res.json(err)
   }
-})
+}
 
 // @route   POST /api/places/new-place
 // @access   private
-exports.newPlace = asyH(async (req, res) => {
+exports.newPlace = async (req, res) => {
   try {
     const { company, job, year, assignment, show } = req.body
     const place = await Place.create({ company, job, year, assignment, show })
@@ -33,11 +32,11 @@ exports.newPlace = asyH(async (req, res) => {
   } catch (err) {
     return res.json(err)
   }
-})
+}
 
 // @route   PUT /api/places/update-place/:placeId
 // @access   private
-exports.updatePlace = asyH(async (req, res) => {
+exports.updatePlace = async (req, res) => {
   try {
     const { company, job, year, assignment, show } = req.body
     const place = await Place.findByPk(req.params.placeId)
@@ -51,11 +50,11 @@ exports.updatePlace = asyH(async (req, res) => {
   } catch (err) {
     return res.json({ err })
   }
-})
+}
 
 // @route   DELETE /api/places/delete-place/:placeId
 // @access   private
-exports.deletePlace = asyH(async (req, res) => {
+exports.deletePlace = async (req, res) => {
   try {
     const place = await Place.findByPk(req.params.placeId)
     await place.remove()
@@ -63,4 +62,4 @@ exports.deletePlace = asyH(async (req, res) => {
   } catch (err) {
     return res.json({ err })
   }
-})
+}
