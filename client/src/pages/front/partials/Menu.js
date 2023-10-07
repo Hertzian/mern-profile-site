@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { frontMenu } from '../../../menuConfig/menuConfig'
+import { frontMenu } from '../../../config/menuConfig'
 import MenuItem from './MenuItem'
 
 const Menu = () => {

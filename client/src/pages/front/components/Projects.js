@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom'
-import { dummyData } from '../../../dummyEndpoints'
 
 const Projects = () => {
-  const { projects } = dummyData
+  const projects = []
 
   const showProjects =
     projects && projects.map((project) => (

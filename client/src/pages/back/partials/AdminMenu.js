@@ -1,5 +1,5 @@
 import Footer from './AdminFooter'
-import { adminMenu } from '../../../menuConfig/menuConfig'
+import { adminMenu } from '../../../config/menuConfig'
 import AdminSideBarItem from './AdminSideBarItem'
 
 const AdminMenu = (props) => {

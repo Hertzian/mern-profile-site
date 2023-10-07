@@ -4,10 +4,10 @@ import AdminNav from './partials/AdminNav'
 import '../../styles/tables.css'
 import '../../styles/back.css'
 
-import { dummyData } from '../../dummyEndpoints'
 
 const AdminPage = (props) => {
-  const { user } = dummyData
+  const user = {}
+
   const [openMenu, setOpenMenu] = useState(true)
   const handleMenu = () => setOpenMenu(!openMenu)
 

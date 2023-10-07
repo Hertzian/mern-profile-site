@@ -3,7 +3,7 @@ import Card from './components/Card'
 import ButtonOpenModal from './components/ButtonOpenModal'
 import PlaceModal from './components/PlaceModal'
 import ConfirmModal from './components/ConfirmModal'
-import { dummyData } from '../../dummyEndpoints'
+import { dummyData } from '../../config/dummyEndpoints'
 
 function PlacesSection(props) {
   const newPlace = () => { }

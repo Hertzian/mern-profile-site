@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import Menu from './partials/Menu'
 import Footer from './partials/Footer'
-import { dummyData } from '../../dummyEndpoints'
+import { dummyData } from '../../config/dummyEndpoints'
 import '../../styles/front.css'
 
 const ProjectPage = () => {
