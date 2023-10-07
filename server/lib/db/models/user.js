@@ -34,11 +34,11 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: true,
     modelName: 'User',
     tableName: 'users',
-    defaultScope: {
-      attributes: {
-        exclude: ['password']
-      }
-    }
+    // defaultScope: {
+    //   attributes: {
+    //     exclude: ['password']
+    //   }
+    // }
   })
 
   return User

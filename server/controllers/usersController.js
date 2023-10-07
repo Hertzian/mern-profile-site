@@ -26,7 +26,10 @@ exports.getFrontProfile = async (req, res) => {
   try {
     const user = await User.findOne({
       where: { email: process.env.USER_EMAIL },
-      include: ['places', 'projects', 'skills']
+      include: ['places', 'projects', 'skills'],
+      attributes: {
+        exclude: 'password' // this field can be an array
+      }
     })
 
     return res.json(user)
