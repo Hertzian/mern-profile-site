@@ -1,12 +1,12 @@
-import { Route, Redirect } from 'react-router-dom'
+import { Route, Navigate } from 'react-router-dom'
 
 const isAuthenticated = true // this comes from global state
 
 function PrivateRoute(props) {
   const routesProps = (routeProps) =>
     isAuthenticated
-      ? (<this.props.comp {...routeProps} />)
-      : (<Redirect to='/mamalon/login' />)
+      ? (<props.comp {...routeProps} />)
+      : (<Navigate to='/mamalon/login' />)
 
 
   return (

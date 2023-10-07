@@ -1,9 +1,8 @@
-import { useskill } from 'react'
-import axios from 'axios'
+import { useState } from 'react'
 import closeModal from '../../../utils/closeModal'
 
 function SkillModal(props) {
-  const [skill, setSkill] = useskill({
+  const [skill, setSkill] = useState({
     _id: '',
     name: '',
     value: '',

@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import AdminPage from './AdminPage'
-import Card from '../../components/Card'
-import ProjectModal from '../../components/ProjectModal'
-import ButtonOpenModal from '../../components/ButtonOpenModal'
-import ConfirmModal from '../../components/ConfirmModal'
-import ImageModal from '../../components/ImageModal'
+import Card from './components/Card'
+import ProjectModal from './components/ProjectModal'
+import ButtonOpenModal from './components/ButtonOpenModal'
+import ConfirmModal from './components/ConfirmModal'
+import ImageModal from './components/ImageModal'
 
 function ProjectsSection(props) {
   const [projects, setProjects] = useState([])

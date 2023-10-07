@@ -1,8 +1,8 @@
 import AdminPage from './AdminPage'
-import Card from '../../components/Card'
-import ButtonOpenModal from '../../components/ButtonOpenModal'
-import PlaceModal from '../../components/PlaceModal'
-import ConfirmModal from '../../components/ConfirmModal'
+import Card from './components/Card'
+import ButtonOpenModal from './components/ButtonOpenModal'
+import PlaceModal from './components/PlaceModal'
+import ConfirmModal from './components/ConfirmModal'
 import { dummyData } from '../../dummyEndpoints'
 
 function PlacesSection(props) {

@@ -1,5 +1,4 @@
-import { Component } from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import HomePage from '../pages/front/HomePage'
 import ProjectPage from '../pages/front/ProjectPage'
 import Login from '../pages/back/Login'
@@ -14,7 +13,7 @@ const isAuthenticated = true // this comes from global state
 
 function SiteRoutes() {
   return (
-    <Switch>
+    <Router>
       <Route exact path='/' component={HomePage} />
       <Route exact path='/project/:projectId' component={ProjectPage} />
       <Route exact path='/mamalon/login' component={Login} />
@@ -30,9 +29,9 @@ function SiteRoutes() {
               <PrivateRoute exact path='/admin/practice' comp={PracticeSection} />
             </>
           )
-          : <Redirect to='/mamalon/login' />
+          : <Navigate to='/mamalon/login' />
       }
-    </Switch>
+    </Router>
   )
 }
 

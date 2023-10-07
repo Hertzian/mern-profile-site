@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import AdminPage from './AdminPage'
-import Card from '../../components/Card'
-import ButtonOpenModal from '../../components/ButtonOpenModal'
-import SkillModal from '../../components/SkillModal'
-import ConfirmModal from '../../components/ConfirmModal'
+import Card from './components/Card'
+import ButtonOpenModal from './components/ButtonOpenModal'
+import SkillModal from './components/SkillModal'
+import ConfirmModal from './components/ConfirmModal'
 
 function SkillsSection(props) {
   const [skills, setSkills] = useState([])
@@ -52,14 +52,14 @@ function SkillsSection(props) {
 
   return (
     <AdminPage {...props}>
-      <Card header={'Projects'}>
+      <Card header={'Skills'}>
         <ButtonOpenModal
-          target='new-project'
+          target='new-skill'
           color='primary mb-2'
           label='New Project'
         />
         <SkillModal
-          target={'new-project'}
+          target={'new-skill'}
           isModify={false}
           addUpdateProject={newSkill}
         />
