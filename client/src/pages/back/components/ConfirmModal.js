@@ -1,4 +1,4 @@
-import closeModal from '../utils/closeModal'
+import closeModal from '../../../utils/closeModal'
 
 function ConfirmModal(props) {
   const handleSubmit = (e) => {
@@ -10,7 +10,7 @@ function ConfirmModal(props) {
   return (
     <div
       className='modal fade'
-      id={this.props.target}
+      id={props.target}
       tabIndex='-1'
       role='dialog'
       aria-labelledby='ModalLabel'

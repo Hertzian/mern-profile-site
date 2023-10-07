@@ -16,7 +16,7 @@ function ProjectsSection(props) {
 
   const projectsRender =
     projects && projects.map((project) => {
-      const { _id, name, url, repo, show } = project
+      const { id, name, url, repo, show } = project
       const showIcon = show === 'yes'
         ? (
           <td className='text-success'>
@@ -30,38 +30,38 @@ function ProjectsSection(props) {
         )
 
       return (
-        <tr key={_id}>
+        <tr key={id}>
           <td>{name}</td>
           <td>{url}</td>
           <td>{repo}</td>
           {showIcon}
           <td>
             <ButtonOpenModal
-              target={`update-project-${_id}`}
+              target={`update-project-${id}`}
               color='primary mr-2'
               label='Update'
             />
             <ProjectModal
-              target={`update-project-${_id}`}
+              target={`update-project-${id}`}
               isModify={true}
-              projectId={_id}
+              projectId={id}
               addUpdateProject={updateProject}
             />
             <ButtonOpenModal
-              target={`image-project-${_id}`}
+              target={`image-project-${id}`}
               color='info mr-2'
               label='Img'
             />
-            <ImageModal target={`image-project-${_id}`} imageId={_id} />
+            <ImageModal target={`image-project-${id}`} imageId={id} />
             <ButtonOpenModal
-              target={`confirm-project-${_id}`}
+              target={`confirm-project-${id}`}
               color='danger mr-2'
               label='X'
             />
             <ConfirmModal
               confirmFunction={deleteProject}
-              itemId={_id}
-              target={`confirm-project-${_id}`}
+              itemId={id}
+              target={`confirm-project-${id}`}
             />
           </td>
         </tr>

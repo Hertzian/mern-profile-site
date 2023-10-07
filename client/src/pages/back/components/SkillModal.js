@@ -1,22 +1,18 @@
-import { useproject } from 'react'
+import { useskill } from 'react'
+import axios from 'axios'
+import closeModal from '../../../utils/closeModal'
 
-function ProjectModal(props) {
-  const [project, setProject] = useproject({
+function SkillModal(props) {
+  const [skill, setSkill] = useskill({
     _id: '',
     name: '',
-    url: '',
-    repo: '',
-    //image: '',
-    description: '',
+    value: '',
     show: 'no'
   })
 
-  const handleChange = (e) => {
-    setProject({ ...project, [e.target.name]: e.target.value })
-  }
-  const handleSubmit = (e) => {
-    e.preventDefault()
-  }
+  const handleChange = (e) => { }
+  const clearskill = () => { }
+  const handleSubmit = () => { }
 
   return (
     <div
@@ -31,7 +27,7 @@ function ProjectModal(props) {
         <div className='modal-content'>
           <div className='modal-header'>
             <h5 className='modal-title' id='exampleModalLabel'>
-              {props.isModify ? 'Update Project' : 'New Project'}
+              {props.isModify ? 'Update Skill' : 'New Skill'}
             </h5>
             <button
               type='button'
@@ -42,7 +38,7 @@ function ProjectModal(props) {
               <span aria-hidden='true'>&times;</span>
             </button>
           </div>
-          <form onSubmit={handleSubmit} encType='multipart/form-data'>
+          <form onSubmit={handleSubmit}>
             <div className='modal-body'>
               <div className='form-group'>
                 <label htmlFor='name'>Name:</label>
@@ -51,39 +47,20 @@ function ProjectModal(props) {
                   onChange={handleChange}
                   className='form-control'
                   type='text'
-                  value={project.name}
+                  value={skill.name}
                 />
               </div>
               <div className='form-group'>
-                <label htmlFor='url'>url:</label>
+                <label htmlFor=''>Value</label>
                 <input
-                  name='url'
+                  name='value'
+                  value={skill.value}
+                  className='form-control-range'
+                  type='range'
+                  min='0'
+                  max='100'
                   onChange={handleChange}
-                  className='form-control'
-                  type='text'
-                  value={project.url}
                 />
-              </div>
-              <div className='form-group'>
-                <label htmlFor='repo'>Repo:</label>
-                <input
-                  name='repo'
-                  onChange={handleChange}
-                  className='form-control'
-                  type='text'
-                  value={project.repo}
-                />
-              </div>
-              <div className='form-group'>
-                <label htmlFor='description'>Description:</label>
-                <textarea
-                  className='form-control'
-                  name='description'
-                  value={project.description}
-                  onChange={handleChange}
-                  cols='20'
-                  rows='3'
-                ></textarea>
               </div>
               <div className='form-group'>
                 <label htmlFor='show'>Do you want to show?</label>
@@ -93,7 +70,7 @@ function ProjectModal(props) {
                     value={'yes'}
                     className='form-check-input'
                     type='radio'
-                    checked={project.show === 'yes'}
+                    checked={skill.show === 'yes'}
                     onChange={handleChange}
                   />
                   <label className='form-check-label' htmlFor='yes'>
@@ -106,7 +83,7 @@ function ProjectModal(props) {
                     value={'no'}
                     className='form-check-input'
                     type='radio'
-                    checked={project.show === 'no'}
+                    checked={skill.show === 'no'}
                     onChange={handleChange}
                   />
                   <label className='form-check-label' htmlFor='yes'>
@@ -133,4 +110,4 @@ function ProjectModal(props) {
     </div>
   )
 }
-export default ProjectModal
+export default SkillModal

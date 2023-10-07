@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, Navigate } from 'react-router-dom'
 import AdminFooter from './partials/AdminFooter'
-import Alert from '../../components/Alert'
+import Alert from './components/Alert'
 import { useActions } from '../../hooks/useActions'
 import '../../styles/back.css'
 

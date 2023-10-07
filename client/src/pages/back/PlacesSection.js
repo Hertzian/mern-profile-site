@@ -11,49 +11,39 @@ function PlacesSection(props) {
   const deletePlace = () => { }
 
   const places = dummyData.places.map((place) => {
-    const { _id, company, year, assignment, show } = place
+    const { id, company, year, assignment, show } = place
 
     const showIcon = show === 'yes'
-      ?
-      (
-        <td className='text-success'>
-          <i className='far fa-check-circle fa-2x'></i>
-        </td>
-      )
-      :
-      (
-        <td className='text-danger'>
-          <i className='far fa-times-circle fa-2x'></i>
-        </td>
-      )
+      ? (<td className='text-success'> <i className='far fa-check-circle fa-2x'></i> </td>)
+      : (<td className='text-danger'> <i className='far fa-times-circle fa-2x'></i> </td>)
 
     return (
-      <tr key={_id}>
+      <tr key={id}>
         <td>{company}</td>
         <td>{assignment}</td>
         <td>{year}</td>
         {showIcon}
         <td>
           <ButtonOpenModal
-            target={`update-place-${_id}`}
+            target={`update-place-${id}`}
             color='primary mr-2'
             label='Update'
           />
           <PlaceModal
-            target={`update-place-${_id}`}
+            target={`update-place-${id}`}
             isModify={true}
-            placeId={_id}
+            placeId={id}
             addUpdatePlace={updatePlace}
           />
           <ButtonOpenModal
-            target={`delete-place-${_id}`}
+            target={`delete-place-${id}`}
             color='danger mr-2'
             label='X'
           />
           <ConfirmModal
             confirmFunction={deletePlace}
-            itemId={_id}
-            target={`delete-place-${_id}`}
+            itemId={id}
+            target={`delete-place-${id}`}
           />
         </td>
       </tr>
