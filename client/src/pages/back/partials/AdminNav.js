@@ -1,13 +1,17 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { logout } from '../../../store'
 
 const AdminNav = (props) => {
   const [isOpen, setIsOpen] = useState(false)
+  const dispatch = useDispatch()
 
   const toggleOpen = () => setIsOpen(!isOpen)
 
   const handleLogout = () => {
-    console.log('logout :)')
+    console.log('logout carnal')
+    dispatch(logout())
   }
 
   return (

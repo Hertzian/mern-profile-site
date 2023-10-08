@@ -4,19 +4,23 @@ import { Link, Navigate } from 'react-router-dom'
 import AdminFooter from './partials/AdminFooter'
 import Alert from './components/Alert'
 import '../../styles/back.css'
+import { login } from '../../store'
+import { useThunk } from '../../hooks/useThunk'
 
 const Login = () => {
+  const [doLogin, isLoading, isLoadingError] = useThunk(login)
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   })
-  const { isAuthenticated } = useSelector((state) => state.user)
+  const { isAuthenticated } = useSelector((state) => state.users)
   const { email, password } = formData
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value })
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    doLogin(formData)
   }
 
   if (isAuthenticated) {

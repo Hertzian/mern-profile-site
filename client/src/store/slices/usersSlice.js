@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { getFrontProfile } from "../thunks/usersThunk"
+import {
+  getFrontProfile,
+  login,
+} from "../thunks/usersThunk"
+import setAuthToken from "../../utils/setAuthToken"
 
 const usersSlice = createSlice({
   name: 'users',
@@ -9,6 +13,13 @@ const usersSlice = createSlice({
     error: null,
     isAuthenticated: false,
     token: ''
+  },
+  reducers: {
+    logout(state, action) {
+      setAuthToken()
+      state.token = ''
+      state.isAuthenticated = false
+    }
   },
   extraReducers(builder) {
     builder.addCase(getFrontProfile.pending, (state, action) => {
@@ -22,8 +33,24 @@ const usersSlice = createSlice({
       state.isLoading = false
       state.error = action.error
     })
+
+    builder.addCase(login.pending, (state, action) => {
+      state.isLoading = true
+      state.isAuthenticated = false
+    })
+    builder.addCase(login.fulfilled, (state, action) => {
+      state.isLoading = false
+      state.isAuthenticated = true
+      state.token = action.payload
+    })
+    builder.addCase(login.rejected, (state, action) => {
+      state.isLoading = false
+      state.isAuthenticated = false
+      state.error = action.error
+    })
   }
 
 })
 
+export const { logout } = usersSlice.actions
 export const usersReducer = usersSlice.reducer
