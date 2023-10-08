@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import '../../styles/front.css'
+import { useThunk } from '../../hooks/useThunk'
 
 import About from './components/About'
 import Contact from './components/Contact'
@@ -10,16 +11,19 @@ import Menu from './partials/Menu'
 import Places from './components/Places'
 import Projects from './components/Projects'
 import Skills from './components/Skills'
-import { useActions } from '../../hooks/useActions'
+import { getFrontProfile } from '../../store'
 
 function HomePage() {
-  const { getFrontProfile } = useActions()
-  const { user } = useSelector((state) => state.user)
+  const [doFetchProfile, isLoading, loadingError] = useThunk(getFrontProfile)
 
+  const { data } = useSelector((state) => {
+    return state.users
+  })
+
+  const user = data
   useEffect(() => {
-    getFrontProfile()
-    // eslint-disable-next-line
-  }, [])
+    doFetchProfile()
+  }, [doFetchProfile])
 
   return (
     <>
@@ -27,13 +31,13 @@ function HomePage() {
       {
         user && (
           <>
-            <Intro name={user.user.name} lastname={user.user.lastname} portrait={user.user.portrait} profession={user.user.profession} />
+            <Intro name={user.name} lastname={user.lastname} portrait={user.portrait} profession={user.profession} />
             <Places places={user.places} background={user.background} />
             <Skills skills={user.skills} />
             <Projects projects={user.projects} />
-            <About bio={user.user.bio} portrait={user.user.portrait} profession={user.user.profession} />
-            <Contact email={user.user.email} phone={user.user.phone} />
-            <Footer name={user.user.name} lastname={user.user.lastname} github={user.user.github} linkedin={user.user.linkedin} />
+            <About bio={user.bio} portrait={user.portrait} profession={user.profession} />
+            <Contact email={user.email} phone={user.phone} />
+            <Footer name={user.name} lastname={user.lastname} github={user.github} linkedin={user.linkedin} />
           </>
         )
       }

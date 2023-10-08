@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { Link, Navigate } from 'react-router-dom'
 import AdminFooter from './partials/AdminFooter'
 import Alert from './components/Alert'
-import { useActions } from '../../hooks/useActions'
 import '../../styles/back.css'
 
 const Login = () => {
@@ -11,7 +10,6 @@ const Login = () => {
     email: '',
     password: ''
   })
-  const { login } = useActions()
   const { isAuthenticated } = useSelector((state) => state.user)
   const { email, password } = formData
 
@@ -19,7 +17,6 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    login(formData)
   }
 
   if (isAuthenticated) {

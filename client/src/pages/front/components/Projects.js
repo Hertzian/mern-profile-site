@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom'
 
-const Projects = () => {
-  const projects = []
+const Projects = ({ projects }) => {
 
-  const showProjects =
-    projects && projects.map((project) => (
+  const showProjects = projects && projects
+    .map((project) => (
       <Link
         key={project.id}
         id={`link-work-${project.id}`}

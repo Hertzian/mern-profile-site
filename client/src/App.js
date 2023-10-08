@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { store } from './state'
+import { store } from './store'
 
 import HomePage from './pages/front/HomePage'
 import ProjectPage from './pages/front/ProjectPage'
