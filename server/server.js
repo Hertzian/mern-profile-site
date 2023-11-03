@@ -1,11 +1,13 @@
 const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
+const cors = require('cors')
 const fileupload = require('express-fileupload')
 require('dotenv').config()
 const { sequelize } = require('./lib/db/models')
 const app = express()
 
+app.use(cors())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 // to store images
