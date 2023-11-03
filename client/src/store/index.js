@@ -1,14 +1,17 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore, } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/dist/query'
-import { usersReducer, logout } from './slices/usersSlice'
+import { frontPageApi } from './apis/frontPageApi'
 
 export const store = configureStore({
   reducer: {
-    users: usersReducer
+    [frontPageApi.reducerPath]: frontPageApi.reducer
   },
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware()
+      .concat(frontPageApi.middleware)
+  }
 })
 
 setupListeners(store.dispatch)
 
-export * from './thunks/usersThunk'
-export { logout }
+export { useGetGeneralProfileQuery } from './apis/frontPageApi'
