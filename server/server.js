@@ -14,6 +14,7 @@ app.use('/public', express.static(path.join(__dirname, 'public')))
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
 
 app.use(fileupload())
+app.use('/api/auth', require('./routes/authRoutes'))
 app.use('/api/users', require('./routes/usersRoutes'))
 app.use('/api/places', require('./routes/placesRoutes'))
 app.use('/api/skills', require('./routes/skillsRoutes'))
