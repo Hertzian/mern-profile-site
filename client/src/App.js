@@ -1,6 +1,4 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import { store } from './store'
 
 import HomePage from './pages/front/HomePage'
 import ProjectPage from './pages/front/ProjectPage'
@@ -12,20 +10,18 @@ import ProjectsSection from './pages/back/ProjectsSection'
 
 function App() {
   return (
-    <Provider store={store}>
-      <Router>
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/project/:projectId' element={<ProjectPage />} />
-          <Route path='/mamalon/login' element={<Login />} />
+    <Router>
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/project/:projectId' element={<ProjectPage />} />
+        <Route path='/mamalon/login' element={<Login />} />
 
-          <Route path='/admin/profile' element={<ProfileSection />} />
-          <Route path='/admin/places' element={<PlacesSection />} />
-          <Route path='/admin/skills' element={<SkillsSection />} />
-          <Route path='/admin/projects' element={<ProjectsSection />} />
-        </Routes>
-      </Router>
-    </Provider>
+        <Route path='/admin/profile' element={<ProfileSection />} />
+        <Route path='/admin/places' element={<PlacesSection />} />
+        <Route path='/admin/skills' element={<SkillsSection />} />
+        <Route path='/admin/projects' element={<ProjectsSection />} />
+      </Routes>
+    </Router>
   )
 }
 
