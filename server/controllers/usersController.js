@@ -41,13 +41,15 @@ exports.getFrontProfile = async (req, res) => {
 
 // @route   GET /api/users/profile
 // @access  private 
-exports.getProfile = (req, res) => {
+exports.getProfile = async (req, res) => {
   try {
-    const user = req.user
-    const { name, lastname, github, linkedin, phone, bio, profession } = user
-    return res.json({
-      user: { name, lastname, github, linkedin, phone, bio, profession }
+    const id = req.user.id
+    const user = await User.findOne({
+      where: { id },
+      attributes: { exclude: 'password' }
     })
+
+    return res.json(user)
   } catch (err) {
     console.log(err)
     res.json({ error: err })
@@ -58,19 +60,18 @@ exports.getProfile = (req, res) => {
 // @access   private
 exports.updateProfile = async (req, res) => {
   try {
-    const { name, lastname, github, linkedin, phone, bio, profession } =
-      req.body
     const user = await User.findByPk(req.user.id)
-    user.name = name || user.name
-    user.lastname = lastname || user.lastname
-    user.github = github || user.github
-    user.linkedin = linkedin || user.linkedin
-    user.phone = phone || user.phone
-    user.bio = bio || user.bio
-    user.profession = profession || user.profession
-    user.save()
+    const propsToUpdate = ['name', 'lastName', 'github', 'linkedin', 'phone', 'bio', 'profession']
 
-    res.json({ user })
+    propsToUpdate.forEach((prop) => {
+      if (req.body[prop]) {
+        user[prop] = req.body[prop]
+      }
+    })
+
+    await user.save()
+
+    return res.json({ user })
   } catch (err) {
     res.json({ error: err })
   }

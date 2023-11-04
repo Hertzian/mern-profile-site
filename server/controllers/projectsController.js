@@ -1,11 +1,12 @@
 const { unlink } = require('fs/promises')
 const path = require('path')
-const { project: Project } = require('../lib/db/models')
+const { Project } = require('../lib/db/models')
 
 // @route   GET /api/projects/get-all
 // @access   private
 exports.getProjects = async (req, res) => {
-  const projects = await Project.find({})
+  console.log(Project)
+  const projects = await Project.findAll()
 
   res.json({ projects, success: true })
 }
@@ -26,13 +27,20 @@ exports.getProject = async (req, res) => {
 exports.newProject = async (req, res) => {
   try {
     const { name, url, repo, description, show } = req.body
+    const user = req.user
     const project = await Project.create({
-      name,
-      url,
-      repo,
-      description,
-      show
+      userId: user.id,
+      ...req.body
     })
+    // const project = await Project.create({
+    //   name,
+    //   url,
+    //   repo,
+    //   image,
+    //   description,
+    //   show
+    // })
+    console.log(project)
     return res.json({ message: 'Project created!', project })
   } catch (err) {
     return res.json(err)

@@ -3,18 +3,22 @@ GET http://localhost:5001/api/users/get-front-profile
 
 ### get user profile for back page **require token
 GET http://localhost:5001/api/users/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5OTA3Njc3NiwiZXhwIjoxNzAxNjY4Nzc2fQ.1L2HH5DEaf-1HrN287OeLJElfIZ6lQ34lt_VaT2L7AM 
 Content-Type: application/json
-
-{
-  token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU3YWE0Mzg1MWQ1MTNmMGRmNzlmNWQiLCJpYXQiOjE2MzQyNTQ2NzMsImV4cCI6MTYzNjg0NjY3M30.kTkeBY1ov_LLh6Sxawy26l_Y7IH0mIgiaB5S2Hw1xIA"
-}
 
 ### update user profile back page **require token
 PUT http://localhost:5001/api/users/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5OTA3Njc3NiwiZXhwIjoxNzAxNjY4Nzc2fQ.1L2HH5DEaf-1HrN287OeLJElfIZ6lQ34lt_VaT2L7AM 
 Content-Type: application/json
 
 {
-  token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU3YWE0Mzg1MWQ1MTNmMGRmNzlmNWQiLCJpYXQiOjE2MzQyNTQ2NzMsImV4cCI6MTYzNjg0NjY3M30.kTkeBY1ov_LLh6Sxawy26l_Y7IH0mIgiaB5S2Hw1xIA"
+  "name": "updated",
+  "lastName": "lastName",
+  "github": "updated github",
+  "linkedin": "updated linkedin",
+  "phone": "updated phone",
+  "bio": "updated bio",
+  "profession": "one, two, three, updated"
 }
 
 ### update access for user, back page **require token

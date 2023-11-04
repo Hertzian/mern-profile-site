@@ -5,10 +5,10 @@ const { getProjects, getProject, newProject, updateProject, deleteProject, uploa
 
 router.get('/get-all', getProjects)
 router.get('/get-project/:projectId', getProject)
-router.post('/new-project/', newProject)
-router.put('/update-project/:projectId', updateProject)
-router.delete('/delete-project/:projectId', deleteProject)
-router.post('/upload-project/:projectId', uploadImage)
-router.get('/load-project/:projectId', loadImage)
+router.post('/new-project/', protect, newProject)
+router.put('/update-project/:projectId', protect, updateProject)
+router.delete('/delete-project/:projectId', protect, deleteProject)
+router.post('/upload-project/:projectId', protect, uploadImage)
+router.get('/load-project/:projectId', protect, loadImage)
 
 module.exports = router
