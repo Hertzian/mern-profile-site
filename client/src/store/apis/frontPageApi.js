@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-const frontPageApi = createApi({
-  reducerPath: 'frontPage',
+export const frontPageApi = createApi({
+  reducerPath: 'frontPageApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:5001/api/users'
   }),
@@ -22,4 +22,3 @@ const frontPageApi = createApi({
 })
 
 export const { useGetGeneralProfileQuery, } = frontPageApi
-export { frontPageApi }
