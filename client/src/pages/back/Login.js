@@ -1,29 +1,32 @@
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, Navigate } from 'react-router-dom'
 import AdminFooter from './partials/AdminFooter'
 import Alert from './components/Alert'
 import '../../styles/back.css'
-import { login } from '../../store'
-import { useThunk } from '../../hooks/useThunk'
+import { useLoginMutation, setLoginCredentials } from '../../store'
+
 
 const Login = () => {
-  const [doLogin, isLoading, isLoadingError] = useThunk(login)
+  const dispatch = useDispatch()
+  const [login] = useLoginMutation()
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   })
-  const { isAuthenticated } = useSelector((state) => state.users)
   const { email, password } = formData
+
+  const token = useSelector(({ credentials }) => credentials.token)
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value })
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    doLogin(formData)
+    const submit = await login(formData)
+    dispatch(setLoginCredentials(submit.data))
   }
 
-  if (isAuthenticated) {
+  if (token) {
     return <Navigate to={'/admin/profile'} />
   }
 
@@ -42,6 +45,7 @@ const Login = () => {
                     <Alert />
                   </div>
                   <div className='card-body'>
+
                     <form onSubmit={handleSubmit}>
                       <div className='form-group'>
                         <label htmlFor='email'>Email</label>
@@ -72,6 +76,7 @@ const Login = () => {
                         </Link>
                       </div>
                     </form>
+
                   </div>
                 </div>
               </div>

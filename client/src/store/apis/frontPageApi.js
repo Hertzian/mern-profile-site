@@ -15,12 +15,11 @@ const frontPageApi = createApi({
             method: 'GET'
           }
         }
-      })
+      }),
+
     }
   }
 })
 
-export const {
-  useGetGeneralProfileQuery
-} = frontPageApi
+export const { useGetGeneralProfileQuery, } = frontPageApi
 export { frontPageApi }
