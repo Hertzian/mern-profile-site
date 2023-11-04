@@ -16,7 +16,7 @@ const Login = () => {
   })
   const { email, password } = formData
 
-  const token = useSelector(({ credentials }) => credentials.token)
+  const token = useSelector(({ authSlice }) => authSlice.token)
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value })
 
