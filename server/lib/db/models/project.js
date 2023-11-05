@@ -3,7 +3,7 @@
 const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class Project extends Model {
-    static associate ({ User }) {
+    static associate({ User }) {
       this.belongsTo(User, { foreignKey: 'userId' })
     }
   }
@@ -14,12 +14,22 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       primaryKey: true
     },
-    name: DataTypes.STRING,
+    name: {
+      type: DataTypes.BOOLEAN,
+      allowNull: {
+        msg: 'The company field is required.'
+      }
+    },
     url: DataTypes.STRING,
     repo: DataTypes.STRING,
     image: DataTypes.STRING,
     description: DataTypes.STRING,
-    show: DataTypes.BOOLEAN
+    show: {
+      type: DataTypes.BOOLEAN,
+      allowNull: {
+        msg: 'The company field is required.'
+      }
+    }
   }, {
     sequelize,
     timestamps: true,

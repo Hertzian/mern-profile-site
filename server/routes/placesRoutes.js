@@ -3,10 +3,12 @@ const router = express.Router()
 const { userService: { protect } } = require('../utils')
 const { allPlaces, getPlace, newPlace, updatePlace, deletePlace } = require('../controllers/placesController')
 
-router.get('/get-all', allPlaces)
-router.get('/get-place/:placeId', getPlace)
-router.post('/new-place', newPlace)
-router.put('/update-place/:placeId', updatePlace)
-router.delete('/delete-place/:placeId', deletePlace)
+router
+  .get('/', protect, allPlaces)
+  .post('/', protect, newPlace)
+router
+  .get('/:placeId', protect, getPlace)
+  .put('/:placeId', protect, updatePlace)
+  .delete('/:placeId', protect, deletePlace)
 
 module.exports = router
