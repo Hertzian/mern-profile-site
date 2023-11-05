@@ -14,7 +14,7 @@ Content-Type: application/json
 {
   "name": "updated",
   "lastName": "lastName",
-  "github": "updated github",
+  "github": "updated githubl",
   "linkedin": "updated linkedin",
   "phone": "updated phone",
   "bio": "updated bio",

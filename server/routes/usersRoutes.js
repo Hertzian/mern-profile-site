@@ -7,9 +7,6 @@ router.get('/get-front-profile', getFrontProfile)
 // protected routes
 router.get('/profile', protect, getProfile)
 router.put('/profile', protect, updateProfile)
-router.put('/update-access', protect, updateAccess)
-router.get('/load-portrait', protect, loadPortrait)
-router.get('/load-background', protect, loadBackground)
 router.post('/upload-portrait', protect, uploadPortrait)
 router.post('/upload-background', protect, uploadBackground)
 
