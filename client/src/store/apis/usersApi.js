@@ -19,7 +19,7 @@ export const usersApi = createApi({
       getProfile: builder.query({
         query: () => {
           return {
-            url: '/profile',
+            url: '/',
             method: 'GET'
           }
         }
@@ -29,7 +29,7 @@ export const usersApi = createApi({
         query: (formData) => {
           console.log('formData: ', formData)
           return {
-            url: 'profile',
+            url: '/',
             method: 'PUT',
             body: formData
           }

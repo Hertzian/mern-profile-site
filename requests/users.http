@@ -14,27 +14,12 @@ Content-Type: application/json
 {
   "name": "updated",
   "lastName": "lastName",
-  "github": "updated githubl",
-  "linkedin": "updated linkedin",
+  "github": "github.com",
+  "linkedin": "linkedin.com",
   "phone": "updated phone",
-  "bio": "updated bio",
+  "bio": "updated biosd",
   "profession": "one, two, three, updated"
 }
-
-### update access for user, back page **require token
-PUT http://localhost:5001/api/users/update-access
-Content-Type: application/json
-
-{
-  token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU3YWE0Mzg1MWQ1MTNmMGRmNzlmNWQiLCJpYXQiOjE2MzQyNTQ2NzMsImV4cCI6MTYzNjg0NjY3M30.kTkeBY1ov_LLh6Sxawy26l_Y7IH0mIgiaB5S2Hw1xIA"
-}
-
-### load portrait image, back page **no idea why this exists lol, **require token
-GET http://localhost:5001/api/users/load-portrait
-
-### load background image, back page **no idea why this exists lol, **require token
-GET http://localhost:5001/api/users/load-background
-
 
 ### upload portrait image, back page **no idea why this exists lol, **require token
 POST http://localhost:5001/api/users/upload-portrait

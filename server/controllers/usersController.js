@@ -68,6 +68,10 @@ exports.updateProfile = async (req, res) => {
     const propsToUpdate = Object.keys(req.body)
 
     for (const prop of propsToUpdate) {
+      if (prop === 'password' && req.body[prop] === '') {
+        continue
+      }
+
       if (req.body[prop]) {
         user[prop] = req.body[prop]
       }

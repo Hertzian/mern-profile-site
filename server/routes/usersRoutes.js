@@ -5,8 +5,9 @@ const { getFrontProfile, getProfile, updateProfile, updateAccess, loadPortrait, 
 
 router.get('/get-front-profile', getFrontProfile)
 // protected routes
-router.get('/profile', protect, getProfile)
-router.put('/profile', protect, updateProfile)
+router
+  .get('/', protect, getProfile)
+  .put('/', protect, updateProfile)
 router.post('/upload-portrait', protect, uploadPortrait)
 router.post('/upload-background', protect, uploadBackground)
 
