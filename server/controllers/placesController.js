@@ -1,10 +1,10 @@
-const { place: Place } = require('../lib/db/models')
+const { Place } = require('../lib/db/models')
 
 // @route   GET /api/places/get-all
 // @access   private
 exports.allPlaces = async (req, res) => {
   try {
-    const places = await Place.find({})
+    const places = await Place.findAll()
     return res.json({ places })
   } catch (err) {
     return res.json(err)
@@ -16,7 +16,7 @@ exports.allPlaces = async (req, res) => {
 exports.getPlace = async (req, res) => {
   try {
     const place = await Place.findByPk(req.params.placeId)
-    return res.json({ place })
+    return res.json(place)
   } catch (err) {
     return res.json(err)
   }
@@ -27,7 +27,7 @@ exports.getPlace = async (req, res) => {
 exports.newPlace = async (req, res) => {
   try {
     const { company, job, year, assignment, show } = req.body
-    const place = await Place.create({ company, job, year, assignment, show })
+    const place = await Place.create({ company, job, year, assignment, show, userId: req.user.id })
     return res.json({ message: 'Place created!', place })
   } catch (err) {
     return res.json(err)
@@ -38,13 +38,17 @@ exports.newPlace = async (req, res) => {
 // @access   private
 exports.updatePlace = async (req, res) => {
   try {
-    const { company, job, year, assignment, show } = req.body
     const place = await Place.findByPk(req.params.placeId)
-    place.company = company || place.company
-    place.job = job || place.job
-    place.year = year || place.year
-    place.assignment = assignment || place.assignment
-    place.show = show || place.show
+    const propsToUpdate = Object.keys(req.body)
+
+    for (const prop of propsToUpdate) {
+      if (req.body[prop]) {
+        place[prop] = req.body[prop]
+      }
+    }
+
+    await place.save()
+
     place.save()
     return res.json({ message: 'Place updated', place })
   } catch (err) {
@@ -57,9 +61,10 @@ exports.updatePlace = async (req, res) => {
 exports.deletePlace = async (req, res) => {
   try {
     const place = await Place.findByPk(req.params.placeId)
-    await place.remove()
-    return res.json({ message: `ALV place ${placeId}` })
+    await place.destroy()
+    return res.json({ message: `ALV place ${req.params.placeId}` })
   } catch (err) {
+    console.log(err)
     return res.json({ err })
   }
 }

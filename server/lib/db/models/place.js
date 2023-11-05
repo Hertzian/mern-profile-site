@@ -4,7 +4,7 @@ const { Model } = require('sequelize')
 
 module.exports = (sequelize, DataTypes) => {
   class Place extends Model {
-    static associate ({ User }) {
+    static associate({ User }) {
       this.belongsTo(User, { foreignKey: 'userId' })
     }
   }
@@ -15,11 +15,30 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       primaryKey: true
     },
-    company: DataTypes.STRING,
-    job: DataTypes.STRING,
+    company: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: 'The company field is required.'
+        },
+      }
+    },
+    job: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: 'The job field is required.'
+        },
+      }
+    },
     year: DataTypes.STRING,
     assignment: DataTypes.STRING,
-    show: DataTypes.BOOLEAN
+    show: {
+      type: DataTypes.BOOLEAN,
+      allowNull: {
+        msg: 'The year field is required.'
+      }
+    }
   }, {
     sequelize,
     timestamps: true,

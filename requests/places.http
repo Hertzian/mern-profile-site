@@ -1,12 +1,16 @@
 ### get all places **require token I guess
-GET http://localhost:5001/api/places/get-all
+GET http://localhost:5001/api/places
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5OTA3Njc3NiwiZXhwIjoxNzAxNjY4Nzc2fQ.1L2HH5DEaf-1HrN287OeLJElfIZ6lQ34lt_VaT2L7AM 
 
 ### get single place
-GET http://localhost:5001/api/places/get-place/:placeId
+GET http://localhost:5001/api/places/7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5OTA3Njc3NiwiZXhwIjoxNzAxNjY4Nzc2fQ.1L2HH5DEaf-1HrN287OeLJElfIZ6lQ34lt_VaT2L7AM 
 
 ### create new place **require token
-POST http://localhost:5001/api/places/new-place
+POST http://localhost:5001/api/places
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5OTA3Njc3NiwiZXhwIjoxNzAxNjY4Nzc2fQ.1L2HH5DEaf-1HrN287OeLJElfIZ6lQ34lt_VaT2L7AM 
 Content-Type: application/json
+
 {
   "company": "test company",
   "job": "test job",
@@ -16,8 +20,10 @@ Content-Type: application/json
 }
 
 ### update existing place **require token
-POST http://localhost:5001/api/places/update-place/:placeId
+PUT http://localhost:5001/api/places/7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5OTA3Njc3NiwiZXhwIjoxNzAxNjY4Nzc2fQ.1L2HH5DEaf-1HrN287OeLJElfIZ6lQ34lt_VaT2L7AM 
 Content-Type: application/json
+
 {
   "company": "update company",
   "job": "update job",
@@ -27,5 +33,5 @@ Content-Type: application/json
 }
 
 ### delete place **require token
-POST http://localhost:5001/api/places/delete-place/:placeId
-
+DELETE http://localhost:5001/api/places/9
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5OTA3Njc3NiwiZXhwIjoxNzAxNjY4Nzc2fQ.1L2HH5DEaf-1HrN287OeLJElfIZ6lQ34lt_VaT2L7AM 
