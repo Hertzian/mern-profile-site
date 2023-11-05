@@ -17,7 +17,7 @@ function ProfileSection(props) {
     const { name, lastName, github, linkedin, phone, bio, profession, ...obj1 } = data
     const { portrait, background, email } = obj1
     images = { portrait, background }
-    access = email
+    access = { email, password: '' }
     profile = { name, lastName, github, linkedin, phone, bio, profession }
   }
 
@@ -25,7 +25,7 @@ function ProfileSection(props) {
     <>
       <AdminPage {...props}>
         <Profile profile={profile} />
-        <Access email={access} />
+        <Access access={access} />
         <MainImages images={images} />
       </AdminPage>
     </>
