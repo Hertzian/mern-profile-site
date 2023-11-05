@@ -60,52 +60,25 @@ exports.getProfile = async (req, res) => {
 // @access   private
 exports.updateProfile = async (req, res) => {
   try {
-    const user = await User.findByPk(req.user.id)
-    const propsToUpdate = ['name', 'lastName', 'github', 'linkedin', 'phone', 'bio', 'profession']
+    const user = await User.findOne({
+      where: { id: req.user.id },
+      attributes: { exclude: 'password' }
+    })
 
-    propsToUpdate.forEach((prop) => {
+    const propsToUpdate = Object.keys(req.body)
+
+    for (const prop of propsToUpdate) {
       if (req.body[prop]) {
         user[prop] = req.body[prop]
       }
-    })
+    }
 
     await user.save()
 
-    return res.json({ user })
+    return res.json(user)
   } catch (err) {
     res.json({ error: err })
   }
-}
-
-// @route   PUT /api/users/update-access
-// @access  private
-exports.updateAccess = async (req, res) => {
-  try {
-    const { email, password } = req.body
-    const user = await User.findByPk(req.user.id)
-
-    user.email = email || user.email
-    user.password = password || user.password
-
-    user.save()
-    return res.json({ email: user.email, user: user.password })
-  } catch (err) {
-    return res.json({ error: err })
-  }
-}
-
-// @route   GET /api/users/load-portrait
-// @access  private
-exports.loadPortrait = async (req, res) => {
-  const user = req.user
-  return res.json({ image: user.portrait })
-}
-
-// @route   GET /api/users/background
-// @access  private
-exports.loadBackground = async (req, res) => {
-  const user = req.user
-  return res.json({ image: user.background })
 }
 
 // @route   POST /api/users/upload-portrait
