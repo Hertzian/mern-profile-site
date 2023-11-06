@@ -17,7 +17,7 @@ function PlaceRow({ place, updateFn, deleteFn }) {
       <td>{showIcon}</td>
       <td>
         <ButtonOpenModal target={`update-place-${id}`} color='primary mr-2' label='Update' />
-        <PlaceModal target={`update-place-${id}`} isUpdate={true} placeId={id} addUpdatePlace={updateFn} />
+        <PlaceModal target={`update-place-${id}`} isUpdate={true} addUpdatePlace={updateFn} placeData={place} />
         <ButtonOpenModal target={`delete-place-${id}`} color='danger mr-2' label='X' />
         <ConfirmModal confirmFunction={deleteFn} itemId={id} target={`delete-place-${id}`} />
       </td>

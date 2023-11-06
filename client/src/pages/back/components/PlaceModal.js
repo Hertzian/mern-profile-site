@@ -1,28 +1,38 @@
 import { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import handleAll from '../../../utils/handleAll'
 import closeModal from '../../../utils/closeModal'
-import { useGetSinglePlaceQuery, useUpdatePlaceMutation } from '../../../store'
+import { useUpdatePlaceMutation, updateStatePlace } from '../../../store'
 
-const initialState = {
-  id: '',
-  company: '',
-  job: '',
-  year: '',
-  assignment: '',
-  show: false
-}
+function PlaceModal({ target, isUpdate, addUpdatePlace, placeData }) {
+  const initialState = {
+    id: '',
+    company: '',
+    job: '',
+    year: '',
+    assignment: '',
+    show: false
+  }
 
-function PlaceModal({ target, isUpdate, addUpdatePlace, placeId }) {
   const [place, setPlace] = useState(initialState)
+
+  const dispatch = useDispatch()
+  const [updatePlace] = useUpdatePlaceMutation()
+
+  useEffect(() => {
+    if (placeData) {
+      setPlace(placeData)
+    }
+  }, [placeData])
 
   const handleChange = (e) => handleAll(e, { st: place, setSt: setPlace })
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (placeId) {
-      await addUpdatePlace(place)
+    if (placeData.id) {
+      const updatedPlace = await updatePlace(place)
+      dispatch(updateStatePlace(updatedPlace.data))
     }
 
     if (!isUpdate) {

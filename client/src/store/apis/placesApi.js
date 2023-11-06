@@ -23,16 +23,6 @@ export const placesApi = createApi({
         providesTags: ['Place']
       }),
 
-      getSinglePlace: builder.query({
-        query: (place) => {
-          return {
-            url: `/${place.id}`,
-            method: 'GET'
-          }
-        },
-        providesTags: ['Place']
-      }),
-
       createPlace: builder.mutation({
         query: (place) => {
           return {
