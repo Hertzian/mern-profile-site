@@ -35,9 +35,7 @@ module.exports = (sequelize, DataTypes) => {
     assignment: DataTypes.STRING,
     show: {
       type: DataTypes.BOOLEAN,
-      allowNull: {
-        msg: 'The year field is required.'
-      }
+      defaultValue: false
     }
   }, {
     sequelize,

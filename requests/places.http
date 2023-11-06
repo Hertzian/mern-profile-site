@@ -3,7 +3,7 @@ GET http://localhost:5001/api/places
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5OTA3Njc3NiwiZXhwIjoxNzAxNjY4Nzc2fQ.1L2HH5DEaf-1HrN287OeLJElfIZ6lQ34lt_VaT2L7AM 
 
 ### get single place
-GET http://localhost:5001/api/places/7
+GET http://localhost:5001/api/places/62
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5OTA3Njc3NiwiZXhwIjoxNzAxNjY4Nzc2fQ.1L2HH5DEaf-1HrN287OeLJElfIZ6lQ34lt_VaT2L7AM 
 
 ### create new place **require token
@@ -20,7 +20,7 @@ Content-Type: application/json
 }
 
 ### update existing place **require token
-PUT http://localhost:5001/api/places/7
+PUT http://localhost:5001/api/places/62
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5OTA3Njc3NiwiZXhwIjoxNzAxNjY4Nzc2fQ.1L2HH5DEaf-1HrN287OeLJElfIZ6lQ34lt_VaT2L7AM 
 Content-Type: application/json
 
@@ -29,7 +29,7 @@ Content-Type: application/json
   "job": "update job",
   "year": "1900",
   "assignment": "update assignment",
-  "show": true
+  "show": true 
 }
 
 ### delete place **require token

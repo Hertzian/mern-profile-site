@@ -42,14 +42,17 @@ exports.updatePlace = async (req, res) => {
     const propsToUpdate = Object.keys(req.body)
 
     for (const prop of propsToUpdate) {
+      if (prop === 'id') continue
       if (req.body[prop]) {
+        place[prop] = req.body[prop]
+      }
+      if (typeof req.body[prop] === 'boolean') {
         place[prop] = req.body[prop]
       }
     }
 
     await place.save()
 
-    place.save()
     return res.json({ message: 'Place updated', place })
   } catch (err) {
     return res.json({ err })
