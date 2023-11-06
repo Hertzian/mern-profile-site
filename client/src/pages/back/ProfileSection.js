@@ -1,13 +1,20 @@
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import Profile from './components/Profile'
 import Access from './components/Access'
 import MainImages from './components/MainImages' // pending component
 import AdminPage from './AdminPage'
-import { useGetProfileQuery } from '../../store'
+import { useGetProfileQuery, setStateProfile } from '../../store'
 
 function ProfileSection(props) {
+  const dispatch = useDispatch()
   const { data,
     //  isFetching 
   } = useGetProfileQuery()
+
+  useEffect(() => {
+    dispatch(setStateProfile(data))
+  })
 
   let profile = null
   let images = null

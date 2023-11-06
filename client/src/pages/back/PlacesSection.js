@@ -1,68 +1,68 @@
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import AdminPage from './AdminPage'
 import Card from './components/Card'
+import {
+  setStateAllPlaces, useGetAllPlacesQuery, setStateNewPlace,
+  useCreatePlaceMutation, useDeletePlaceMutation, deleteStatePlace
+} from '../../store'
+import PlaceRow from './placesPage/PlaceRow'
 import ButtonOpenModal from './components/ButtonOpenModal'
 import PlaceModal from './components/PlaceModal'
-import ConfirmModal from './components/ConfirmModal'
-import { dummyData } from '../../config/dummyEndpoints'
+import Loader from './components/Loader'
+
 
 function PlacesSection(props) {
-  const newPlace = () => { }
-  const updatePlace = () => { }
-  const deletePlace = () => { }
-
-  const places = dummyData.places.map((place) => {
-    const { id, company, year, assignment, show } = place
-
-    const showIcon = show === 'yes'
-      ? (<td className='text-success'> <i className='far fa-check-circle fa-2x'></i> </td>)
-      : (<td className='text-danger'> <i className='far fa-times-circle fa-2x'></i> </td>)
-
-    return (
-      <tr key={id}>
-        <td>{company}</td>
-        <td>{assignment}</td>
-        <td>{year}</td>
-        {showIcon}
-        <td>
-          <ButtonOpenModal
-            target={`update-place-${id}`}
-            color='primary mr-2'
-            label='Update'
-          />
-          <PlaceModal
-            target={`update-place-${id}`}
-            isModify={true}
-            placeId={id}
-            addUpdatePlace={updatePlace}
-          />
-          <ButtonOpenModal
-            target={`delete-place-${id}`}
-            color='danger mr-2'
-            label='X'
-          />
-          <ConfirmModal
-            confirmFunction={deletePlace}
-            itemId={id}
-            target={`delete-place-${id}`}
-          />
-        </td>
-      </tr>
-    )
+  const dispatch = useDispatch()
+  const [createPlace] = useCreatePlaceMutation()
+  const [deletePlace] = useDeletePlaceMutation()
+  const { data, isLoading, isError } = useGetAllPlacesQuery()
+  const placesState = useSelector(({ placesSlice }) => {
+    return placesSlice.places
   })
+
+  useEffect(() => {
+    if (data) {
+      dispatch(setStateAllPlaces(data.places))
+    }
+  }, [dispatch, data])
+
+  const handleNew = async (newPlace) => {
+    const placeAdded = await createPlace(newPlace)
+    dispatch(setStateNewPlace(placeAdded.data))
+  }
+
+  const handleUpdate = () => { }
+
+  const handleDelete = async (placeId) => {
+    const placeDeleted = await deletePlace(placeId)
+    dispatch(deleteStatePlace(placeDeleted.data))
+  }
+
+  const places = placesState
+    ? placesState.map((place) => {
+      return (
+        <PlaceRow
+          key={place.id}
+          place={place}
+          updateFn={handleUpdate}
+          deleteFn={handleDelete}
+          data={place}
+        />
+      )
+    }
+    )
+    : null
+
+  if (isLoading) { return <Loader /> }
+
+  if (isError) { return <div>Error loading data.</div> }
 
   return (
     <AdminPage {...props}>
       <Card header={'Places'}>
-        <ButtonOpenModal
-          target='new-place'
-          color='primary mb-2'
-          label='New place'
-        />
-        <PlaceModal
-          target='new-place'
-          isModify={false}
-          addUpdatePlace={newPlace}
-        />
+        <ButtonOpenModal target='new-place' color='primary mb-2' label='New place' />
+        <PlaceModal target='new-place' isUpdate={false} addUpdatePlace={handleNew} />
         <table className='table table-bordered'>
           <thead>
             <tr>
