@@ -60,9 +60,10 @@ exports.updatePlace = async (req, res) => {
 // @access   private
 exports.deletePlace = async (req, res) => {
   try {
-    const place = await Place.findByPk(req.params.placeId)
+    const placeId = req.params.placeId
+    const place = await Place.findByPk(placeId)
     await place.destroy()
-    return res.json({ message: `ALV place ${req.params.placeId}` })
+    return res.json({ place: placeId, message: `ALV place ${req.params.placeId}` })
   } catch (err) {
     console.log(err)
     return res.json({ err })
