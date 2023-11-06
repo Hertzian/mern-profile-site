@@ -42,7 +42,9 @@ export const placesApi = createApi({
             body: place
           }
         },
-        invalidatesTags: [{ type: 'Place' }]
+        invalidatesTags: (result, error, place) => {
+          return [{ type: 'Place', id: place.id }]
+        }
       }),
 
       deletePlace: builder.mutation({

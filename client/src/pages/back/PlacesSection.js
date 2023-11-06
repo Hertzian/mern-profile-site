@@ -4,7 +4,8 @@ import AdminPage from './AdminPage'
 import Card from './components/Card'
 import {
   setStateAllPlaces, useGetAllPlacesQuery, setStateNewPlace,
-  useCreatePlaceMutation, useDeletePlaceMutation, deleteStatePlace
+  useCreatePlaceMutation, useDeletePlaceMutation, deleteStatePlace,
+  useUpdatePlaceMutation, updateStatePlace
 } from '../../store'
 import PlaceRow from './placesPage/PlaceRow'
 import ButtonOpenModal from './components/ButtonOpenModal'
@@ -16,10 +17,9 @@ function PlacesSection(props) {
   const dispatch = useDispatch()
   const [createPlace] = useCreatePlaceMutation()
   const [deletePlace] = useDeletePlaceMutation()
+  const [updatePlace] = useUpdatePlaceMutation()
   const { data, isLoading, isError } = useGetAllPlacesQuery()
-  const placesState = useSelector(({ placesSlice }) => {
-    return placesSlice.places
-  })
+  const placesState = useSelector(({ placesSlice }) => placesSlice.places)
 
   useEffect(() => {
     if (data) {
@@ -32,7 +32,10 @@ function PlacesSection(props) {
     dispatch(setStateNewPlace(placeAdded.data))
   }
 
-  const handleUpdate = () => { }
+  const handleUpdate = async (place) => {
+    const updatedPlace = await updatePlace(place)
+    dispatch(updateStatePlace(updatedPlace.data))
+  }
 
   const handleDelete = async (placeId) => {
     const placeDeleted = await deletePlace(placeId)

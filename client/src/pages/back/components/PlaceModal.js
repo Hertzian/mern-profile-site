@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
 import handleAll from '../../../utils/handleAll'
 import closeModal from '../../../utils/closeModal'
-import { useUpdatePlaceMutation, updateStatePlace } from '../../../store'
 
 function PlaceModal({ target, isUpdate, addUpdatePlace, placeData }) {
   const initialState = {
@@ -16,9 +14,6 @@ function PlaceModal({ target, isUpdate, addUpdatePlace, placeData }) {
 
   const [place, setPlace] = useState(initialState)
 
-  const dispatch = useDispatch()
-  const [updatePlace] = useUpdatePlaceMutation()
-
   useEffect(() => {
     if (placeData) {
       setPlace(placeData)
@@ -31,8 +26,7 @@ function PlaceModal({ target, isUpdate, addUpdatePlace, placeData }) {
     e.preventDefault()
 
     if (placeData.id) {
-      const updatedPlace = await updatePlace(place)
-      dispatch(updateStatePlace(updatedPlace.data))
+      await addUpdatePlace(place)
     }
 
     if (!isUpdate) {
