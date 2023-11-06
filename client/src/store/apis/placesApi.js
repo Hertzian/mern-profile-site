@@ -43,7 +43,7 @@ export const placesApi = createApi({
           }
         },
         invalidatesTags: (result, error, place) => {
-          return [{ type: 'Place', id: place.id }]
+          return [{ type: 'Place', id: place.id, show: place.show }]
         }
       }),
 

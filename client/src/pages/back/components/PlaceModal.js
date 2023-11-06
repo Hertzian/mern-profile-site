@@ -4,7 +4,6 @@ import closeModal from '../../../utils/closeModal'
 
 function PlaceModal({ target, isUpdate, addUpdatePlace, placeData }) {
   const initialState = {
-    id: '',
     company: '',
     job: '',
     year: '',
@@ -25,7 +24,7 @@ function PlaceModal({ target, isUpdate, addUpdatePlace, placeData }) {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (placeData.id) {
+    if (placeData) {
       await addUpdatePlace(place)
     }
 
@@ -82,25 +81,13 @@ function PlaceModal({ target, isUpdate, addUpdatePlace, placeData }) {
                 <textarea value={place.assignment} onChange={handleChange} name='assignment' className='form-control' cols='20' rows='3' />
 
               </div>
-              <div className='form-group'>
 
-                <label htmlFor='show'>Do you want to show</label>
-                <div className='form-check'>
-                  <input value={true} onChange={handleChange} name='show' checked={place.show === true} className='form-check-input' type='radio' />
-                  <label className='form-check-label' htmlFor='yes'> Yes </label>
-                </div>
-
-                <div className='form-check'>
-                  <input value={false} onChange={handleChange} name='show' checked={place.show === false} className='form-check-input' type='radio' />
-                  <label className='form-check-label' htmlFor='yes'> Nope </label>
-                </div>
-
-              </div>
             </div>
-            <div className='modal-footer'>
 
+            <div className='modal-footer'>
               <button type='button' className='btn btn-secondary' data-dismiss='modal' >Close</button>
-              <button type='submit' className='btn btn-primary'>Save</button></div>
+              <button type='submit' className='btn btn-primary'>Save</button>
+            </div>
 
           </form>
         </div>
