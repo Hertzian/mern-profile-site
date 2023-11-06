@@ -3,7 +3,7 @@ import AdminMenu from './partials/AdminMenu'
 import AdminNav from './partials/AdminNav'
 import '../../styles/tables.css'
 import '../../styles/back.css'
-
+import { Outlet } from 'react-router-dom'
 
 const AdminPage = (props) => {
   const user = {}
@@ -16,10 +16,12 @@ const AdminPage = (props) => {
       <AdminNav
         {...props}
         menuState={handleMenu}
-        name={user && `${user.name} ${user.lastname}`}
+        userName={user && `${user.name} ${user.lastname}`}
       />
       <AdminMenu name={user && `${user.name} ${user.lastname}`}>
-        {props.children}
+
+        <Outlet />
+
       </AdminMenu>
     </div>
   )

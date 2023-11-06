@@ -6,11 +6,6 @@ export const frontMenu = [
   { label: 'Projects', refe: '/#projects' },
   { label: 'Contact', refe: '/#contact' },
   { label: 'Admin', refe: '/mamalon/login' },
-
-  { label: '- profile', refe: '/admin/profile' },
-  { label: '- places', refe: '/admin/places' },
-  { label: '- skills', refe: '/admin/skills' },
-  { label: '- projects', refe: '/admin/projects' },
 ]
 
 export const adminMenu = [

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-const AdminNav = (props) => {
+const AdminNav = ({ userName, menuState }) => {
   const [isOpen, setIsOpen] = useState(false)
   const dispatch = useDispatch()
 
@@ -18,12 +18,12 @@ const AdminNav = (props) => {
       <button
         className='btn btn-link btn-sm order-1 order-lg-0'
         id='sidebarToggle'
-        onClick={props.menuState}
+        onClick={menuState}
       >
         <i className='fas fa-bars' />
       </button>
       <div className='d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0' />
-      {props.name && (<span className='navbar-nav text-light'> Welcome {props.name} </span>)}
+      {userName && (<span className='navbar-nav text-light'> Welcome {userName} </span>)}
       <ul className='navbar-nav ml-auto ml-md-0'>
         <li className='nav-item dropdown'>
           <span

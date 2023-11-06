@@ -68,7 +68,7 @@ function ProjectsSection(props) {
       )
     })
   return (
-    <AdminPage {...props}>
+    <>
       <Card header={'Projects'}>
         <ButtonOpenModal
           target='new-project'
@@ -93,7 +93,7 @@ function ProjectsSection(props) {
           <tbody>{projectsRender}</tbody>
         </table>
       </Card>
-    </AdminPage>
+    </>
   )
 }
 

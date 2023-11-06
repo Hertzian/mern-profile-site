@@ -51,7 +51,7 @@ function SkillsSection(props) {
   })
 
   return (
-    <AdminPage {...props}>
+    <>
       <Card header={'Skills'}>
         <ButtonOpenModal
           target='new-skill'
@@ -76,7 +76,7 @@ function SkillsSection(props) {
           <tbody>{skills}</tbody>
         </table>
       </Card>
-    </AdminPage>
+    </>
   )
 }
 

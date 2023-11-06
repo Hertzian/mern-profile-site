@@ -62,7 +62,7 @@ function PlacesSection(props) {
   if (isError) { return <div>Error loading data.</div> }
 
   return (
-    <AdminPage {...props}>
+    <>
       <Card header={'Places'}>
         <ButtonOpenModal target='new-place' color='primary mb-2' label='New place' />
         <PlaceModal target='new-place' isUpdate={false} addUpdatePlace={handleNew} />
@@ -79,7 +79,7 @@ function PlacesSection(props) {
           <tbody>{places}</tbody>
         </table>
       </Card>
-    </AdminPage>
+    </>
   )
 }
 

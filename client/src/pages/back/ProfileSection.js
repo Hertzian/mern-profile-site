@@ -30,11 +30,9 @@ function ProfileSection(props) {
 
   return (
     <>
-      <AdminPage {...props}>
-        <Profile profile={profile} />
-        <Access access={access} />
-        <MainImages images={images} />
-      </AdminPage>
+      <Profile profile={profile} />
+      <Access access={access} />
+      <MainImages images={images} />
     </>
   )
 }
