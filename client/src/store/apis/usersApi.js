@@ -27,7 +27,6 @@ export const usersApi = createApi({
 
       updateProfile: builder.mutation({
         query: (formData) => {
-          console.log('formData: ', formData)
           return {
             url: '/',
             method: 'PUT',
