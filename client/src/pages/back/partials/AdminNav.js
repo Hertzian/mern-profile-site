@@ -1,15 +1,14 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-const AdminNav = ({ userName, menuState }) => {
+const AdminNav = ({ userName, menuState, logoutFn }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const dispatch = useDispatch()
 
   const toggleOpen = () => setIsOpen(!isOpen)
 
-  const handleLogout = () => {
-    console.log('logout carnal')
+  let renderUserName = ''
+  if (userName) {
+    renderUserName = <span className='navbar-nav text-light'> Welcome {userName} </span>
   }
 
   return (
@@ -23,7 +22,9 @@ const AdminNav = ({ userName, menuState }) => {
         <i className='fas fa-bars' />
       </button>
       <div className='d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0' />
-      {userName && (<span className='navbar-nav text-light'> Welcome {userName} </span>)}
+
+      {renderUserName}
+
       <ul className='navbar-nav ml-auto ml-md-0'>
         <li className='nav-item dropdown'>
           <span
@@ -34,7 +35,7 @@ const AdminNav = ({ userName, menuState }) => {
             <i className='fas fa-user fa-fw' />
           </span>
           <div className={`dropdown-menu dropdown-menu-right ${isOpen && 'show'}`} >
-            <button onClick={handleLogout} className='dropdown-item'> Logout </button>
+            <button onClick={logoutFn} className='dropdown-item'> Logout </button>
           </div>
         </li>
       </ul>

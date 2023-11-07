@@ -1,10 +1,13 @@
+import { siteName } from "../../../config/menuConfig"
+import { thisYear } from "../../../utils/thisYear"
+
 const Footer = ({ name, lastname, github, linkedin }) => {
-  const date = new Date().getFullYear()
+  const date = thisYear()
 
   return (
     <footer className='footer'>
       <p className='footer-link'>
-        {name} {lastname} Copyright &copy; {date}
+        {siteName} Copyright &copy; {date}
       </p>
       <ul className='social-list'>
         <li className='social-list__item'>

@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom"
 import { FaArrowLeft } from "react-icons/fa"
+import { siteName } from "../config/menuConfig"
+import { thisYear } from "../utils/thisYear"
 
 function ErrorPage() {
+  const date = thisYear()
+
   return (
     <div id="layoutError">
       <div id="layoutError_content">
@@ -23,7 +27,7 @@ function ErrorPage() {
         <footer className="py-4 bg-light mt-auto">
           <div className="container-fluid px-4">
             <div className="d-flex align-items-center justify-content-between small">
-              <div className="text-muted">Copyright &copy; Your Website 2023</div>
+              <div className="text-muted">Copyright &copy; {siteName} {date}</div>
               <div>
                 <a href="#">Privacy Policy</a>
                 &middot;

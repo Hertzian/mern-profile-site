@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import AdminPage from './AdminPage'
 import Card from './components/Card'
 import ProjectModal from './components/ProjectModal'
 import ButtonOpenModal from './components/ButtonOpenModal'

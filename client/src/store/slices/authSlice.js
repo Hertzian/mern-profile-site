@@ -9,9 +9,14 @@ const authSlice = createSlice({
     setLoginCredentials: (state, { payload }) => {
       localStorage.setItem('token', payload.token)
       state.token = payload.token
+    },
+
+    logout: (state, actions) => {
+      localStorage.removeItem('token')
+      state.token = ''
     }
   }
 })
 
-export const { setLoginCredentials } = authSlice.actions
+export const { setLoginCredentials, logout } = authSlice.actions
 export const authReducer = authSlice.reducer

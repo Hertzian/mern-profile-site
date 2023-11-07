@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import AdminPage from './AdminPage'
 import Card from './components/Card'
 import {
   setStateAllPlaces, useGetAllPlacesQuery, setStateNewPlace,

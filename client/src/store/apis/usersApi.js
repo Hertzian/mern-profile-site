@@ -22,7 +22,8 @@ export const usersApi = createApi({
             url: '/',
             method: 'GET'
           }
-        }
+        },
+        providesTags: ['User']
       }),
 
       updateProfile: builder.mutation({
@@ -32,7 +33,8 @@ export const usersApi = createApi({
             method: 'PUT',
             body: formData
           }
-        }
+        },
+        invalidatesTags: [{ type: 'Place' }]
       })
 
     }

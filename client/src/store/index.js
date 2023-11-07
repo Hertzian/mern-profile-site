@@ -6,7 +6,7 @@ import { authApi } from './apis/authApi'
 import { usersApi } from './apis/usersApi'
 import { placesApi } from './apis/placesApi'
 
-import { authReducer, setLoginCredentials } from './slices/authSlice'
+import { authReducer, setLoginCredentials, logout } from './slices/authSlice'
 import { usersReducer, updateStateProfile, setStateProfile } from './slices/usersSlice'
 import { placesReducer, setStateAllPlaces, setStateNewPlace, updateStatePlace, deleteStatePlace } from './slices/placesSlice'
 
@@ -32,7 +32,7 @@ export const store = configureStore({
 setupListeners(store.dispatch)
 
 export {
-  setLoginCredentials,
+  setLoginCredentials, logout,
   updateStateProfile, setStateProfile,
   setStateAllPlaces, setStateNewPlace, updateStatePlace, deleteStatePlace,
 }

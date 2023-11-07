@@ -5,7 +5,7 @@ import AdminFooter from './partials/AdminFooter'
 import Alert from './components/Alert'
 import '../../styles/back.css'
 import { useLoginMutation, setLoginCredentials } from '../../store'
-
+import { siteName } from '../../config/menuConfig'
 
 const Login = () => {
   const dispatch = useDispatch()
@@ -85,7 +85,7 @@ const Login = () => {
         </main >
       </div >
       <div id='layoutAuthentication_footer'>
-        <AdminFooter />
+        <AdminFooter siteName={siteName} />
       </div>
     </div >
   )
