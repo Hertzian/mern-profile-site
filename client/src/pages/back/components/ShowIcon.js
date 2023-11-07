@@ -1,27 +1,22 @@
-import { useEffect, useState } from "react"
 import { FaTimes, FaCheck } from "react-icons/fa"
 
-function ShowIcon({ updateFn, placeData }) {
+function ShowIcon({ updateFn, itemData }) {
   const handleClick = async () => {
-    const updatePlace = {
-      ...placeData,
-      show: !placeData.show
+    const updateItem = {
+      ...itemData,
+      show: !itemData.show
     }
-    await updateFn(updatePlace)
+    await updateFn(updateItem)
   }
 
-  const showIcon = placeData.show
-    ? <FaCheck size={'30px'} color="green" />
-    : <FaTimes size={'30px'} color="red" />
+  let showIcon
+  if (itemData) {
+    showIcon = itemData.show
+      ? <FaCheck size={'30px'} color="green" />
+      : <FaTimes size={'30px'} color="red" />
+  }
 
-  return (
-    <>
-      <div onClick={handleClick}>
-        {showIcon}
-        {/* <i className={showIcon} /> */}
-      </div>
-    </>
-  )
+  return <div onClick={handleClick}>{showIcon}</div>
 }
 
 export default ShowIcon
