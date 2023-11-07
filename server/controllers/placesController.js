@@ -1,23 +1,13 @@
 const { Place } = require('../lib/db/models')
 
-// @route   GET /api/places/get-all
+// @route   GET /api/places
 // @access   private
 exports.allPlaces = async (req, res) => {
   try {
     const places = await Place.findAll()
     return res.json({ places })
   } catch (err) {
-    return res.json(err)
-  }
-}
-
-// @route   GET /api/places/get-place/:placeId
-// @access   private
-exports.getPlace = async (req, res) => {
-  try {
-    const place = await Place.findByPk(req.params.placeId)
-    return res.json(place)
-  } catch (err) {
+    console.log(err)
     return res.json(err)
   }
 }
@@ -28,13 +18,14 @@ exports.newPlace = async (req, res) => {
   try {
     const { company, job, year, assignment, show } = req.body
     const place = await Place.create({ company, job, year, assignment, show, userId: req.user.id })
-    return res.json({ message: 'Place created!', place })
+    return res.json({ msg: 'Place created!', place })
   } catch (err) {
+    console.log(err)
     return res.json(err)
   }
 }
 
-// @route   PUT /api/places/update-place/:placeId
+// @route   PUT /api/places/:placeId
 // @access   private
 exports.updatePlace = async (req, res) => {
   try {
@@ -53,13 +44,14 @@ exports.updatePlace = async (req, res) => {
 
     await place.save()
 
-    return res.json({ message: 'Place updated', place })
+    return res.json({ msg: 'Place updated', place })
   } catch (err) {
+    console.log(err)
     return res.json({ err })
   }
 }
 
-// @route   DELETE /api/places/delete-place/:placeId
+// @route   DELETE /api/places/:placeId
 // @access   private
 exports.deletePlace = async (req, res) => {
   try {

@@ -7,7 +7,6 @@ router
   .get('/', protect, allPlaces)
   .post('/', protect, newPlace)
 router
-  .get('/:placeId', protect, getPlace)
   .put('/:placeId', protect, updatePlace)
   .delete('/:placeId', protect, deletePlace)
 
