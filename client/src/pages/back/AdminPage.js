@@ -24,9 +24,7 @@ const AdminPage = (props) => {
 
   const handleMenu = () => setOpenMenu(!openMenu)
 
-  const handleLogout = () => {
-    dispatch(logout())
-  }
+  const handleLogout = () => dispatch(logout())
 
   return (
     <div className={`sb-nav-fixed ${!openMenu && 'sb-sidenav-toggled'}`}>

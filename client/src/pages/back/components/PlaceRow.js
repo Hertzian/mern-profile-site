@@ -1,7 +1,7 @@
-import ButtonOpenModal from '../components/ButtonOpenModal'
-import PlaceModal from '../components/PlaceModal'
-import ConfirmModal from '../components/ConfirmModal'
-import ShowIcon from '../components/ShowIcon'
+import ButtonOpenModal from './ButtonOpenModal'
+import PlaceModal from './PlaceModal'
+import ConfirmModal from './ConfirmModal'
+import ShowIcon from './ShowIcon'
 
 function PlaceRow({ place, updateFn, deleteFn }) {
   const { id, company, assignment, year } = place
@@ -12,11 +12,11 @@ function PlaceRow({ place, updateFn, deleteFn }) {
       <td>{assignment}</td>
       <td>{year}</td>
       <td>
-        <ShowIcon updateFn={updateFn} placeData={place} />
+        <ShowIcon updateFn={updateFn} itemData={place} />
       </td>
       <td>
         <ButtonOpenModal target={`update-place-${id}`} color='primary mr-2' label='Update' />
-        <PlaceModal target={`update-place-${id}`} isUpdate={true} addUpdatePlace={updateFn} placeData={place} />
+        <PlaceModal target={`update-place-${id}`} isUpdate={true} addUpdate={updateFn} placeData={place} />
         <ButtonOpenModal target={`delete-place-${id}`} color='danger mr-2' label='X' />
         <ConfirmModal confirmFunction={deleteFn} itemId={id} target={`delete-place-${id}`} />
       </td>

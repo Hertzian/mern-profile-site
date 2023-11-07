@@ -2,11 +2,14 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Card from './components/Card'
 import {
-  setStateAllPlaces, useGetAllPlacesQuery, setStateNewPlace,
-  useCreatePlaceMutation, useDeletePlaceMutation, deleteStatePlace,
-  useUpdatePlaceMutation, updateStatePlace
+  // state handlers
+  setStateAllPlaces, setStateNewPlace,
+  deleteStatePlace, updateStatePlace,
+  // api handlers
+  useGetPlacesQuery, useCreatePlaceMutation,
+  useDeletePlaceMutation, useUpdatePlaceMutation
 } from '../../store'
-import PlaceRow from './placesPage/PlaceRow'
+import PlaceRow from './components/PlaceRow'
 import ButtonOpenModal from './components/ButtonOpenModal'
 import PlaceModal from './components/PlaceModal'
 import Loader from './components/Loader'
@@ -14,10 +17,10 @@ import Loader from './components/Loader'
 
 function PlacesSection(props) {
   const dispatch = useDispatch()
+  const { data, isLoading, isError } = useGetPlacesQuery()
   const [createPlace] = useCreatePlaceMutation()
-  const [deletePlace] = useDeletePlaceMutation()
   const [updatePlace] = useUpdatePlaceMutation()
-  const { data, isLoading, isError } = useGetAllPlacesQuery()
+  const [deletePlace] = useDeletePlaceMutation()
   const placesState = useSelector(({ placesSlice }) => placesSlice.places)
 
   useEffect(() => {
@@ -26,7 +29,7 @@ function PlacesSection(props) {
     }
   }, [dispatch, data])
 
-  const handleNew = async (newPlace) => {
+  const handleCreate = async (newPlace) => {
     const placeAdded = await createPlace(newPlace)
     dispatch(setStateNewPlace(placeAdded.data))
   }
@@ -49,7 +52,6 @@ function PlacesSection(props) {
           place={place}
           updateFn={handleUpdate}
           deleteFn={handleDelete}
-          data={place}
         />
       )
     }
@@ -63,8 +65,8 @@ function PlacesSection(props) {
   return (
     <>
       <Card header={'Places'}>
-        <ButtonOpenModal target='new-place' color='primary mb-2' label='New place' />
-        <PlaceModal target='new-place' isUpdate={false} addUpdatePlace={handleNew} />
+        <ButtonOpenModal target='new-place' color='primary mb-2' label='New Place' />
+        <PlaceModal target='new-place' isUpdate={false} addUpdate={handleCreate} />
         <table className='table table-bordered'>
           <thead>
             <tr>

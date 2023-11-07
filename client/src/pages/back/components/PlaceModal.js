@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import handleAll from '../../../utils/handleAll'
 import closeModal from '../../../utils/closeModal'
 
-function PlaceModal({ target, isUpdate, addUpdatePlace, placeData }) {
+function PlaceModal({ target, isUpdate, addUpdate, placeData }) {
   const initialState = {
     company: '',
     job: '',
@@ -21,15 +21,15 @@ function PlaceModal({ target, isUpdate, addUpdatePlace, placeData }) {
 
   const handleChange = (e) => handleAll(e, { st: place, setSt: setPlace })
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
 
     if (placeData) {
-      await addUpdatePlace(place)
+      addUpdate(place)
     }
 
     if (!isUpdate) {
-      await addUpdatePlace(place)
+      addUpdate(place)
 
       const clearSt = {}
       for (const prop in place) {

@@ -1,11 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
+import getToken from "../../utils/getToken"
 
 export const placesApi = createApi({
   reducerPath: 'placesApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:5001/api/places',
     prepareHeaders: (headers, { getState }) => {
-      const token = localStorage.getItem('token')
+      const token = getToken()
       if (token) headers.set('authorization', `Bearer ${token}`)
     }
   }),
@@ -13,7 +14,7 @@ export const placesApi = createApi({
   endpoints: (builder) => {
     return {
 
-      getAllPlaces: builder.query({
+      getPlaces: builder.query({
         query: () => {
           return {
             url: '/',
@@ -62,8 +63,7 @@ export const placesApi = createApi({
 })
 
 export const {
-  useGetAllPlacesQuery,
-  useGetSinglePlaceQuery,
+  useGetPlacesQuery,
   useCreatePlaceMutation,
   useUpdatePlaceMutation,
   useDeletePlaceMutation

@@ -34,7 +34,7 @@ export const usersApi = createApi({
             body: formData
           }
         },
-        invalidatesTags: [{ type: 'Place' }]
+        invalidatesTags: [{ type: 'User' }]
       })
 
     }
