@@ -1,5 +1,6 @@
 import { siteName } from "../../../config/menuConfig"
 import { thisYear } from "../../../utils/thisYear"
+import { FaGithub, FaLinkedin } from "react-icons/fa"
 
 const Footer = ({ name, lastname, github, linkedin }) => {
   const date = thisYear()
@@ -12,12 +13,12 @@ const Footer = ({ name, lastname, github, linkedin }) => {
       <ul className='social-list'>
         <li className='social-list__item'>
           <a href={github} className='social-list__link'>
-            <i className='fab fa-github' />
+            <FaGithub size={'40px'} />
           </a>
         </li>
         <li className='social-list__item'>
           <a href={linkedin} className='social-list__link'>
-            <i className='fab fa-linkedin-in' />
+            <FaLinkedin size={'40px'} />
           </a>
         </li>
       </ul>

@@ -5,12 +5,9 @@ import { siteName } from '../../../config/menuConfig'
 
 const AdminMenu = ({ children, name }) => {
   const sideItems = adminMenu.map((item, idx) => (
-    <AdminSideBarItem
-      key={idx}
-      label={item.label}
-      icon={item.icon}
-      route={item.route}
-    />
+    <AdminSideBarItem key={idx} label={item.label} route={item.route}>
+      {item.icon}
+    </AdminSideBarItem>
   ))
 
   return (

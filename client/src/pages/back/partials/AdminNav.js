@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { FaBars, FaUserAlt } from "react-icons/fa"
 
 const AdminNav = ({ userName, menuState, logoutFn }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -19,7 +20,7 @@ const AdminNav = ({ userName, menuState, logoutFn }) => {
         id='sidebarToggle'
         onClick={menuState}
       >
-        <i className='fas fa-bars' />
+        <FaBars />
       </button>
       <div className='d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0' />
 
@@ -32,7 +33,7 @@ const AdminNav = ({ userName, menuState, logoutFn }) => {
             id='userDropdown'
             onClick={toggleOpen}
           >
-            <i className='fas fa-user fa-fw' />
+            <FaUserAlt />
           </span>
           <div className={`dropdown-menu dropdown-menu-right ${isOpen && 'show'}`} >
             <button onClick={logoutFn} className='dropdown-item'> Logout </button>

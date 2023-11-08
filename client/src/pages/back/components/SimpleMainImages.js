@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import imagePlaceholder from '../../../utils/imagePlaceholder.jpg'
 
 class SimpleMainImages extends Component {
   constructor(props) {
@@ -76,7 +77,7 @@ class SimpleMainImages extends Component {
           onChange={this.handleChange}
         />
         <img
-          src={this.state.url}
+          src={imagePlaceholder}
           className='img-thumbnail mt-2'
           alt={`just a ${label}`}
         />
@@ -86,10 +87,6 @@ class SimpleMainImages extends Component {
       </form>
     )
   }
-}
-
-SimpleMainImages.defaultProps = {
-  itemId: null
 }
 
 export default SimpleMainImages

@@ -1,3 +1,5 @@
+import { FaUserAlt, FaChartArea, FaTable, FaFolderPlus } from "react-icons/fa"
+
 export const siteName = 'eduardoaguilar.com'
 
 export const frontMenu = [
@@ -11,10 +13,10 @@ export const frontMenu = [
 ]
 
 export const adminMenu = [
-  { label: 'Profile', icon: 'fa fa-user', route: '/admin/profile' },
-  { label: 'Places', icon: 'fa fa-chart-area', route: '/admin/places' },
-  { label: 'Skills', icon: 'fa fa-table', route: '/admin/skills' },
-  { label: 'Projects', icon: 'fa fa-folder-plus', route: '/admin/projects' },
+  { label: 'Profile', icon: <FaUserAlt />, route: '/admin/profile' },
+  { label: 'Places', icon: <FaChartArea />, route: '/admin/places' },
+  { label: 'Skills', icon: <FaTable />, route: '/admin/skills' },
+  { label: 'Projects', icon: <FaFolderPlus />, route: '/admin/projects' },
 ]
 
 export const image =
