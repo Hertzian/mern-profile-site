@@ -24,9 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     value: DataTypes.STRING,
     show: {
       type: DataTypes.BOOLEAN,
-      allowNull: {
-        msg: 'The company field is required.'
-      }
+      defaultValue: false
     }
   }, {
     sequelize,
