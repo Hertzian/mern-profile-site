@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import handleAll from '../../../utils/handleAll'
+import closeModal from '../../../utils/closeModal'
 
-function ProjectModal(props) {
-  const [project, setProject] = useState({
+function ProjectModal({ target, isUpdate, addUpdate, itemData }) {
+  const initialState = {
     _id: '',
     name: '',
     url: '',
@@ -9,124 +11,84 @@ function ProjectModal(props) {
     //image: '',
     description: '',
     show: 'no'
-  })
-
-  const handleChange = (e) => {
-    setProject({ ...project, [e.target.name]: e.target.value })
   }
+
+  const [project, setProject] = useState(initialState)
+
+  useEffect(() => {
+    if (itemData) {
+      setProject(itemData)
+    }
+  }, [itemData])
+
+  const handleChange = (e) => handleAll(e, { st: project, setSt: setProject })
+
   const handleSubmit = (e) => {
     e.preventDefault()
+
+    if (itemData) {
+      addUpdate(project)
+    }
+
+    if (!isUpdate) {
+      addUpdate(project)
+
+      const clearSt = {}
+      for (const prop in project) {
+        clearSt[prop] = ''
+      }
+
+      setProject(clearSt)
+    }
+
+    closeModal(target)
   }
 
   return (
-    <div
-      className='modal fade'
-      id={props.target}
-      tabIndex='-1'
-      role='dialog'
-      aria-labelledby='ModalLabel'
-      aria-hidden='true'
-    >
+    <div className='modal fade' id={target} tabIndex='-1' role='dialog' aria-labelledby='ModalLabel' aria-hidden='true' >
       <div className='modal-dialog' role='document'>
         <div className='modal-content'>
           <div className='modal-header'>
-            <h5 className='modal-title' id='exampleModalLabel'>
-              {props.isModify ? 'Update Project' : 'New Project'}
-            </h5>
-            <button
-              type='button'
-              className='close'
-              data-dismiss='modal'
-              aria-label='Close'
-            >
+
+            <h5 className='modal-title' id='exampleModalLabel'>{isUpdate ? 'Update Project' : 'New Project'}</h5>
+
+            <button type='button' className='close' data-dismiss='modal' aria-label='Close' >
               <span aria-hidden='true'>&times;</span>
             </button>
           </div>
           <form onSubmit={handleSubmit} encType='multipart/form-data'>
             <div className='modal-body'>
               <div className='form-group'>
+
                 <label htmlFor='name'>Name:</label>
-                <input
-                  name='name'
-                  onChange={handleChange}
-                  className='form-control'
-                  type='text'
-                  value={project.name}
-                />
+                <input value={project.name} onChange={handleChange} name='name' className='form-control' type='text' />
+
               </div>
               <div className='form-group'>
+
                 <label htmlFor='url'>url:</label>
-                <input
-                  name='url'
-                  onChange={handleChange}
-                  className='form-control'
-                  type='text'
-                  value={project.url}
-                />
+                <input value={project.url} onChange={handleChange} name='url' className='form-control' type='text' />
+
               </div>
               <div className='form-group'>
+
                 <label htmlFor='repo'>Repo:</label>
-                <input
-                  name='repo'
-                  onChange={handleChange}
-                  className='form-control'
-                  type='text'
-                  value={project.repo}
-                />
+                <input value={project.repo} onChange={handleChange} name='repo' className='form-control' type='text' />
+
               </div>
               <div className='form-group'>
+
                 <label htmlFor='description'>Description:</label>
-                <textarea
-                  className='form-control'
-                  name='description'
-                  value={project.description}
-                  onChange={handleChange}
-                  cols='20'
-                  rows='3'
-                ></textarea>
+                <textarea value={project.description} onChange={handleChange} name='description' className='form-control' cols='20' rows='3' />
+
               </div>
-              <div className='form-group'>
-                <label htmlFor='show'>Do you want to show?</label>
-                <div className='form-check'>
-                  <input
-                    name='show'
-                    value={'yes'}
-                    className='form-check-input'
-                    type='radio'
-                    checked={project.show === 'yes'}
-                    onChange={handleChange}
-                  />
-                  <label className='form-check-label' htmlFor='yes'>
-                    Yes
-                  </label>
-                </div>
-                <div className='form-check'>
-                  <input
-                    name='show'
-                    value={'no'}
-                    className='form-check-input'
-                    type='radio'
-                    checked={project.show === 'no'}
-                    onChange={handleChange}
-                  />
-                  <label className='form-check-label' htmlFor='yes'>
-                    Nope
-                  </label>
-                </div>
-              </div>
+
             </div>
             <div className='modal-footer'>
-              <button
-                type='button'
-                className='btn btn-secondary'
-                data-dismiss='modal'
-              >
-                Close
-              </button>
-              <button type='submit' className='btn btn-primary'>
-                Save
-              </button>
+              <button type='button' className='btn btn-secondary' data-dismiss='modal' >Close</button>
+              <button type='submit' className='btn btn-primary'>Save</button>
             </div>
+
           </form>
         </div>
       </div>

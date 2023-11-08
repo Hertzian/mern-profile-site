@@ -14,7 +14,7 @@ function ErrorPage() {
             <div className="row justify-content-center">
               <div className="col-lg-6">
                 <div className="text-center mt-4">
-                  <img className="mb-4 img-error" src="error-404-monochrome.svg" alt='404 not found' />
+                  <img className="mb-4 img-error" src="./error-404.svg" alt='404 not found' />
                   <p className="lead">This requested URL was not found on this server.</p>
                   <Link to='/'><FaArrowLeft />Return</Link>
                 </div>
