@@ -11,8 +11,8 @@ import { projectsApi } from './apis/projectsApi'
 import { authReducer, setLoginCredentials, logout } from './slices/authSlice'
 import { usersReducer, updateStateProfile, setStateProfile } from './slices/usersSlice'
 import { placesReducer, setStateAllPlaces, setStateNewPlace, updateStatePlace, deleteStatePlace } from './slices/placesSlice'
-import { setStateSkills, setStateNewSkill, updateStateSkill, deleteStateSkill, skillsReducer } from './slices/skillsSlice'
-import { setStateProjects, setStateNewProject, updateStateProject, deleteStateProject, projectsReducer } from './slices/projectsSlice'
+import { skillsReducer, setStateSkills, setStateNewSkill, updateStateSkill, deleteStateSkill } from './slices/skillsSlice'
+import { projectsReducer, setStateProjects, setStateNewProject, updateStateProject, deleteStateProject } from './slices/projectsSlice'
 
 export const store = configureStore({
   reducer: {
@@ -56,4 +56,4 @@ export { useLoginMutation } from './apis/authApi'
 export { useGetProfileQuery, useUpdateProfileMutation } from './apis/usersApi'
 export { useGetPlacesQuery, useCreatePlaceMutation, useUpdatePlaceMutation, useDeletePlaceMutation } from './apis/placesApi'
 export { useGetSkillsQuery, useCreateSkillMutation, useUpdateSkillMutation, useDeleteSkillMutation } from './apis/skillsApi'
-export { getProjects, createProject, updateProject, deleteProject } from './apis/projectsApi'
+export { useGetProjectsQuery, useCreateProjectMutation, useUpdateProjectMutation, useDeleteProjectMutation } from './apis/projectsApi'
