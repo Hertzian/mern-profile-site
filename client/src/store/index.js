@@ -51,7 +51,7 @@ export {
   setStateSkills, setStateNewSkill, updateStateSkill, deleteStateSkill,
   setStateProjects, setStateNewProject, updateStateProject, deleteStateProject
 }
-export { useGetGeneralProfileQuery, } from './apis/frontPageApi'
+export { useGetGeneralProfileQuery, useGetProjectQuery } from './apis/frontPageApi'
 export { useLoginMutation } from './apis/authApi'
 export { useGetProfileQuery, useUpdateProfileMutation } from './apis/usersApi'
 export { useGetPlacesQuery, useCreatePlaceMutation, useUpdatePlaceMutation, useDeletePlaceMutation } from './apis/placesApi'

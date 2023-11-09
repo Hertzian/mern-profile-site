@@ -7,7 +7,7 @@ router
   .get('/', protect, getProjects)
   .post('/', protect, newProject)
 router
-  .get('/:projectId', protect, getProject)
+  .get('/:projectId', getProject)
   .put('/:projectId', protect, updateProject)
   .delete('/:projectId', protect, deleteProject)
 

@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const frontPageApi = createApi({
   reducerPath: 'frontPageApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5001/api/users'
+    baseUrl: 'http://localhost:5001/api'
   }),
 
   endpoints(builder) {
@@ -11,14 +11,22 @@ export const frontPageApi = createApi({
       getGeneralProfile: builder.query({
         query: () => {
           return {
-            url: '/get-front-profile',
+            url: '/users/get-front-profile',
             method: 'GET'
           }
         }
       }),
 
+      getProject: builder.query({
+        query: (projectId) => {
+          return {
+            url: `/projects/${projectId}`,
+            method: 'GET'
+          }
+        }
+      })
     }
   }
 })
 
-export const { useGetGeneralProfileQuery, } = frontPageApi
+export const { useGetGeneralProfileQuery, useGetProjectQuery } = frontPageApi

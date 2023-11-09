@@ -3,7 +3,7 @@ GET http://localhost:5001/api/projects/
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5OTA3Njc3NiwiZXhwIjoxNzAxNjY4Nzc2fQ.1L2HH5DEaf-1HrN287OeLJElfIZ6lQ34lt_VaT2L7AM 
 
 ### get single project
-GET http://localhost:5001/api/projects/6
+GET http://localhost:5001/api/projects/50
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5OTA3Njc3NiwiZXhwIjoxNzAxNjY4Nzc2fQ.1L2HH5DEaf-1HrN287OeLJElfIZ6lQ34lt_VaT2L7AM 
 
 ### create new project **require token

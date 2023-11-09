@@ -1,46 +1,49 @@
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Menu from './partials/Menu'
 import Footer from './partials/Footer'
-import { dummyData } from '../../config/dummyData'
 import '../../styles/front.css'
+import { useGetProjectQuery } from '../../store'
+import Loader from '../back/components/Loader'
 
 const ProjectPage = () => {
-  const project = dummyData.projects[0]
+  const { projectId } = useParams()
+  const { data, isLoading } = useGetProjectQuery(projectId)
+
+  let renderContent
+  if (isLoading) {
+    renderContent = <Loader />
+  }
+
+  if (data) {
+    renderContent =
+      <>
+        <section className='intro' id='home'>
+          <h1 className='section__title section__title--intro'>
+            Welcome to <strong>{data.name}</strong>
+          </h1>
+          <img className='intro__img' src={`/public/uploads/${data.image}`} alt={`${data.name} project`} />
+        </section>
+
+        <div className='portfolio-item-individual'>
+          <p>
+            <a className='btn-front' href={`${data.repo}`}> This is the repo </a>
+          </p>
+          <p>
+            <a className='btn-front' href={data.url}> You can visit {data.name} from here </a>
+          </p>
+          <p>
+            <Link to='/' className='btn-front'>back</Link>
+          </p>
+          <p>{data.description}</p>
+          <img src={`/public/uploads/${data.image}`} alt={`${data.name} project`} />
+        </div>
+      </>
+  }
 
   return (
     <>
       <Menu />
-      <section className='intro' id='home'>
-        <h1 className='section__title section__title--intro'>
-          Welcome to <strong>{project.name}</strong>
-        </h1>
-        <img
-          className='intro__img'
-          src={project && `/public/uploads/${project.image}`}
-          alt={`${project.name} project`}
-        />
-      </section>
-
-      <div className='portfolio-item-individual'>
-        <p>
-          <a className='btn-front' href={`${project.repo}`}>
-            This is the repo
-          </a>
-        </p>
-        <p>
-          <a className='btn-front' href={project.url}>
-            You can visit {project.name} from here
-          </a>
-        </p>
-        <p>
-          <Link to='/' className='btn-front'>back</Link>
-        </p>
-        <p>{project.description}</p>
-        <img
-          src={project && `/public/uploads/${project.image}`}
-          alt={`${project.name} project`}
-        />
-      </div>
+      {renderContent}
       <Footer />
     </>
   )
