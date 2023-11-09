@@ -1,68 +1,39 @@
-import { Component } from 'react'
-import axios from 'axios'
-import Footer from './partials/Footer'
-import Menu from './partials/Menu'
-import Intro from './components/Intro'
-import Places from './components/Places'
-import About from './components/About'
-import Skills from './components/Skills'
-import Projects from './components/Projects'
-import Contact from './components/Contact'
+import { useGetGeneralProfileQuery } from '../../store'
 import '../../styles/front.css'
 
-class HomePage extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { user: '' }
-  }
+import About from './components/About'
+import Contact from './components/Contact'
+import Footer from './partials/Footer'
+import Intro from './components/Intro'
+import Menu from './partials/Menu'
+import Places from './components/Places'
+import Projects from './components/Projects'
+import Skills from './components/Skills'
+import Loader from '../back/components/Loader'
 
-  componentDidMount() {
-    this.loadUser()
-  }
-  async loadUser() {
-    const res = await axios.get('/api/users/get-front-profile')
-    const userRes = res.data
-    this.setState(userRes)
-  }
+function HomePage() {
+  const { data, isFetching } = useGetGeneralProfileQuery()
 
-  render() {
-    const { user, places, skills, projects } = this.state
-    const {
-      name,
-      lastname,
-      portrait,
-      background,
-      email,
-      phone,
-      github,
-      linkedin,
-      bio,
-      profession
-    } = user
-
-    return (
-      <>
-        <Menu />
-        <Intro
-          name={name}
-          lastname={lastname}
-          portrait={portrait}
-          profession={profession}
-        />
-        <Places places={places} background={background} />
-        <About bio={bio} portrait={portrait} profession={profession} />
-        <Skills skills={skills} />
-        <Projects projects={projects} />
-        <Contact email={email} phone={phone} />
-        <Footer
-          name={name}
-          lastname={lastname}
-          github={github}
-          linkedin={linkedin}
-        />
-      </>
-    )
-  }
+  return (
+    <>
+      <Menu />
+      {
+        isFetching
+          ? <Loader />
+          : data && (
+            <>
+              <Intro name={data.name} lastname={data.lastname} portrait={data.portrait} profession={data.profession} />
+              <Places places={data.places} background={data.background} />
+              <Skills skills={data.skills} />
+              <Projects projects={data.projects} />
+              <About bio={data.bio} portrait={data.portrait} profession={data.profession} />
+              <Contact email={data.email} phone={data.phone} />
+              <Footer name={data.name} lastname={data.lastname} github={data.github} linkedin={data.linkedin} />
+            </>
+          )
+      }
+    </>
+  )
 }
 
 export default HomePage

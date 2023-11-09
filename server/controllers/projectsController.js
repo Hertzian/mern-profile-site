@@ -1,86 +1,106 @@
-const { unlink } = require('fs/promises')
+const { unlink, access } = require('fs/promises')
 const path = require('path')
-const { project: Project } = require('../lib/db/models')
-const asyH = require('../utils/asyncHandler')
+const { Project } = require('../lib/db/models')
 
-// @route   GET /api/projects/get-all
+// @route   GET /api/projects
 // @access   private
-exports.getProjects = asyH(async (req, res) => {
-  const projects = await Project.find({})
-
-  res.json({ projects, success: true })
-})
-
-// @route   GET /api/projects/get-project/:projectId
-// @access   private
-exports.getProject = asyH(async (req, res) => {
+exports.getProjects = async (req, res) => {
   try {
-    const project = await Project.findByPk(req.params.projectId)
-    return res.json({ project })
-  } catch (err) {
-    return res.json(err)
-  }
-})
-
-// @route   POST /api/projects/new-project
-// @access   private
-exports.newProject = asyH(async (req, res) => {
-  try {
-    const { name, url, repo, description, show } = req.body
-    const project = await Project.create({
-      name,
-      url,
-      repo,
-      description,
-      show
-    })
-    return res.json({ message: 'Project created!', project })
-  } catch (err) {
-    return res.json(err)
-  }
-})
-
-// @route   PUT /api/projects/update-project/:projectId
-// @access   private
-exports.updateProject = asyH(async (req, res) => {
-  try {
-    const { name, url, repo, image, description, show } = req.body
-    const project = await Project.findByPk(req.params.projectId)
-    project.name = name || project.name
-    project.url = url || project.url
-    project.repo = repo || project.repo
-    project.image = image || project.image
-    project.description = description || project.description
-    project.show = show || project.show
-    project.save()
-    return res.json({ message: 'Project updated!', project })
-  } catch (err) {
-    return res.json(err)
-  }
-})
-
-// @route   DELETE /api/projects/delete-project/:projectId
-// @access   private
-exports.delteProject = asyH(async (req, res) => {
-  try {
-    const projectId = req.params.projectId
-    const project = await Project.findByPk(projectId)
-    if (project.image !== 'placeholder.jpg') {
-      await unlink(
-        `${path.resolve(__dirname, '../public/uploads')}/${project.image}`
-      )
-    }
-    await project.remove()
-    return res.json({ message: `Project gone, ${projectId}` })
+    const projects = await Project.findAll()
+    return res.json({ projects })
   } catch (err) {
     console.log(err)
     return res.json(err)
   }
-})
+}
 
-// @route   POST /api/projects/upload-project/:projectId
+// @route   GET /api/projects/:projectId
 // @access   private
-exports.uploadImage = asyH(async (req, res) => {
+exports.getProject = async (req, res) => {
+  try {
+    const project = await Project.findByPk(req.params.projectId)
+    return res.json(project)
+  } catch (err) {
+    console.log(err)
+    return res.json(err)
+  }
+}
+
+// @route   POST /api/projects
+// @access   private
+exports.newProject = async (req, res) => {
+  try {
+    const { name, url, repo, description, show } = req.body
+    const project = await Project.create({
+      userId: req.user.id,
+      name, url, repo, description, show
+    })
+
+    return res.json({ msg: 'Project created!', project })
+  } catch (err) {
+    console.log(err)
+    return res.json(err)
+  }
+}
+
+// @route   PUT /api/projects/:projectId
+// @access   private
+exports.updateProject = async (req, res) => {
+  try {
+    const { name, url, repo, image, description, show } = req.body
+    const project = await Project.findByPk(req.params.projectId)
+    const propsToUpdate = Object.keys(req.body)
+
+    for (const prop of propsToUpdate) {
+      if (prop === 'id') continue
+      if (req.body[prop]) {
+        project[prop] = req.body[prop]
+      }
+      if (typeof req.body[prop] === 'boolean') {
+        project[prop] = req.body[prop]
+      }
+    }
+
+    await project.save()
+
+    return res.json({ msg: 'Project updated!', project })
+  } catch (err) {
+    return res.json(err)
+  }
+}
+
+// @route   DELETE /api/projects/:projectId
+// @access   private
+exports.deleteProject = async (req, res) => {
+  try {
+    const projectId = req.params.projectId
+    const project = await Project.findByPk(projectId)
+
+    if (project.image !== 'placeholder.jpg' && project.image) {
+      const filePath = `${path.resolve(__dirname, '../public/uploads')}/${project.image}`
+
+      try {
+        await access(filePath)
+        await unlink(filePath)
+      } catch (err) {
+        console.log(err)
+        console.log('Image not found')
+      }
+    }
+
+    await project.destroy()
+    return res.json({ project: projectId, msg: `ALV project, ${projectId}` })
+  } catch (err) {
+    console.log(err)
+    return res.json(err)
+  }
+}
+
+// pending...
+
+// @route   POST /api/projects/project/:projectId
+// @access   private
+exports.uploadImage = async (req, res) => {
   const file = req.files.project
   const projectId = req.params.projectId
 
@@ -100,11 +120,11 @@ exports.uploadImage = asyH(async (req, res) => {
     project.save()
     return res.json(project.image)
   })
-})
+}
 
 // @route   GET /api/projects/load-project/:projectId
 // @access   private
-exports.loadImage = asyH(async (req, res) => {
+exports.loadImage = async (req, res) => {
   try {
     const projectId = req.params.projectId
     const project = await Project.findByPk(projectId)
@@ -113,4 +133,4 @@ exports.loadImage = asyH(async (req, res) => {
     console.log(err)
     return res.json(err)
   }
-})
+}

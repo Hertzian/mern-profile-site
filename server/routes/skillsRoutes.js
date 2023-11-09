@@ -1,12 +1,13 @@
 const express = require('express')
 const router = express.Router()
 const { userService: { protect } } = require('../utils')
-const skillsController = require('../controllers/skillsController')
+const { getSkills, newSkill, updateSkill, deleteSkill } = require('../controllers/skillsController')
 
-router.get('/get-all', skillsController.getSkills)
-router.get('/get-skill/:skillId', skillsController.getSkill)
-router.post('/new-skill/', skillsController.newSkill)
-router.put('/update-skill/:skillId', skillsController.updateSkill)
-router.delete('/delete-skill/:skillId', skillsController.deleteSkill)
+router
+  .get('/', protect, getSkills)
+  .post('/', protect, newSkill)
+router
+  .put('/:skillId', protect, updateSkill)
+  .delete('/:skillId', protect, deleteSkill)
 
 module.exports = router

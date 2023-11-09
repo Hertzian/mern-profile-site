@@ -4,109 +4,6 @@ const { User, Place, Skill, Project } = require('../lib/db/models')
 const { userService: { matchPassword, genToken } } = require('../utils')
 const jwt = require('jsonwebtoken')
 
-// @route   GET /api/users/profile
-// @access  public
-exports.getProfile = async (req, res) => {
-  try {
-    const user = req.user
-    const { name, lastname, github, linkedin, phone, bio, profession } = user
-    return res.json({
-      user: { name, lastname, github, linkedin, phone, bio, profession }
-    })
-  } catch (err) {
-    console.log(err)
-    res.json({ error: err })
-  }
-}
-
-// @route   GET /api/users/get-front-profile
-// @access  public
-exports.getFrontProfile = async (req, res) => {
-  try {
-    const user = await User.findOne({ where: { email: process.env.USER_EMAIL } })
-    const places = await Place.findAll({ where: { userId: user.id } })
-    const projects = await Project.findAll({ where: { userId: user.id } })
-    const skills = await Skill.findAll({ where: { userId: user.id } })
-
-    const { name, lastname, email, github, linkedin, phone, bio, profession } = user
-    const showPlaces = places.filter((place) => place.show === true)
-    const showSkills = skills.filter((skill) => skill.show === true)
-    const showProjects = projects.filter((project) => project.show === true)
-
-    return res.json({
-      user: {
-        name,
-        lastname,
-        email,
-        github,
-        linkedin,
-        phone,
-        bio,
-        profession,
-        portrait: `/public/uploads/${user.portrait}`,
-        background: `/public/uploads/${user.background}`
-      },
-      places: showPlaces,
-      skills: showSkills,
-      projects: showProjects
-    })
-  } catch (err) {
-    console.log(err)
-    res.json(err)
-  }
-}
-
-// @route    PUT /api/user/profile
-// @access   private
-exports.updateProfile = async (req, res) => {
-  try {
-    const { name, lastname, github, linkedin, phone, bio, profession } =
-      req.body
-    const user = await User.findByPk(req.user.id)
-    user.name = name || user.name
-    user.lastname = lastname || user.lastname
-    user.github = github || user.github
-    user.linkedin = linkedin || user.linkedin
-    user.phone = phone || user.phone
-    user.bio = bio || user.bio
-    user.profession = profession || user.profession
-    user.save()
-
-    res.json({ user })
-  } catch (err) {
-    res.json({ error: err })
-  }
-}
-
-// @route   GET /api/users/read-access
-// @access  private
-exports.readAccessData = async (req, res) => {
-  try {
-    const user = req.user
-    return res.json({ email: user.email })
-  } catch (err) {
-    console.log(err)
-    res.json(err)
-  }
-}
-
-// @route   PUT /api/users/update-access
-// @access  private
-exports.updateAccess = async (req, res) => {
-  try {
-    const { email, password } = req.body
-    const user = await User.findByPk(req.user.id)
-
-    user.email = email || user.email
-    user.password = password || user.password
-
-    user.save()
-    return res.json({ email: user.email, user: user.password })
-  } catch (err) {
-    return res.json({ error: err })
-  }
-}
-
 // @route   POST /api/users/login
 // @access  public
 exports.login = async (req, res) => {
@@ -123,19 +20,68 @@ exports.login = async (req, res) => {
   }
 }
 
-// @route   POST /api/users/verify
-// @access  private
-exports.verifyAccess = async (req, res) => {
-  let localToken
-  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
-    token = req.headers.authorization.split(' ')[1]
-  }
+// @route   GET /api/users/get-front-profile
+// @access  public
+exports.getFrontProfile = async (req, res) => {
   try {
-    jwt.verify(localToken, process.env.JWT_SECRET)
-    return res.json({ verifiqueichons: true })
+    const user = await User.findOne({
+      where: { email: process.env.USER_EMAIL },
+      include: ['places', 'projects', 'skills'],
+      attributes: {
+        exclude: 'password' // this field can be an array
+      }
+    })
+
+    return res.json(user)
   } catch (err) {
     console.log(err)
-    return res.json({ verifiqueichons: false, error: err })
+    res.json(err)
+  }
+}
+
+// @route   GET /api/users/profile
+// @access  private 
+exports.getProfile = async (req, res) => {
+  try {
+    const id = req.user.id
+    const user = await User.findOne({
+      where: { id },
+      attributes: { exclude: 'password' }
+    })
+
+    return res.json(user)
+  } catch (err) {
+    console.log(err)
+    res.json({ error: err })
+  }
+}
+
+// @route    PUT /api/user/profile
+// @access   private
+exports.updateProfile = async (req, res) => {
+  try {
+    const user = await User.findOne({
+      where: { id: req.user.id },
+      attributes: { exclude: 'password' }
+    })
+
+    const propsToUpdate = Object.keys(req.body)
+
+    for (const prop of propsToUpdate) {
+      if (prop === 'password' && req.body[prop] === '') {
+        continue
+      }
+
+      if (req.body[prop]) {
+        user[prop] = req.body[prop]
+      }
+    }
+
+    await user.save()
+
+    return res.json(user)
+  } catch (err) {
+    res.json({ error: err })
   }
 }
 
@@ -184,18 +130,4 @@ exports.uploadBackground = async (req, res) => {
     return res.json(user.background)
   })
   // return res.json({ message: req.files })
-}
-
-// @route   GET /api/users/load-portrait
-// @access  private
-exports.loadPortrait = async (req, res) => {
-  const user = req.user
-  return res.json({ image: user.portrait })
-}
-
-// @route   GET /api/users/background
-// @access  private
-exports.loadBackground = async (req, res) => {
-  const user = req.user
-  return res.json({ image: user.background })
 }

@@ -1,66 +1,66 @@
-const { place: Place } = require('../lib/db/models')
-const asyH = require('../utils/asyncHandler')
+const { Place } = require('../lib/db/models')
 
-// @route   GET /api/places/get-all
+// @route   GET /api/places
 // @access   private
-exports.allPlaces = asyH(async (req, res) => {
+exports.allPlaces = async (req, res) => {
   try {
-    const places = await Place.find({})
+    const places = await Place.findAll()
     return res.json({ places })
   } catch (err) {
+    console.log(err)
     return res.json(err)
   }
-})
-
-// @route   GET /api/places/get-place/:placeId
-// @access   private
-exports.getPlace = asyH(async (req, res) => {
-  try {
-    const place = await Place.findByPk(req.params.placeId)
-    return res.json({ place })
-  } catch (err) {
-    return res.json(err)
-  }
-})
+}
 
 // @route   POST /api/places/new-place
 // @access   private
-exports.newPlace = asyH(async (req, res) => {
+exports.newPlace = async (req, res) => {
   try {
     const { company, job, year, assignment, show } = req.body
-    const place = await Place.create({ company, job, year, assignment, show })
-    return res.json({ message: 'Place created!', place })
+    const place = await Place.create({ company, job, year, assignment, show, userId: req.user.id })
+    return res.json({ msg: 'Place created!', place })
   } catch (err) {
+    console.log(err)
     return res.json(err)
   }
-})
+}
 
-// @route   PUT /api/places/update-place/:placeId
+// @route   PUT /api/places/:placeId
 // @access   private
-exports.updatePlace = asyH(async (req, res) => {
-  try {
-    const { company, job, year, assignment, show } = req.body
-    const place = await Place.findByPk(req.params.placeId)
-    place.company = company || place.company
-    place.job = job || place.job
-    place.year = year || place.year
-    place.assignment = assignment || place.assignment
-    place.show = show || place.show
-    place.save()
-    return res.json({ message: 'Place updated', place })
-  } catch (err) {
-    return res.json({ err })
-  }
-})
-
-// @route   DELETE /api/places/delete-place/:placeId
-// @access   private
-exports.deletePlace = asyH(async (req, res) => {
+exports.updatePlace = async (req, res) => {
   try {
     const place = await Place.findByPk(req.params.placeId)
-    await place.remove()
-    return res.json({ message: `ALV place ${placeId}` })
+    const propsToUpdate = Object.keys(req.body)
+
+    for (const prop of propsToUpdate) {
+      if (prop === 'id') continue
+      if (req.body[prop]) {
+        place[prop] = req.body[prop]
+      }
+      if (typeof req.body[prop] === 'boolean') {
+        place[prop] = req.body[prop]
+      }
+    }
+
+    await place.save()
+
+    return res.json({ msg: 'Place updated', place })
   } catch (err) {
+    console.log(err)
     return res.json({ err })
   }
-})
+}
+
+// @route   DELETE /api/places/:placeId
+// @access   private
+exports.deletePlace = async (req, res) => {
+  try {
+    const placeId = req.params.placeId
+    const place = await Place.findByPk(placeId)
+    await place.destroy()
+    return res.json({ place: placeId, message: `ALV place ${req.params.placeId}` })
+  } catch (err) {
+    console.log(err)
+    return res.json({ err })
+  }
+}

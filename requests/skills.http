@@ -1,0 +1,29 @@
+### get all skills **require token I guess
+GET http://localhost:5001/api/skills
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5OTA3Njc3NiwiZXhwIjoxNzAxNjY4Nzc2fQ.1L2HH5DEaf-1HrN287OeLJElfIZ6lQ34lt_VaT2L7AM 
+
+### create new skill **require token
+POST http://localhost:5001/api/skills
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5OTA3Njc3NiwiZXhwIjoxNzAxNjY4Nzc2fQ.1L2HH5DEaf-1HrN287OeLJElfIZ6lQ34lt_VaT2L7AM 
+Content-Type: application/json
+
+{
+  "name": "test company",
+  "value": "100",
+  "show": true
+}
+
+### update existing skill **require token
+PUT http://localhost:5001/api/skills/5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5OTA3Njc3NiwiZXhwIjoxNzAxNjY4Nzc2fQ.1L2HH5DEaf-1HrN287OeLJElfIZ6lQ34lt_VaT2L7AM 
+Content-Type: application/json
+
+{
+  "name": "update skill test",
+  "value": "90",
+  "show": true
+}
+
+### delete skill **require token
+DELETE http://localhost:5001/api/skills/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5OTA3Njc3NiwiZXhwIjoxNzAxNjY4Nzc2fQ.1L2HH5DEaf-1HrN287OeLJElfIZ6lQ34lt_VaT2L7AM 

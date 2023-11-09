@@ -1,12 +1,8 @@
-import SiteRoutes from './routing/SiteRoutes'
-import { UserProvider } from './context/UserContext'
+import { RouterProvider } from 'react-router-dom'
+import { router } from './router'
 
 function App() {
-  return (
-    <UserProvider>
-      <SiteRoutes />
-    </UserProvider>
-  )
+  return <RouterProvider router={router} />
 }
 
 export default App

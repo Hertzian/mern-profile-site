@@ -1,62 +1,52 @@
-import { Component } from 'react'
-import axios from 'axios'
+import { Link, useParams } from 'react-router-dom'
 import Menu from './partials/Menu'
 import Footer from './partials/Footer'
-import Typewriter from '../../components/TypeWriter'
 import '../../styles/front.css'
+import { useGetProjectQuery } from '../../store'
+import Loader from '../back/components/Loader'
 
-class DetailPage extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { project: '' }
+const ProjectPage = () => {
+  const { projectId } = useParams()
+  const { data, isLoading } = useGetProjectQuery(projectId)
+
+  let renderContent
+  if (isLoading) {
+    renderContent = <Loader />
   }
 
-  async componentDidMount() {
-    const projectId = this.props.match.params.projectId
-    const res = await axios.get(`/api/projects/get-project/${projectId}`)
-    const resProject = res.data.project
-    this.setState({ project: resProject })
-  }
-
-  render() {
-    const project = this.state.project && this.state.project
-    //console.log(project)
-    return (
+  if (data) {
+    renderContent =
       <>
-        <Menu />
         <section className='intro' id='home'>
           <h1 className='section__title section__title--intro'>
-            Welcome to <strong>{project.name}</strong>
+            Welcome to <strong>{data.name}</strong>
           </h1>
-          {project && <Typewriter words={`Welcome to ${project.name}`} />}
-          <img
-            className='intro__img'
-            src={project && `/public/uploads/${project.image}`}
-            alt={`${project.name} project`}
-          />
+          <img className='intro__img' src={`/public/uploads/${data.image}`} alt={`${data.name} project`} />
         </section>
 
         <div className='portfolio-item-individual'>
           <p>
-            <a className='btn' href={`${project.repo}`}>
-              This is the repo
-            </a>
+            <a className='btn-front' href={`${data.repo}`}> This is the repo </a>
           </p>
           <p>
-            <a className='btn' href={project.url}>
-              You can visit workname from here
-            </a>
+            <a className='btn-front' href={data.url}> You can visit {data.name} from here </a>
           </p>
-          <p>{project.description}</p>
-          <img
-            src={project && `/public/uploads/${project.image}`}
-            alt={`${project.name} project`}
-          />
+          <p>
+            <Link to='/' className='btn-front'>back</Link>
+          </p>
+          <p>{data.description}</p>
+          <img src={`/public/uploads/${data.image}`} alt={`${data.name} project`} />
         </div>
-        <Footer />
       </>
-    )
   }
+
+  return (
+    <>
+      <Menu />
+      {renderContent}
+      <Footer />
+    </>
+  )
 }
 
-export default DetailPage
+export default ProjectPage 

@@ -1,11 +1,13 @@
 const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
+const cors = require('cors')
 const fileupload = require('express-fileupload')
 require('dotenv').config()
 const { sequelize } = require('./lib/db/models')
 const app = express()
 
+app.use(cors())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 // to store images
@@ -14,6 +16,7 @@ app.use('/public', express.static(path.join(__dirname, 'public')))
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
 
 app.use(fileupload())
+app.use('/api/auth', require('./routes/authRoutes'))
 app.use('/api/users', require('./routes/usersRoutes'))
 app.use('/api/places', require('./routes/placesRoutes'))
 app.use('/api/skills', require('./routes/skillsRoutes'))

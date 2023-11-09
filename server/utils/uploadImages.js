@@ -11,6 +11,15 @@ const path = require('path')
 //   })
 // }
 
+const checkFileType = (file, cb) => {
+  const filetypes = /jpeg|jpg|png|gif/
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
+  const mimetype = filetypes.test.mimetype
+
+  if (extname && mimetype) return cb(null, true)
+  return cb('Error: Images Only!')
+}
+
 // // parameter is for preserve same name from upload field (name="imgFile")
 // const upload = (imageFile) => {
 //   multer({
@@ -21,14 +30,5 @@ const path = require('path')
 //     }
 //   }).single(imageFile)
 // }
-
-const checkFileType = (file, cb) => {
-  const filetypes = /jpeg|jpg|png|gif/
-  const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
-  const mimetype = filetypes.test.mimetype
-
-  if (extname && mimetype) return cb(null, true)
-  return cb('Error: Images Only!')
-}
 
 // module.exports = { upload }

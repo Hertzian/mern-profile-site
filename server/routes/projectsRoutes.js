@@ -1,14 +1,18 @@
 const express = require('express')
 const router = express.Router()
 const { userService: { protect } } = require('../utils')
-const projectsController = require('../controllers/projectsController')
+const { getProjects, getProject, newProject, updateProject, deleteProject, uploadImage, loadImage } = require('../controllers/projectsController')
 
-router.get('/get-all', projectsController.getProjects)
-router.get('/get-project/:projectId', projectsController.getProject)
-router.post('/new-project/', projectsController.newProject)
-router.put('/update-project/:projectId', projectsController.updateProject)
-router.delete('/delete-project/:projectId', projectsController.delteProject)
-router.post('/upload-project/:projectId', projectsController.uploadImage)
-router.get('/load-project/:projectId', projectsController.loadImage)
+router
+  .get('/', protect, getProjects)
+  .post('/', protect, newProject)
+router
+  .get('/:projectId', getProject)
+  .put('/:projectId', protect, updateProject)
+  .delete('/:projectId', protect, deleteProject)
+
+// to do...
+router.post('/upload-project/:projectId', protect, uploadImage)
+router.get('/load-project/:projectId', protect, loadImage)
 
 module.exports = router

@@ -1,121 +1,99 @@
-import { Component } from 'react'
-import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, Navigate } from 'react-router-dom'
 import AdminFooter from './partials/AdminFooter'
-import { UserContext } from '../../context/UserContext'
-import { hasToken } from '../../utils/hasToken'
-import setAuthToken from '../../utils/setAuthToken'
+import Alert from './components/Alert'
 import '../../styles/back.css'
+import { useLoginMutation, setLoginCredentials } from '../../store'
+import { siteName } from '../../config/menuConfig'
 
-class Login extends Component {
-  static contextType = UserContext
+const Login = () => {
+  const dispatch = useDispatch()
+  const [login] = useLoginMutation()
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  })
+  const { email, password } = formData
 
-  constructor(props) {
-    super(props)
-    this.state = { email: '', password: '' }
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
+  const token = useSelector(({ authSlice }) => authSlice.token)
 
-  handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value })
-  }
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value })
 
-  componentDidMount() {
-    this.verify()
-  }
-  async verify() {
-    try {
-      const token = hasToken()
-      const res = await axios.post('/api/users/verify', { localToken: token })
-      const tokenRes = res.data.verifiqueichons
-      if (token && tokenRes) {
-        const localToken = localStorage.getItem('token')
-        setAuthToken(localToken)
-        this.context.authorize()
-        this.context.loadUser()
-        this.props.history.push('/admin/profile')
-      }
-    } catch (err) {
-      console.log(err)
-    }
-  }
-  async handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    try {
-      const res = await axios.post('/api/users/login', {
-        email: this.state.email,
-        password: this.state.password
-      })
-      const token = res.data.token
-      localStorage.setItem('token', token)
-      setAuthToken(token)
-      this.context.authorize()
-      this.context.loadUser()
-      this.props.history.push('/admin/profile')
-    } catch (err) {
-      console.log('peluquin: ', err)
-    }
+    const submit = await login(formData)
+    dispatch(setLoginCredentials(submit.data))
   }
 
-  render() {
-    return (
-      <div className='bg-dark' id='layoutAuthentication'>
-        <div id='layoutAuthentication_content'>
-          <main>
-            <div className='container'>
-              <div className='row justify-content-center'>
-                <div className='col-lg-5'>
-                  <div className='card shadow-lg border-0 rounded-lg mt-5'>
-                    <div className='card-header'>
-                      <h3 className='text-center font-weight-light my-4'>
-                        Welcome again!
-                      </h3>
-                    </div>
-                    <div className='card-body'>
-                      <form onSubmit={this.handleSubmit}>
-                        <div className='form-grop'>
-                          <label htmlFor='email'>Email</label>
-                          <input
-                            value={this.state.email}
-                            name='email'
-                            type='email'
-                            className='form-control'
-                            placeholder='Email'
-                            onChange={this.handleChange}
-                          />
-                        </div>
-                        <div className='form-grop'>
-                          <label htmlFor='password'>Password</label>
-                          <input
-                            value={this.state.password}
-                            name='password'
-                            type='password'
-                            className='form-control'
-                            placeholder='password'
-                            onChange={this.handleChange}
-                          />
-                        </div>
-                        <div className='form-group d-flex align-items-center mt-4 mb-0'>
-                          <button className='btn btn-primary'>Login</button>
-                          <Link className='btn ml-2' to='/'>
-                            Go back
-                          </Link>
-                        </div>
-                      </form>
-                    </div>
+  if (token) {
+    return <Navigate to={'/admin/profile'} />
+  }
+
+  return (
+    <div className='bg-dark' id='layoutAuthentication'>
+      <div id='layoutAuthentication_content'>
+        <main>
+          <div className='container'>
+            <div className='row justify-content-center'>
+              <div className='col-lg-5'>
+                <div className='card shadow-lg border-0 rounded-lg mt-5'>
+                  <div className='card-header'>
+                    <h3 className='text-center font-weight-light my-4'>
+                      Welcome again!
+                    </h3>
+                    <Alert />
+                  </div>
+                  <div className='card-body'>
+
+                    <form onSubmit={handleSubmit}>
+                      <div className='form-group'>
+                        <label htmlFor='email'>Email</label>
+                        <input
+                          value={email}
+                          name='email'
+                          type='email'
+                          className='form-control'
+                          placeholder='Email'
+                          onChange={handleChange}
+                        />
+                      </div>
+                      <div className='form-group'>
+                        <label htmlFor='password'>Password</label>
+                        <input
+                          value={password}
+                          name='password'
+                          type='password'
+                          className='form-control'
+                          placeholder='password'
+                          onChange={handleChange}
+                        />
+                      </div>
+                      <div className='form-group d-flex align-items-center mt-4 mb-0'>
+                        <button className='btn btn-primary'>Login</button>
+                        <Link className='btn ml-2' to='/'>
+                          Go back
+                        </Link>
+                      </div>
+                    </form>
+
                   </div>
                 </div>
               </div>
             </div>
-          </main>
-        </div>
-        <div id='layoutAuthentication_footer'>
-          <AdminFooter />
-        </div>
+          </div >
+        </main >
+      </div >
+      <div id='layoutAuthentication_footer'>
+        <AdminFooter siteName={siteName} />
       </div>
-    )
-  }
+    </div >
+  )
+}
+
+Login.propTypes = {
+  // login: PropTypes.func.isRequired,
+  // isAuthenticated: PropTypes.bool
 }
 
 export default Login
