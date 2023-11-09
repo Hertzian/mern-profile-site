@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import Profile from './components/Profile'
 import Access from './components/Access'
-import MainImages from './components/MainImages' // pending component
+import ProfileImages from './components/ProfileImages' // pending component
 import { useGetProfileQuery, setStateProfile } from '../../store'
 
 function ProfileSection(props) {
@@ -31,7 +31,7 @@ function ProfileSection(props) {
     <>
       <Profile profile={profile} />
       <Access access={access} />
-      <MainImages images={images} />
+      <ProfileImages images={images} />
     </>
   )
 }
