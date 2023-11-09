@@ -11,7 +11,6 @@ import {
 import Card from './components/Card'
 import ButtonOpenModal from './components/ButtonOpenModal'
 import SkillModal from './components/SkillModal'
-import ConfirmModal from './components/ConfirmModal'
 import SkillRow from './components/SkillRow'
 import Loader from './components/Loader'
 
