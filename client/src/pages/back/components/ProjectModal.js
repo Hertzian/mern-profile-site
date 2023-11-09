@@ -4,13 +4,12 @@ import closeModal from '../../../utils/closeModal'
 
 function ProjectModal({ target, isUpdate, addUpdate, itemData }) {
   const initialState = {
-    _id: '',
     name: '',
     url: '',
     repo: '',
     //image: '',
     description: '',
-    show: 'no'
+    show: false
   }
 
   const [project, setProject] = useState(initialState)

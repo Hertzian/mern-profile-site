@@ -1,4 +1,4 @@
-const { unlink } = require('fs/promises')
+const { unlink, access } = require('fs/promises')
 const path = require('path')
 const { Project } = require('../lib/db/models')
 
@@ -76,11 +76,16 @@ exports.deleteProject = async (req, res) => {
     const projectId = req.params.projectId
     const project = await Project.findByPk(projectId)
 
-    // pending this block
-    if (project.image !== 'placeholder.jpg') {
-      await unlink(
-        `${path.resolve(__dirname, '../public/uploads')}/${project.image}`
-      )
+    if (project.image !== 'placeholder.jpg' && project.image) {
+      const filePath = `${path.resolve(__dirname, '../public/uploads')}/${project.image}`
+
+      try {
+        await access(filePath)
+        await unlink(filePath)
+      } catch (err) {
+        console.log(err)
+        console.log('Image not found')
+      }
     }
 
     await project.destroy()

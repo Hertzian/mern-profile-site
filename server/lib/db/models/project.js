@@ -17,12 +17,15 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.BOOLEAN,
       allowNull: {
-        msg: 'The company field is required.'
+        msg: 'The name field is required.'
       }
     },
     url: DataTypes.STRING,
     repo: DataTypes.STRING,
-    image: DataTypes.STRING,
+    image: {
+      type: DataTypes.STRING,
+      defaultValue: null
+    },
     description: DataTypes.STRING,
     show: {
       type: DataTypes.BOOLEAN,

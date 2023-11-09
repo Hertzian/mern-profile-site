@@ -5,8 +5,8 @@ import {
   useGetProjectsQuery, useCreateProjectMutation,
   useUpdateProjectMutation, useDeleteProjectMutation,
   // api handlers
-  setStateSkills, setStateNewProject,
-  updateStateProject, deleteStateSkill, setStateProjects, deleteStateProject
+  setStateNewProject, updateStateProject,
+  setStateProjects, deleteStateProject
 } from '../../store'
 import Card from './components/Card'
 import ProjectModal from './components/ProjectModal'
@@ -30,11 +30,11 @@ function ProjectsSection(props) {
 
   const handleCreate = async (newProject) => {
     const projectAdded = await createProject(newProject)
-    dispatch(updateStateProject(projectAdded.data))
+    dispatch(setStateNewProject(projectAdded.data))
   }
   const handleUpdate = async (project) => {
     const projectUpdated = await updateProject(project)
-    dispatch(updateProject(projectUpdated.data))
+    dispatch(updateStateProject(projectUpdated.data))
   }
   const handleDelete = async (projectId) => {
     const projectDeleted = await deleteProject(projectId)
@@ -68,7 +68,7 @@ function ProjectsSection(props) {
       <ProjectModal
         target={'new-project'}
         isModify={false}
-        addUpdateProject={handleCreate}
+        addUpdate={handleCreate}
       />
       <table className='table table-bordered'>
         <thead>
