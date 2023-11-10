@@ -13,6 +13,7 @@ import { usersReducer, updateStateProfile, setStateProfile } from './slices/user
 import { placesReducer, setStateAllPlaces, setStateNewPlace, updateStatePlace, deleteStatePlace } from './slices/placesSlice'
 import { skillsReducer, setStateSkills, setStateNewSkill, updateStateSkill, deleteStateSkill } from './slices/skillsSlice'
 import { projectsReducer, setStateProjects, setStateNewProject, updateStateProject, deleteStateProject } from './slices/projectsSlice'
+import { alertsReducer, setStateAlert, removeStateAlert } from './slices/alertsSlice'
 
 export const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ export const store = configureStore({
     placesSlice: placesReducer,
     skillsSlice: skillsReducer,
     projectsSlice: projectsReducer,
+    alertsSlice: alertsReducer,
 
     [frontPageApi.reducerPath]: frontPageApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
@@ -49,7 +51,8 @@ export {
   updateStateProfile, setStateProfile,
   setStateAllPlaces, setStateNewPlace, updateStatePlace, deleteStatePlace,
   setStateSkills, setStateNewSkill, updateStateSkill, deleteStateSkill,
-  setStateProjects, setStateNewProject, updateStateProject, deleteStateProject
+  setStateProjects, setStateNewProject, updateStateProject, deleteStateProject,
+  setStateAlert, removeStateAlert
 }
 export { useGetGeneralProfileQuery, useGetProjectQuery } from './apis/frontPageApi'
 export { useLoginMutation } from './apis/authApi'

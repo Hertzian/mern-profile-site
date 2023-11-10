@@ -1,12 +1,13 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  // state handlers
+  // api handlers
   useGetSkillsQuery, useCreateSkillMutation,
   useUpdateSkillMutation, useDeleteSkillMutation,
-  // api handlers
+  // state handlers
   setStateSkills, setStateNewSkill,
   updateStateSkill, deleteStateSkill,
+  setStateAlert
 } from '../../store'
 import Card from './components/Card'
 import ButtonOpenModal from './components/ButtonOpenModal'
@@ -31,14 +32,17 @@ function SkillsSection(props) {
   const handleCreate = async (newSkill) => {
     const skillAdded = await createSkill(newSkill)
     dispatch(setStateNewSkill(skillAdded.data))
+    dispatch(setStateAlert({ msg: skillAdded.data.msg, color: 'success' }))
   }
   const handleUpdate = async (skill) => {
     const skillUpdated = await updateSkill(skill)
     dispatch(updateStateSkill(skillUpdated.data))
+    dispatch(setStateAlert({ msg: skillUpdated.data.msg, color: 'info' }))
   }
   const handleDelete = async (skillId) => {
     const skillDeleted = await deleteSkill(skillId)
     dispatch(deleteStateSkill(skillDeleted.data))
+    dispatch(setStateAlert({ msg: skillDeleted.data.msg, color: 'danger' }))
   }
 
   const skills = skillsState

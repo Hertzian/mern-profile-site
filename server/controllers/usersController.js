@@ -79,7 +79,7 @@ exports.updateProfile = async (req, res) => {
 
     await user.save()
 
-    return res.json(user)
+    return res.json({ msg: 'User updated!', user })
   } catch (err) {
     res.json({ error: err })
   }

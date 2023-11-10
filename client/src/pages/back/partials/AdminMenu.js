@@ -2,6 +2,7 @@ import Footer from './AdminFooter'
 import { adminMenu } from '../../../config/menuConfig'
 import AdminSideBarItem from './AdminSideBarItem'
 import { siteName } from '../../../config/menuConfig'
+import Alert from '../components/Alert'
 
 const AdminMenu = ({ children, name }) => {
   const sideItems = adminMenu.map((item, idx) => (
@@ -33,6 +34,8 @@ const AdminMenu = ({ children, name }) => {
         <div id='layoutSidenav_content'>
           <main>
             <div className='container-fluid'>
+
+              <Alert />
 
               {children}
 

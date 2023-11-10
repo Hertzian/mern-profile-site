@@ -58,7 +58,7 @@ exports.deleteSkill = async (req, res) => {
     const skillId = req.params.skillId
     const skill = await Skill.findByPk(skillId)
     await skill.destroy()
-    return res.json({ skill: skillId, msg: `ALV skill ${skillId}` })
+    return res.json({ id: skillId, msg: `ALV skill ${skillId}` })
   } catch (err) {
     console.log(err)
     return res.json(err)

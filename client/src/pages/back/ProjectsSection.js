@@ -1,12 +1,13 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  // state handlers
+  // api handlers
   useGetProjectsQuery, useCreateProjectMutation,
   useUpdateProjectMutation, useDeleteProjectMutation,
-  // api handlers
+  // state handlers
   setStateNewProject, updateStateProject,
-  setStateProjects, deleteStateProject
+  setStateProjects, deleteStateProject,
+  setStateAlert
 } from '../../store'
 import Card from './components/Card'
 import ProjectModal from './components/ProjectModal'
@@ -31,14 +32,17 @@ function ProjectsSection(props) {
   const handleCreate = async (newProject) => {
     const projectAdded = await createProject(newProject)
     dispatch(setStateNewProject(projectAdded.data))
+    dispatch(setStateAlert({ msg: projectAdded.data.msg, color: 'success' }))
   }
   const handleUpdate = async (project) => {
     const projectUpdated = await updateProject(project)
     dispatch(updateStateProject(projectUpdated.data))
+    dispatch(setStateAlert({ msg: projectUpdated.data.msg, color: 'info' }))
   }
   const handleDelete = async (projectId) => {
     const projectDeleted = await deleteProject(projectId)
     dispatch(deleteStateProject(projectDeleted.data))
+    dispatch(setStateAlert({ msg: projectDeleted.data.msg, color: 'danger' }))
   }
 
   const projects = projectsState

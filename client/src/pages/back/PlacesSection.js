@@ -5,6 +5,7 @@ import {
   // state handlers
   setStateAllPlaces, setStateNewPlace,
   deleteStatePlace, updateStatePlace,
+  setStateAlert,
   // api handlers
   useGetPlacesQuery, useCreatePlaceMutation,
   useDeletePlaceMutation, useUpdatePlaceMutation
@@ -32,16 +33,19 @@ function PlacesSection(props) {
   const handleCreate = async (newPlace) => {
     const placeAdded = await createPlace(newPlace)
     dispatch(setStateNewPlace(placeAdded.data))
+    dispatch(setStateAlert({ msg: placeAdded.data.msg, color: 'success' }))
   }
 
-  const handleUpdate = async (place) => {
-    const updatedPlace = await updatePlace(place)
+  const handleUpdate = async (placeToUpdate) => {
+    const updatedPlace = await updatePlace(placeToUpdate)
     dispatch(updateStatePlace(updatedPlace.data))
+    dispatch(setStateAlert({ msg: updatedPlace.data.msg, color: 'info' }))
   }
 
   const handleDelete = async (placeId) => {
     const placeDeleted = await deletePlace(placeId)
     dispatch(deleteStatePlace(placeDeleted.data))
+    dispatch(setStateAlert({ msg: placeDeleted.data.msg, color: 'danger' }))
   }
 
   const places = placesState

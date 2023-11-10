@@ -89,7 +89,7 @@ exports.deleteProject = async (req, res) => {
     }
 
     await project.destroy()
-    return res.json({ project: projectId, msg: `ALV project, ${projectId}` })
+    return res.json({ id: projectId, msg: `ALV project, ${projectId}` })
   } catch (err) {
     console.log(err)
     return res.json(err)
