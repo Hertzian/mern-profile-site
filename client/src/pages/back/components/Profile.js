@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import Card from './Card'
-import { useUpdateProfileMutation, updateStateProfile } from '../../../store'
+import { useUpdateProfileMutation, updateStateProfile, setStateAlert } from '../../../store'
 
 function Profile({ profile }) {
   const dispatch = useDispatch()
@@ -17,6 +17,7 @@ function Profile({ profile }) {
     e.preventDefault()
     const updatedProfile = await updateProfile(user)
     dispatch(updateStateProfile(updatedProfile.data))
+    dispatch(setStateAlert({ msg: updatedProfile.data.msg, color: 'info' }))
   }
 
   return (

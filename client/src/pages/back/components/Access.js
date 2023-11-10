@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import Card from './Card'
-import { useUpdateProfileMutation, updateStateProfile } from '../../../store'
+import { useUpdateProfileMutation, updateStateProfile, setStateAlert } from '../../../store'
 
 function Access({ access }) {
   const dispatch = useDispatch()
@@ -17,6 +17,7 @@ function Access({ access }) {
     e.preventDefault()
     const updatedProfile = await updateProfile(formData)
     dispatch(updateStateProfile(updatedProfile.data))
+    dispatch(setStateAlert({ msg: updatedProfile.data.msg, color: 'success' }))
   }
 
   return (
