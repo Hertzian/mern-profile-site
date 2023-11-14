@@ -56,7 +56,7 @@ export {
 }
 export { useGetGeneralProfileQuery, useGetProjectQuery } from './apis/frontPageApi'
 export { useLoginMutation } from './apis/authApi'
-export { useGetProfileQuery, useUpdateProfileMutation } from './apis/usersApi'
+export { useGetProfileQuery, useUpdateProfileMutation, useUploadPortraitMutation } from './apis/usersApi'
 export { useGetPlacesQuery, useCreatePlaceMutation, useUpdatePlaceMutation, useDeletePlaceMutation } from './apis/placesApi'
 export { useGetSkillsQuery, useCreateSkillMutation, useUpdateSkillMutation, useDeleteSkillMutation } from './apis/skillsApi'
 export { useGetProjectsQuery, useCreateProjectMutation, useUpdateProjectMutation, useDeleteProjectMutation } from './apis/projectsApi'
