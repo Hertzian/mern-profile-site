@@ -1,37 +1,41 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import imagePlaceholder from '../../../utils/imagePlaceholder.jpg'
 import capitalize from '../../../utils/capitalize'
+import { useUploadPortraitMutation } from '../../../store'
 
-function ImageUpload({ image, itemId, label, section, close }) {
+function ImageUpload({ label, section, close }) {
   const initialState = {
     image: undefined, url: undefined
   }
 
-  const [data, setData] = useState(initialState)
+  const [uploadPortrait] = useUploadPortraitMutation()
+  const [imageState, setImageState] = useState(initialState)
 
   const handleChange = (e) => {
-    setData({
+    setImageState({
       image: e.target.files[0],
-      url: URL.createObjectURL(e.target.files[0])
+      url: URL.createObjectURL(e.target.files[0]),
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    if (typeof data.image !== 'object') {
+    if (typeof imageState.image !== 'object') {
       return
     }
 
     const formData = new FormData()
-    formData.append(label, image, image.name)
-    // uploadToServer function & state handling here...
+    formData.append(label, imageState.image)
+
+    await uploadPortrait(formData)
+
     if (close) {
       close()
     }
   }
 
   const word = capitalize(label)
-  const imageView = data.url || imagePlaceholder
+  const imageView = imageState.url || imagePlaceholder
 
   return (
     <form onSubmit={handleSubmit} className='col-md-6' encType='multipart/form-data' >
