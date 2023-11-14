@@ -85,49 +85,35 @@ exports.updateProfile = async (req, res) => {
   }
 }
 
-// @route   POST /api/users/upload-portrait
+// @route   GET /api/users/image
 // @access  private
-exports.uploadPortrait = async (req, res) => {
-  const file = req.files.portrait
-
-  if (!req.files || Object.keys(req.files).length === 0) { return res.json({ err: 'No file were uploaded' }) }
-
-  file.name = `portrait${path.parse(file.name).ext}`
-  const uploadPath = `${path.resolve(__dirname, '../public/uploads')}/${file.name
-    }`
-
-  file.mv(uploadPath, async (err) => {
-    if (err) {
-      console.error(err)
-      return res.json({ err: 'Problem with your file upload' })
-    }
-    const user = await User.findByPk(req.user._id)
-    user.portrait = file.name || user.portrait
-    user.save()
-    return res.json(user.portrait)
-  })
+exports.loadImage = (req, res) => {
+  return res.json({ msg: 'tenga' })
 }
 
-// @route   POST /api/users/upload-background
+// @route   POST /api/users/image
 // @access  private
-exports.uploadBackground = async (req, res) => {
-  const file = req.files.background
+exports.uploadImage = (req, res) => {
+  const keyName = Object.keys(req.files)[0]
+  const file = req.files[keyName]
 
-  if (!req.files || Object.keys(req.files).length === 0) { return res.json({ err: 'No file were uploaded' }) }
+  if (!req.files || Object.keys(req.files).length === -1) {
+    return 'No file were uploaded.'
+  }
 
-  file.name = `background${path.parse(file.name).ext}`
-  const uploadPath = `${path.resolve(__dirname, '../public/uploads')}/${file.name
-    }`
+  file.name = `${keyName}${path.parse(file.name).ext}`
+  const uploadPath = `${path.resolve(__dirname, '../public/uploads')}/${file.name}`
 
   file.mv(uploadPath, async (err) => {
     if (err) {
       console.error(err)
       return res.json({ err: 'Problem with your file upload' })
     }
-    const user = await User.findByPk(req.user._id)
-    user.background = file.name || file.background
-    user.save()
-    return res.json(user.background)
+
+    const user = await User.findByPk(req.user.id)
+    user[keyName] = req.files[keyName].name || user[keyName]
+    await user.save()
+
+    return res.json({ msg: 'Image uploaded successfully!', image: user[keyName] })
   })
-  // return res.json({ message: req.files })
 }
