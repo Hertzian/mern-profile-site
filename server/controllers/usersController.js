@@ -102,7 +102,7 @@ exports.uploadImage = (req, res) => {
   }
 
   file.name = `${keyName}${path.parse(file.name).ext}`
-  const uploadPath = `${path.resolve(__dirname, '../public/uploads')}/${file.name}`
+  const uploadPath = `${path.resolve(__dirname, '../uploads')}/${file.name}`
 
   file.mv(uploadPath, async (err) => {
     if (err) {
@@ -111,7 +111,7 @@ exports.uploadImage = (req, res) => {
     }
 
     const user = await User.findByPk(req.user.id)
-    user[keyName] = req.files[keyName].name || user[keyName]
+    user[keyName] = '/uploads/' + req.files[keyName].name || user[keyName]
     await user.save()
 
     return res.json({ msg: 'Image uploaded successfully!', image: user[keyName] })

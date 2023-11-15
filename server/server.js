@@ -11,7 +11,7 @@ app.use(cors())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 // to store images
-app.use('/public', express.static(path.join(__dirname, 'public')))
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
 
