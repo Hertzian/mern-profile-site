@@ -17,7 +17,7 @@ const Places = ({ places, background }) => {
         My professional experience
       </h2>
       <div className='services'>{showPlaces}</div>
-      <a href='#work' className='btn'>
+      <a href='#work' className='btn-front'>
         My work
       </a>
     </section>
