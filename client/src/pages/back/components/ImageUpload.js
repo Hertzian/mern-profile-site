@@ -1,15 +1,26 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useDispatch } from "react-redux"
 import imagePlaceholder from '../../../utils/imagePlaceholder.jpg'
 import capitalize from '../../../utils/capitalize'
 import { useUploadPortraitMutation } from '../../../store'
+import { setStateAlert } from '../../../store'
 
-function ImageUpload({ label, section, close }) {
+function ImageUpload({ image, label, section, close }) {
+  const dispatch = useDispatch()
   const initialState = {
     image: undefined, url: undefined
   }
 
   const [uploadPortrait] = useUploadPortraitMutation()
   const [imageState, setImageState] = useState(initialState)
+
+  useEffect(() => {
+    if (image) {
+      setImageState({
+        url: image
+      })
+    }
+  }, [image])
 
   const handleChange = (e) => {
     setImageState({
@@ -27,11 +38,13 @@ function ImageUpload({ label, section, close }) {
     const formData = new FormData()
     formData.append(label, imageState.image)
 
-    await uploadPortrait(formData)
+    const imageUploaded = await uploadPortrait(formData)
 
     if (close) {
       close()
     }
+
+    dispatch(setStateAlert({ msg: imageUploaded.data.msg, color: 'info' }))
   }
 
   const word = capitalize(label)
