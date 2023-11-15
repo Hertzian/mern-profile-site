@@ -1,14 +1,19 @@
 const Skills = ({ skills }) => {
-  const showSkills =
-    skills &&
-    skills.map((skill) => (
-      <div key={skill.id}>
-        <h3>{skill.name}</h3>
-        <div className='progressbar'>
-          <div className='progressbar-infill' style={{ width: `${skill.value}%` }} />
-        </div>
-      </div>
-    ))
+  let showSkills = {}
+  if (skills && skills.length) {
+    showSkills = skills
+      .filter((skill) => skill.show === true)
+      .map((skill) => {
+        return (
+          <div key={skill.id}>
+            <h3>{skill.name}</h3>
+            <div className='progressbar'>
+              <div className='progressbar-infill' style={{ width: `${skill.value}%` }} />
+            </div>
+          </div>
+        )
+      })
+  }
 
   return (
     <section className='skills' id='skills'>
