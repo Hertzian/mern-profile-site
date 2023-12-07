@@ -3,3 +3,4 @@
 /server/uploads/*
 !/server/uploads/.gitkeep
 client2
+.DS_Store

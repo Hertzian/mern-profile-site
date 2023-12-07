@@ -91,7 +91,7 @@ exports.loadImage = (req, res) => {
   return res.json({ msg: 'tenga' })
 }
 
-// @route   POST /api/users/image
+// @route   PUT /api/users/image
 // @access  private
 exports.uploadImage = (req, res) => {
   const keyName = Object.keys(req.files)[0]

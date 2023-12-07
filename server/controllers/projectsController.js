@@ -1,5 +1,7 @@
 const { unlink, access } = require('fs/promises')
 const path = require('path')
+const multer = require('multer')
+const { uploadImages } = require('../utils')
 const { Project } = require('../lib/db/models')
 
 // @route   GET /api/projects
@@ -98,31 +100,44 @@ exports.deleteProject = async (req, res) => {
 
 // pending...
 
-// @route   POST /api/projects/project/:projectId
+// @route   POST /api/projects/:projectId
 // @access   private
 exports.uploadImage = async (req, res) => {
-  const file = req.files.project
   const projectId = req.params.projectId
 
-  if (!req.files || Object.keys(req.files).length === 0) { return res.json({ err: 'No file were uploaded' }) }
+  const saveImage = uploadImages.upload('image', `projects-${projectId}`)
 
-  file.name = `project-${projectId}${path.parse(file.name).ext}`
-  const uploadPath = `${path.resolve(__dirname, '../public/uploads')}/${file.name
-    }`
+  saveImage(req, res, async (err) => {
+    const image = req.file
 
-  file.mv(uploadPath, async (err) => {
-    if (err) {
-      console.error(err)
-      return res.json({ err: 'Problem with your file upload' })
+    if (err instanceof multer.MulterError) {
+      return res.json({ err: 'Error when uploading' })
+    } else if (err) {
+      return res.json({ err })
     }
+
     const project = await Project.findByPk(projectId)
-    project.image = file.name || project.image
-    project.save()
-    return res.json(project.image)
+    const oldImage = project.image
+    project.image = `/uploads/${image?.filename}`
+
+    await project.save()
+    try {
+      if (oldImage.split('/')[2] !== 'undefined' || null) {
+        await unlink('./server' + oldImage)
+      }
+    } catch (err) {
+      /* expected if file doesnt exists */
+      if (err.code === 'ENOENT') {
+        return res.json(project)
+      }
+      return res.json({ err: 'IDFK ' + err })
+    }
+
+    return res.json(project)
   })
 }
 
-// @route   GET /api/projects/load-project/:projectId
+// @route   GET /api/projects/image/:projectId
 // @access   private
 exports.loadImage = async (req, res) => {
   try {

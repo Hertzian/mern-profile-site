@@ -1,34 +1,32 @@
 const path = require('path')
-// const multer = require('multer')
+const multer = require('multer')
 
-// // config storage & have same name from upload field (name="imgFile")
-// const storage = (newImageName) => {
-//   multer.diskStorage({
-//     destination: './public/uploads/',
-//     filename: (req, file, cb) => {
-//       cb(null, newImageName)
-//     }
-//   })
-// }
-
-const checkFileType = (file, cb) => {
-  const filetypes = /jpeg|jpg|png|gif/
-  const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
-  const mimetype = filetypes.test.mimetype
-
-  if (extname && mimetype) return cb(null, true)
-  return cb('Error: Images Only!')
+function storage(fieldName, thingId) {
+  let firstSegment = ''
+  if (thingId) {
+    firstSegment = `${thingId}-`
+  }
+  return multer.diskStorage({
+    destination: './server/uploads/',
+    filename: (req, file, cb) => cb(null, `${firstSegment}${fieldName}-${Date.now()}${path.extname(file.originalname)}`)
+  })
 }
 
-// // parameter is for preserve same name from upload field (name="imgFile")
-// const upload = (imageFile) => {
-//   multer({
-//     storage: storage(imageFile),
-//     limits: { fileSize: 1000000 },
-//     fileFilter: function (req, file, cb) {
-//       checkFileType(file, cb)
-//     }
-//   }).single(imageFile)
-// }
+function checkFileType(file, cb) {
+  const fileTypes = /jpg|jpeg|png|gif/
+  const extName = fileTypes.test(path.extname(file.originalname).toLowerCase())
+  const mimeType = fileTypes.test(file.mimetype)
 
-// module.exports = { upload }
+  if (extName && mimeType) return cb(null, true)
+  return cb('Error: Images only!')
+}
+
+function upload(fieldName, thingId) {
+  return multer({
+    storage: storage(fieldName, thingId),
+    limits: { fileSize: 1024 * 1024 * 5 },
+    fileFilter: (req, file, cb) => checkFileType(file, cb)
+  }).single(fieldName)
+}
+
+module.exports = { upload }
