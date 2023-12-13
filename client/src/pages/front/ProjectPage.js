@@ -21,7 +21,7 @@ const ProjectPage = () => {
           <h1 className='section__title section__title--intro'>
             Welcome to <strong>{data.name}</strong>
           </h1>
-          <img className='intro__img' src={`/public/uploads/${data.image}`} alt={`${data.name} project`} />
+          <img className='intro__img' src={`${data.image}`} alt={`${data.name} project`} />
         </section>
 
         <div className='portfolio-item-individual'>
@@ -35,7 +35,7 @@ const ProjectPage = () => {
             <Link to='/' className='btn-front'>back</Link>
           </p>
           <p>{data.description}</p>
-          <img src={`/public/uploads/${data.image}`} alt={`${data.name} project`} />
+          <img src={`${data.image}`} alt={`${data.name} project`} />
         </div>
       </>
   }

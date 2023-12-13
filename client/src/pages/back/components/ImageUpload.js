@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import imagePlaceholder from '../../../utils/imagePlaceholder.jpg'
 import capitalize from '../../../utils/capitalize'
-import { useUploadPortraitMutation, useUploadBackgroundMutation, useUploadImageMutation, useUploadProjectImageMutation } from '../../../store'
+import { useUploadPortraitMutation, useUploadBackgroundMutation, useUploadProjectImageMutation } from '../../../store'
 import { setStateAlert } from '../../../store'
 
 function ImageUpload({ image, label, section, close, project }) {

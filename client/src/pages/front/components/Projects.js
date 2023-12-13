@@ -16,7 +16,7 @@ const Projects = ({ projects }) => {
             <img
               id={`pic-work-${project.id}`}
               className='portfolio__img'
-              src={`/public/uploads/${project.image}`}
+              src={`${project.image}`}
               alt={`project ${project.name}`}
             />
           </Link>

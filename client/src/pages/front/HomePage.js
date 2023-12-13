@@ -22,7 +22,7 @@ function HomePage() {
           ? <Loader />
           : data && (
             <>
-              <Intro name={data.name} lastname={data.lastname} portrait={data.portrait} profession={data.profession} />
+              <Intro name={data.name} lastname={data.lastName} portrait={data.portrait} profession={data.profession} />
               <Places places={data.places} background={data.background} />
               <Skills skills={data.skills} />
               <Projects projects={data.projects} />
