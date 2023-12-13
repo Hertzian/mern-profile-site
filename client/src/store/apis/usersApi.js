@@ -42,7 +42,17 @@ export const usersApi = createApi({
           console.log('api: ', formData)
 
           return {
-            url: '/image',
+            url: '/image/portrait',
+            method: 'PUT',
+            body: formData
+          }
+        }
+      }),
+
+      uploadBackground: builder.mutation({
+        query: (formData) => {
+          return {
+            url: '/image/background',
             method: 'PUT',
             body: formData
           }
@@ -53,4 +63,4 @@ export const usersApi = createApi({
   }
 })
 
-export const { useGetProfileQuery, useUpdateProfileMutation, useUploadPortraitMutation } = usersApi
+export const { useGetProfileQuery, useUpdateProfileMutation, useUploadPortraitMutation, useUploadBackgroundMutation } = usersApi

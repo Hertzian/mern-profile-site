@@ -2,16 +2,18 @@ import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import imagePlaceholder from '../../../utils/imagePlaceholder.jpg'
 import capitalize from '../../../utils/capitalize'
-import { useUploadPortraitMutation } from '../../../store'
+import { useUploadPortraitMutation, useUploadBackgroundMutation, useUploadImageMutation, useUploadProjectImageMutation } from '../../../store'
 import { setStateAlert } from '../../../store'
 
-function ImageUpload({ image, label, section, close }) {
+function ImageUpload({ image, label, section, close, project }) {
   const dispatch = useDispatch()
   const initialState = {
     image: undefined, url: undefined
   }
 
   const [uploadPortrait] = useUploadPortraitMutation()
+  const [uploadBackground] = useUploadBackgroundMutation()
+  const [uploadProjectImage] = useUploadProjectImageMutation()
   const [imageState, setImageState] = useState(initialState)
 
   useEffect(() => {
@@ -38,7 +40,18 @@ function ImageUpload({ image, label, section, close }) {
     const formData = new FormData()
     formData.append(label, imageState.image)
 
-    const imageUploaded = await uploadPortrait(formData)
+    let imageUploaded
+    if (label === 'portrait') {
+      imageUploaded = await uploadPortrait(formData)
+    }
+    if (label === 'background') {
+      imageUploaded = await uploadBackground(formData)
+    }
+    if (label === 'project') {
+      console.log('project.......')
+      imageUploaded = await uploadProjectImage({ projectId: project.id, formData })
+      console.log(imageUploaded)
+    }
 
     if (close) {
       close()

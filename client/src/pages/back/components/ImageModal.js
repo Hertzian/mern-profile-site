@@ -1,7 +1,7 @@
 import closeModal from '../../../utils/closeModal'
 import ImageUpload from './ImageUpload'
 
-function ImageModal({ target, imageId }) {
+function ImageModal({ target, project }) {
   const handleClose = () => closeModal(target)
 
   return (
@@ -19,7 +19,8 @@ function ImageModal({ target, imageId }) {
 
           <div className='modal-body'>
             <ImageUpload
-              itemId={imageId}
+              project={project}
+              image={project.image}
               close={handleClose}
               label='project'
               section='projects'

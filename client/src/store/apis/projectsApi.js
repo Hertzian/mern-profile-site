@@ -56,7 +56,28 @@ export const projectsApi = createApi({
           }
         },
         invalidatesTags: [{ type: 'Project' }]
-      })
+      }),
+
+      uploadProjectImage: builder.mutation({
+        query: ({ projectId, formData }) => {
+          return {
+            url: `/image/${projectId}`,
+            method: 'POST',
+            body: formData
+          }
+        }
+      }),
+
+      // not used...
+      loadImage: builder.query({
+        query: (projectId) => {
+          return {
+            url: `/image/${projectId}`,
+            method: 'GET'
+          }
+        }
+      }),
+
     }
   }
 })
@@ -65,5 +86,6 @@ export const {
   useGetProjectsQuery,
   useCreateProjectMutation,
   useUpdateProjectMutation,
-  useDeleteProjectMutation
+  useDeleteProjectMutation,
+  useUploadProjectImageMutation
 } = projectsApi

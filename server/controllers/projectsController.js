@@ -79,11 +79,9 @@ exports.deleteProject = async (req, res) => {
     const project = await Project.findByPk(projectId)
 
     if (project.image !== 'placeholder.jpg' && project.image) {
-      const filePath = `${path.resolve(__dirname, '../public/uploads')}/${project.image}`
-
       try {
-        await access(filePath)
-        await unlink(filePath)
+        await access('./server' + project.image)
+        await unlink('./server' + project.image)
       } catch (err) {
         console.log(err)
         console.log('Image not found')
@@ -105,15 +103,16 @@ exports.deleteProject = async (req, res) => {
 exports.uploadImage = async (req, res) => {
   const projectId = req.params.projectId
 
-  const saveImage = upload('image', `projects-${projectId}`)
+  const saveImage = upload('project', `projects-${projectId}`)
 
   saveImage(req, res, async (err) => {
     const image = req.file
 
     if (err instanceof multer.MulterError) {
-      return res.json({ err: 'Error when uploading' })
+      console.log('------ñ-', err)
+      return res.status(500).json({ msg: 'Error when uploading' })
     } else if (err) {
-      return res.json({ err })
+      return res.status(500).json({ msg: err })
     }
 
     const project = await Project.findByPk(projectId)
@@ -121,19 +120,23 @@ exports.uploadImage = async (req, res) => {
     project.image = `/uploads/${image?.filename}`
 
     await project.save()
-    try {
-      if (oldImage.split('/')[2] !== 'undefined' || null) {
-        await unlink('./server' + oldImage)
+
+    if (oldImage) {
+      try {
+        if (oldImage.split('/')[2] !== 'undefined' || null) {
+          await unlink('./server' + oldImage)
+        }
+      } catch (err) {
+        /* expected if file doesnt exists */
+        console.log('----------', err)
+        if (err.code === 'ENOENT') {
+          return res.json({ msg: 'image uploaded successfully', project })
+        }
+        return res.status(500).json({ msg: 'IDFK ' + err })
       }
-    } catch (err) {
-      /* expected if file doesnt exists */
-      if (err.code === 'ENOENT') {
-        return res.json(project)
-      }
-      return res.json({ err: 'IDFK ' + err })
     }
 
-    return res.json(project)
+    return res.json({ msg: 'image uploaded successfully', project })
   })
 }
 
