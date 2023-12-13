@@ -9,7 +9,7 @@ router
   .get('/', protect, getProfile)
   .put('/', protect, updateProfile)
 router
-  .get('/image', protect, loadImage)
-  .put('/image', protect, uploadImage)
+  // the next put route expect background || portrait as :imageType
+  .put('/image/:imageType', protect, uploadImage)
 
 module.exports = router

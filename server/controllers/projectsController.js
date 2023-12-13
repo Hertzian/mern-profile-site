@@ -1,7 +1,7 @@
 const { unlink, access } = require('fs/promises')
 const path = require('path')
 const multer = require('multer')
-const { uploadImages } = require('../utils')
+const { uploadImages: { upload } } = require('../utils')
 const { Project } = require('../lib/db/models')
 
 // @route   GET /api/projects
@@ -105,7 +105,7 @@ exports.deleteProject = async (req, res) => {
 exports.uploadImage = async (req, res) => {
   const projectId = req.params.projectId
 
-  const saveImage = uploadImages.upload('image', `projects-${projectId}`)
+  const saveImage = upload('image', `projects-${projectId}`)
 
   saveImage(req, res, async (err) => {
     const image = req.file
