@@ -7,7 +7,7 @@ function storage(fieldName, thingId) {
     firstSegment = `${thingId}-`
   }
   return multer.diskStorage({
-    destination: './server/uploads/',
+    destination: './src/uploads/',
     filename: (req, file, cb) => cb(null, `${firstSegment}${fieldName}-${Date.now()}${path.extname(file.originalname)}`)
   })
 }

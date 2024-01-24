@@ -20,19 +20,3 @@ Content-Type: application/json
   "bio": "updated biosd",
   "profession": "one, two, three, updated"
 }
-
-### upload portrait image, back page **no idea why this exists lol, **require token
-POST http://localhost:5001/api/users/upload-portrait
-Content-Type: multipart/form-data
-
-{
-  ...
-}
-
-## load background image, back page **no idea why this exists lol, **require token
-POST http://localhost:5001/api/users/upload-background
-Content-Type: multipart/form-data
-
-{
-  ...
-}

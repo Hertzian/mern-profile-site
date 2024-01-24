@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom'
-
 const MenuItem = ({ refe, label, onClose }) => {
   return (
     <li className='navf__item'>

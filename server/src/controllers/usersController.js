@@ -33,6 +33,7 @@ exports.getFrontProfile = async (req, res) => {
       }
     })
 
+    // console.log(path.join(__dirname, '/uploads'))
     return res.json(user)
   } catch (err) {
     console.log(err)
@@ -123,11 +124,12 @@ exports.uploadImage = (req, res) => {
 
     const oldImage = user[fieldName]
     user[fieldName] = `/uploads/${image?.filename}`
+    console.log(user[fieldName])
 
     await user.save()
     try {
       if (oldImage.split('/')[2] !== 'undefined' || null) {
-        await unlink('./server' + oldImage)
+        await unlink('./src' + oldImage)
       }
     } catch (err) {
       /* expected if file doesnt exists */
