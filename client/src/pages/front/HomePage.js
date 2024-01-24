@@ -13,7 +13,6 @@ import Loader from '../back/components/Loader'
 
 function HomePage() {
   const { data, isFetching } = useGetGeneralProfileQuery()
-  console.log(data)
 
   return (
     <>

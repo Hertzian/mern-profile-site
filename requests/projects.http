@@ -1,15 +1,14 @@
 ### get all projects **require token I guess
 GET http://localhost:5001/api/projects/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5OTA3Njc3NiwiZXhwIjoxNzAxNjY4Nzc2fQ.1L2HH5DEaf-1HrN287OeLJElfIZ6lQ34lt_VaT2L7AM 
+Authorization: Bearer ****
 
 ### get single project
 GET http://localhost:5001/api/projects/50
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5OTA3Njc3NiwiZXhwIjoxNzAxNjY4Nzc2fQ.1L2HH5DEaf-1HrN287OeLJElfIZ6lQ34lt_VaT2L7AM 
+Authorization: Bearer ****
 
 ### create new project **require token
 POST http://localhost:5001/api/projects/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5OTA3Njc3NiwiZXhwIjoxNzAxNjY4Nzc2fQ.1L2HH5DEaf-1HrN287OeLJElfIZ6lQ34lt_VaT2L7AM 
-# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5OTMzMTA2NywiZXhwIjoxNzAxOTIzMDY3fQ.UQbIS345Ibs-qv24yKreK6vkOL6mAsfcmtRdNK8tGhs
+Authorization: Bearer ****
 Content-Type: application/json
 
 {
@@ -23,7 +22,7 @@ Content-Type: application/json
 
 ### update existing project **require token
 PUT http://localhost:5001/api/projects/6
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5OTA3Njc3NiwiZXhwIjoxNzAxNjY4Nzc2fQ.1L2HH5DEaf-1HrN287OeLJElfIZ6lQ34lt_VaT2L7AM 
+Authorization: Bearer ****
 Content-Type: multipart/form-data 
 {
   "company": "update company",
@@ -35,7 +34,7 @@ Content-Type: multipart/form-data
 
 ### delete project **require token
 DELETE http://localhost:5001/api/projects/6
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5OTA3Njc3NiwiZXhwIjoxNzAxNjY4Nzc2fQ.1L2HH5DEaf-1HrN287OeLJElfIZ6lQ34lt_VaT2L7AM 
+Authorization: Bearer ****
 
 ### upload project image **require token
 POST http://localhost:5001/api/projects/upload-image-project/:projectId

@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  client:
+    container_name: client
+    build: ./client
+    ports:
+      - 3000:3000
+    volumes:
+      - ./client/src:/app/src
+    depends_on:
+      - server
+
+  server:
+    container_name: server
+    build: ./server
+    ports:
+      - 5001:5001
+    environment:
+      DEV_DB_USER: postgres
+      DEV_DB_PASS: root
+      DEV_DB_DATABASE: mern_profile_page
+    volumes:
+      - ./server/src:/app/src
+    depends_on:
+      - db
+
+  db:
+    container_name: db
+    hostname: db
+    restart: always
+    image: postgres:14.10-alpine3.18
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: postgres
+      POSTGRES_DB: mern_profile_page
+    ports:
+      - 5432:5432
+    volumes:
+      - ./data:/var/lib/postgresql/data

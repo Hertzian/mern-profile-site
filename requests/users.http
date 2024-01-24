@@ -3,12 +3,12 @@ GET http://localhost:5001/api/users/get-front-profile
 
 ### get user profile for back page **require token
 GET http://localhost:5001/api/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5OTA3Njc3NiwiZXhwIjoxNzAxNjY4Nzc2fQ.1L2HH5DEaf-1HrN287OeLJElfIZ6lQ34lt_VaT2L7AM 
+Authorization: Bearer ****
 Content-Type: application/json
 
 ### update user profile back page **require token
 PUT http://localhost:5001/api/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5OTA3Njc3NiwiZXhwIjoxNzAxNjY4Nzc2fQ.1L2HH5DEaf-1HrN287OeLJElfIZ6lQ34lt_VaT2L7AM 
+Authorization: Bearer ****
 Content-Type: application/json
 
 {
