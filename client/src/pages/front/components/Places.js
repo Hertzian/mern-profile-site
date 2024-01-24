@@ -20,14 +20,14 @@ const Places = ({ places, background }) => {
   }
 
   return (
-    <section className='my-services' id='services' style={style}>
+    <section className='my-services' id='places' style={style}>
       <h2 className='section__title section__title--services'>
         My professional experience
       </h2>
       <div className='services'>
         {showPlaces}
       </div>
-      <a href='#work' className='btn-front'>
+      <a href='#projects' className='btn-front'>
         My work
       </a>
     </section>

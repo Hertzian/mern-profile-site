@@ -8,8 +8,8 @@ export const dummyData = {
     phone: "654321-654321",
     bio: "bio updated",
     profession: "profession updated",
-    portrait: "/public/uploads/portrait-image-123.jpg",
-    background: "/public/uploads/background-image.jpg"
+    portrait: "/uploads/portrait-image-123.jpg",
+    background: "/uploads/background-image.jpg"
   },
   places: [
     {
