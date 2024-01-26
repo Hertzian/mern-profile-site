@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import getToken from "../../utils/getToken"
+const apiUrl = process.env.REACT_APP_API_URL
 
 export const placesApi = createApi({
   reducerPath: 'placesApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5001/api/places',
+    baseUrl: `${apiUrl}/places`,
     prepareHeaders: (headers, { getState }) => {
       const token = getToken()
       if (token) headers.set('authorization', `Bearer ${token}`)
