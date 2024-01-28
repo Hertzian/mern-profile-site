@@ -9,7 +9,7 @@ services:
       args:
         REACT_APP_API_URL: http://164.92.106.69:5001/api
     ports:
-      - 80:80
+      - 80:3000
     volumes:
       - ./client/src:/app/src
 
