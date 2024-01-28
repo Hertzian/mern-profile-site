@@ -1,9 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
+const apiUrl = process.env.REACT_APP_API_URL
 
 export const usersApi = createApi({
   reducerPath: 'usersApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5001/api/users',
+    baseUrl: `${apiUrl}/users`,
     prepareHeaders: (headers, { getState }) => {
       // const token = getState().credentialsSlice.token
       const token = localStorage.getItem('token')
