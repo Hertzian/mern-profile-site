@@ -26,6 +26,7 @@ services:
       DEV_DB_DATABASE: mern_profile_page
     volumes:
       - ./server/src:/app/src
+      - ./server/src/uploads:/app/src/uploads
     depends_on:
       - db
 
@@ -37,6 +38,7 @@ services:
     volumes:
       - ./client/src:/app/src
     environment:
+      REACT_APP_BASE_URL: http://localhost:5001
       REACT_APP_API_URL: http://localhost:5001/api
     depends_on:
       - server

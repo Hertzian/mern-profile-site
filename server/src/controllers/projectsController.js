@@ -108,6 +108,8 @@ exports.uploadImage = async (req, res) => {
   saveImage(req, res, async (err) => {
     const image = req.file
 
+    if (!image) { return res.json({ err: 'nachos...' }) }
+
     if (err instanceof multer.MulterError) {
       console.log('------ñ-', err)
       return res.status(500).json({ msg: 'Error when uploading' })
@@ -124,7 +126,7 @@ exports.uploadImage = async (req, res) => {
     if (oldImage) {
       try {
         if (oldImage.split('/')[2] !== 'undefined' || null) {
-          await unlink('./server' + oldImage)
+          await unlink('./src' + oldImage)
         }
       } catch (err) {
         /* expected if file doesnt exists */
