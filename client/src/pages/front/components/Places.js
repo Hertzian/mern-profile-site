@@ -1,7 +1,9 @@
+import { baseUrl } from "../../../utils/baseUrls"
+
 const Places = ({ places, background }) => {
   let style = {}
   if (background) {
-    style = { background: `url(${background})` }
+    style = { background: `url(${baseUrl}${background})` }
   }
 
   let showPlaces = {}

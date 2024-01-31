@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import getToken from "../../utils/getToken"
-const apiUrl = process.env.REACT_APP_API_URL
+import { apiUrl } from "../../utils/baseUrls"
 
 export const projectsApi = createApi({
   reducerPath: 'projectsApi',

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-const apiUrl = process.env.REACT_APP_API_URL
+import { apiUrl } from "../../utils/baseUrls"
 
 export const frontPageApi = createApi({
   reducerPath: 'frontPageApi',

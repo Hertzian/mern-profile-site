@@ -1,3 +1,5 @@
+import { baseUrl } from "../../../utils/baseUrls"
+
 const About = ({ bio, portrait, profession }) => {
   return (
     <section className='about-me' id='about'>
@@ -7,7 +9,7 @@ const About = ({ bio, portrait, profession }) => {
         <p>{bio} </p>
       </div>
 
-      <img className='about-me__img' src={portrait} alt='duh...' />
+      <img className='about-me__img' src={baseUrl + portrait} alt='duh...' />
     </section>
   )
 }

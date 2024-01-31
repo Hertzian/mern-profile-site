@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { baseUrl } from '../../../utils/baseUrls'
 
 const Projects = ({ projects }) => {
   let showProjects = {}
@@ -16,7 +17,7 @@ const Projects = ({ projects }) => {
             <img
               id={`pic-work-${project.id}`}
               className='portfolio__img'
-              src={`${project.image}`}
+              src={`${baseUrl}${project.image}`}
               alt={`project ${project.name}`}
             />
           </Link>

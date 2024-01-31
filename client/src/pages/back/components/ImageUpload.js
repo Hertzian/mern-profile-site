@@ -4,6 +4,7 @@ import imagePlaceholder from '../../../utils/imagePlaceholder.jpg'
 import capitalize from '../../../utils/capitalize'
 import { useUploadPortraitMutation, useUploadBackgroundMutation, useUploadProjectImageMutation } from '../../../store'
 import { setStateAlert } from '../../../store'
+import { baseUrl } from "../../../utils/baseUrls"
 
 function ImageUpload({ image, label, section, close, project }) {
   const dispatch = useDispatch()
@@ -19,7 +20,7 @@ function ImageUpload({ image, label, section, close, project }) {
   useEffect(() => {
     if (image) {
       setImageState({
-        url: image
+        url: baseUrl + image
       })
     }
   }, [image])
@@ -48,9 +49,7 @@ function ImageUpload({ image, label, section, close, project }) {
       imageUploaded = await uploadBackground(formData)
     }
     if (label === 'project') {
-      console.log('project.......')
       imageUploaded = await uploadProjectImage({ projectId: project.id, formData })
-      console.log(imageUploaded)
     }
 
     if (close) {

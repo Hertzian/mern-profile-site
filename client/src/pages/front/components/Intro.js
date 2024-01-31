@@ -1,4 +1,5 @@
 import TypeWriter from "./TypeWriter"
+import { baseUrl } from "../../../utils/baseUrls"
 
 const Intro = ({ name, lastname, portrait, profession }) => {
   return (
@@ -11,7 +12,7 @@ const Intro = ({ name, lastname, portrait, profession }) => {
         {lastname}
       </h1>
       <TypeWriter words={profession} />
-      <img src={portrait} className='intro__img' alt='just me' />
+      <img src={baseUrl + portrait} className='intro__img' alt='just me' />
     </section>
   )
 }

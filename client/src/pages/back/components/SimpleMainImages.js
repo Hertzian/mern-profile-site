@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import imagePlaceholder from '../../../utils/imagePlaceholder.jpg'
+import { baseUrl } from '../../../utils/baseUrls'
 
 class SimpleMainImages extends Component {
   constructor(props) {
@@ -77,7 +78,7 @@ class SimpleMainImages extends Component {
           onChange={this.handleChange}
         />
         <img
-          src={imagePlaceholder}
+          src={baseUrl + imagePlaceholder}
           className='img-thumbnail mt-2'
           alt={`just a ${label}`}
         />

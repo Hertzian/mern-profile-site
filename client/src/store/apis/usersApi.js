@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
-const apiUrl = process.env.REACT_APP_API_URL
+import { apiUrl } from "../../utils/baseUrls"
 
 export const usersApi = createApi({
   reducerPath: 'usersApi',
@@ -40,7 +40,6 @@ export const usersApi = createApi({
 
       uploadPortrait: builder.mutation({
         query: (formData) => {
-          console.log('api: ', formData)
 
           return {
             url: '/image/portrait',
