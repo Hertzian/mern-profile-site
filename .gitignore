@@ -1,5 +1,5 @@
 node_modules
-/data/*
-!/data/.gitkeep
+/db/data/*
+!/db/data/.gitkeep
 ./DS_Store
 .env

@@ -12,7 +12,6 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 // to store images
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
-console.log(path.join(__dirname, '/uploads'))
 
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
 
