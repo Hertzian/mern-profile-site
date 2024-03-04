@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     year: DataTypes.STRING,
-    assignment: DataTypes.STRING,
+    assignment: DataTypes.TEXT,
     show: {
       type: DataTypes.BOOLEAN,
       defaultValue: false

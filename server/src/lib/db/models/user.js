@@ -52,7 +52,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     phone: DataTypes.STRING,
     bio: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       validate: {
         notEmpty: {
           msg: 'The bio field is required.'
