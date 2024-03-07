@@ -14,6 +14,8 @@ services:
       - 80:80
     volumes:
       - ./client/src:/app/src
+    networks:
+      - ${EXTERNAL_NETWORK}
     depends_on:
       - server
 
@@ -29,19 +31,10 @@ services:
       DEV_DB_DATABASE: mern_profile_page
     volumes:
       - ./server/src:/app/src
-      # - ./server/src/uploads:/app/src/uploads
-      # depends_on:
-      #   - db
-      # db:
-      #   container_name: db
-      #   hostname: db
-      #   build: ./db
-      #   restart: always
-      #   environment:
-      #     POSTGRES_PASSWORD: root
-      #     POSTGRES_USER: postgres
-      #     POSTGRES_DB: mern_profile_page
-      #   ports:
-      #     - 5432:5432
-      #   volumes:
-      #     - ./db/data:/var/lib/postgresql/data
+    networks:
+      - ${EXTERNAL_NETWORK}
+
+networks:
+  # modify next line with proper .env value
+  "${EXTERNAL_NETWORK}":
+    external: true
