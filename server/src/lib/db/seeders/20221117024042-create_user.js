@@ -1,5 +1,6 @@
 'use strict'
 const bcrypt = require('bcryptjs')
+require('dotenv').config()
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -14,10 +15,10 @@ module.exports = {
         phone: '123456-123456',
         bio: 'this is my bio...',
         profession: 'random words...',
-        email: 'test@test.com',
+        email: process.env.USER_EMAIL,
         background: 'background-image.jpg',
         portrait: 'portrait-image-123.jpg',
-        password: await bcrypt.hash('123456', 10),
+        password: await bcrypt.hash(process.env.USER_PASSWORD, 10),
         createdAt: new Date(),
         updatedAt: new Date()
       }],
