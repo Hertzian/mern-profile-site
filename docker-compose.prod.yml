@@ -16,13 +16,13 @@ services:
       - ./client/src:/app/src
     networks:
       - ${EXTERNAL_NETWORK}
-    depends_on:
-      - server
 
   server:
     container_name: server
     restart: unless-stopped
-    build: ./server
+    build:
+      context: ./server
+      dockerfile: Dockerfile.prod
     ports:
       - 5001:5001
     environment:

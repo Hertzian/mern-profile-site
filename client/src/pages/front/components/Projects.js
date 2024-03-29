@@ -23,7 +23,7 @@ const Projects = ({ projects }) => {
           </Link>
         )
       })
-  }
+  } else { showProjects = '' }
 
   return (
     <section className='my-work' id='projects'>

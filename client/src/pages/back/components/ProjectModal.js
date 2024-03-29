@@ -34,7 +34,11 @@ function ProjectModal({ target, isUpdate, addUpdate, itemData }) {
 
       const clearSt = {}
       for (const prop in project) {
-        clearSt[prop] = ''
+        if (typeof project[prop] === 'boolean') {
+          clearSt[prop] = false
+        } else {
+          clearSt[prop] = ''
+        }
       }
 
       setProject(clearSt)

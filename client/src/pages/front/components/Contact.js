@@ -6,13 +6,13 @@ const Contact = ({ email, phone }) => {
         <div>
           <span>email: </span>
           <a className='footer-link' href='#email'>
-            {email}
+            {email || ''}
           </a>
         </div>
         <div>
           <span>phone: </span>
           <a className='footer-link' href='#tel'>
-            {phone}
+            {phone || ''}
           </a>
         </div>
       </div>

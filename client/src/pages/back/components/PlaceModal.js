@@ -33,7 +33,11 @@ function PlaceModal({ target, isUpdate, addUpdate, placeData }) {
 
       const clearSt = {}
       for (const prop in place) {
-        clearSt[prop] = ''
+        if (typeof place[prop] === 'boolean') {
+          clearSt[prop] = false
+        } else {
+          clearSt[prop] = ''
+        }
       }
 
       setPlace(clearSt)

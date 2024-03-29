@@ -31,7 +31,11 @@ function SkillModal({ target, isUpdate, addUpdate, itemData }) {
 
       const clearSt = {}
       for (const prop in skill) {
-        clearSt[prop] = ''
+        if (typeof skill[prop] === 'boolean') {
+          clearSt[prop] = false
+        } else {
+          clearSt[prop] = ''
+        }
       }
 
       setSkill(clearSt)

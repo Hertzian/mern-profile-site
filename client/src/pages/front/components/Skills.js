@@ -13,6 +13,8 @@ const Skills = ({ skills }) => {
           </div>
         )
       })
+  } else {
+    showSkills = ''
   }
 
   return (

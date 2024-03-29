@@ -19,6 +19,8 @@ const Places = ({ places, background }) => {
           </div>
         )
       })
+  } else {
+    showPlaces = ''
   }
 
   return (

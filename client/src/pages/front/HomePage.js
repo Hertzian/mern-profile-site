@@ -10,6 +10,7 @@ import Places from './components/Places'
 import Projects from './components/Projects'
 import Skills from './components/Skills'
 import Loader from '../back/components/Loader'
+import Placeholder from './components/Placeholder'
 
 function HomePage() {
   const { data, isFetching } = useGetGeneralProfileQuery()
@@ -30,7 +31,7 @@ function HomePage() {
               <Contact email={data.email} phone={data.phone} />
               <Footer name={data.name} lastname={data.lastname} github={data.github} linkedin={data.linkedin} />
             </>
-          )
+          ) || <Placeholder />
       }
     </>
   )

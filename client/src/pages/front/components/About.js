@@ -6,10 +6,10 @@ const About = ({ bio, portrait, profession }) => {
       <h2 className='section__title section__title--about'>About me</h2>
 
       <div className='about-me__body'>
-        <p>{bio} </p>
+        <p>{bio || ''} </p>
       </div>
 
-      <img className='about-me__img' src={baseUrl + portrait} alt='duh...' />
+      <img className='about-me__img' src={(baseUrl + portrait) || ''} alt='duh...' />
     </section>
   )
 }

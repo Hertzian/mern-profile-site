@@ -1,8 +1,7 @@
 import closeModal from '../../../utils/closeModal'
 
-function ConfirmModal(props) {
+function ConfirmModal({ itemId, confirmFunction, target }) {
   const handleSubmit = (e) => {
-    const { itemId, confirmFunction, target } = props
     e.preventDefault()
     confirmFunction(itemId)
     closeModal(target)
@@ -10,7 +9,7 @@ function ConfirmModal(props) {
   return (
     <div
       className='modal fade'
-      id={props.target}
+      id={target}
       tabIndex='-1'
       role='dialog'
       aria-labelledby='ModalLabel'

@@ -7,12 +7,16 @@ const Intro = ({ name, lastname, portrait, profession }) => {
       <h1 className='section__title section__title--intro'>
         Hi, I am
         <strong>
-          {name}
+          {name || 'Lalo'}
         </strong>
-        {lastname}
+        {lastname || 'Aguilar'}
       </h1>
-      <TypeWriter words={profession} />
-      <img src={baseUrl + portrait} className='intro__img' alt='just me' />
+      {
+        profession && <TypeWriter words={profession} />
+      }
+      {
+        portrait && <img src={baseUrl + portrait} className='intro__img' alt='just me' />
+      }
     </section>
   )
 }
