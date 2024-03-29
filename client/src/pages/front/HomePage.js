@@ -14,9 +14,6 @@ import Placeholder from './components/Placeholder'
 
 function HomePage() {
   const { data, isFetching } = useGetGeneralProfileQuery()
-  if (data.parent || data.original) {
-    data.name = ''
-  }
 
   return (
     <>
